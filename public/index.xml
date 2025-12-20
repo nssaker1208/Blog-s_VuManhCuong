@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/my-blog/</link>
+    <description>Recent content on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/my-blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Giới thiệu</title>
+      <link>http://localhost:1313/my-blog/about/</link>
+      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/my-blog/about/</guid>
+      <description>&lt;h1 id=&#34;xin-chào-tôi-là-vũ-mạnh-cường&#34;&gt;Xin chào, tôi là Vũ Mạnh Cường&lt;/h1&gt;
+&lt;p&gt;Tôi là sinh viên trường Đại học Công nghệ TP.HCM (HUTECH). Tôi thuộc khóa K22 chuyên ngành Công nghệ phần mềm thuộc khoa Công nghệ thông tin.&lt;/p&gt;
+&lt;h2 id=&#34;kỹ-năng&#34;&gt;Kỹ năng&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ngôn ngữ:&lt;/strong&gt; Java, JavaScript, C#&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Network Programming:&lt;/strong&gt; Socket, HTTP, WebSocket&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tools:&lt;/strong&gt; Git, Maven, Node.js&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;học-vấn&#34;&gt;Học vấn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Trường: Đại học Công nghệ TP.HCM (HUTECH)&lt;/li&gt;
+&lt;li&gt;Chuyên ngành: Công nghệ phần mềm&lt;/li&gt;
+&lt;li&gt;Khoa: Công nghệ thông tin&lt;/li&gt;
+&lt;li&gt;Khóa học: Java Network Programming, JavaScript Web Development&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;liên-hệ&#34;&gt;Liên hệ&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Email: &lt;a href=&#34;mailto:nssaker1208@gmail.com&#34;&gt;nssaker1208@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub: github.com/nssaker1208&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Socket Programming trong Java - Xây dựng Chat Server cơ bản</title>
+      <link>http://localhost:1313/my-blog/posts/socket-java/</link>
+      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/my-blog/posts/socket-java/</guid>
+      <description>&lt;h2 id=&#34;giới-thiệu&#34;&gt;Giới thiệu&lt;/h2&gt;
+&lt;p&gt;Socket Programming là kỹ thuật cơ bản trong lập trình mạng&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;tạo-server-socket&#34;&gt;Tạo Server Socket&lt;/h2&gt;
+&lt;p&gt;ServerSocket serverSocket = new ServerSocket(8080);
+Socket clientSocket = serverSocket.accept();&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
