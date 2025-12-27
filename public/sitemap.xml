@@ -23,16 +23,10 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/chat-app/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/cors/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/datagram/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/fetch-api/</loc>
@@ -56,13 +50,7 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/java/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/javascript/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/native-api/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/network-programming/</loc>
@@ -72,12 +60,6 @@
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/real-time/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/same-origin-policy/</loc>
@@ -104,22 +86,16 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/web-development/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/web-security/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/websocket/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/backend/</loc>
+    <lastmod>2025-12-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/chat-app/</loc>
     <lastmod>2025-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/core-concepts/</loc>
@@ -140,7 +116,19 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/node.js-tutorial/</loc>
     <lastmod>2025-12-25T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/real-time/</loc>
+    <lastmod>2025-12-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/streams/</loc>
+    <lastmod>2025-12-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</loc>
+    <lastmod>2025-12-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/websocket/</loc>
+    <lastmod>2025-12-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</loc>
     <lastmod>2025-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/async/await/</loc>
@@ -158,22 +146,13 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/rest-api/</loc>
     <lastmod>2025-12-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/notification-system/</loc>
-    <lastmod>2025-12-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/spring-boot/</loc>
-    <lastmod>2025-12-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/stomp/</loc>
-    <lastmod>2025-12-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</loc>
-    <lastmod>2025-12-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/api/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/api-development/</loc>
+    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/backend-development/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/concurrency/</loc>
@@ -194,6 +173,9 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</loc>
+    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/json/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
@@ -203,10 +185,22 @@
     <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/network-programming/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/notification-system/</loc>
+    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/rest/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/spring-boot/</loc>
+    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/categories/technical-tutorial/</loc>
+    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/tags/thread-pool/</loc>
+    <lastmod>2025-12-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</loc>
     <lastmod>2025-12-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</loc>

@@ -1,0 +1,1083 @@
+/* ===================================
+   CHỈ XÓA LOGO VÀ CĂN GIỮA MENU
+   =================================== */
+
+/* Ẩn hoàn toàn logo/title ở header */
+header .logo,
+header .logo a {
+  display: none !important;
+}
+
+/* Căn giữa CHỈ phần header navigation */
+header nav,
+header nav#menu {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Căn giữa list menu items */
+header #menu {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+header #menu li {
+  list-style: none !important;
+}
+
+/* Style cho menu links */
+header #menu a {
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+header #menu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight trang hiện tại */
+header #menu li a[aria-current="page"] {
+  font-weight: bold;
+  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* ===================================
+   ẨN BREADCRUMBS VÀ PAGE TITLE (LIST PAGES)
+   =================================== */
+
+/* Ẩn breadcrumbs ở trang list */
+.page-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn page header title */
+.page-header h1 {
+  display: none !important;
+}
+
+/* Hoặc ẩn toàn bộ page header */
+.page-header {
+  display: none !important;
+}
+
+/* ===================================
+   ẨN POST HEADER Ở TRANG ABOUT/SINGLE
+   =================================== */
+
+/* Ẩn breadcrumbs ở trang single post/page */
+.post-single .post-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn meta mặc định ở mọi nơi */
+.post-single .post-header .post-meta {
+  display: none !important;
+}
+
+/* CHỈ HIỆN meta khi breadcrumbs chứa "posts" */
+.post-header:has(.breadcrumbs a[href*="posts"]) .post-meta {
+  display: block !important;
+}
+
+/* LOẠI BỎ KHOẢNG TRẮNG khi meta bị ẩn */
+.post-single .post-header:not(:has(.breadcrumbs a[href*="posts"])) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Giảm khoảng cách giữa header và content khi không có meta */
+.post-single:not(:has(.breadcrumbs a[href*="posts"])) .post-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Giảm padding của post-header khi meta bị ẩn */
+.post-single .post-header:not(:has(.post-meta[style*="display: block"])) {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* ===================================
+   AVATAR TRONG TRANG ABOUT - CHỈ CĂN GIỮA ẢNH
+   =================================== */
+
+/* CHỈ căn giữa đoạn văn đầu tiên NÀO CÓ ẢNH */
+.post-single .post-content > p:first-of-type:has(img) {
+  text-align: center !important;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style cho ảnh avatar - HÌNH CHỮ NHẬT */
+.post-single .post-content > p:first-of-type img {
+  display: inline-block;
+  width: 300px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  margin: 0 auto;
+}
+
+.post-single .post-content > p:first-of-type img:hover {
+  transform: scale(1.02);
+}
+
+/* ===================================
+   CĂN ĐỀU NỘI DUNG VĂN BẢN
+   =================================== */
+
+/* Căn đều tất cả đoạn văn trong post content */
+.post-single .post-content p {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+/* NGOẠI LỆ: CHỈ căn giữa paragraph đầu tiên CÓ ẢNH */
+.post-single .post-content > p:first-of-type:has(img) {
+  text-align: center !important;
+}
+
+/* Paragraph đầu tiên KHÔNG CÓ ẢNH vẫn căn đều (justify) */
+.post-single .post-content > p:first-of-type:not(:has(img)) {
+  text-align: justify !important;
+  display: block !important;
+}
+
+/* Đảm bảo heading, list, strong luôn căn trái */
+.post-single .post-content h1,
+.post-single .post-content h2,
+.post-single .post-content h3,
+.post-single .post-content h4,
+.post-single .post-content h5,
+.post-single .post-content h6,
+.post-single .post-content ul,
+.post-single .post-content ol,
+.post-single .post-content blockquote {
+  text-align: left !important;
+}
+
+/* Đảm bảo các paragraph có strong (Chủ đề:) căn trái */
+.post-single .post-content p:has(strong) {
+  text-align: left !important;
+}
+
+/* ===================================
+   ẨN TIÊU ĐỀ CHỈ Ở TRANG PORTFOLIO
+   =================================== */
+
+/* Ẩn tiêu đề "Portfolio" trong content */
+body:has(.portfolio-filter) .post-single .post-content > h1:first-child,
+body:has(.portfolio-filter) .post-single .post-content > h2:first-child {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Loại bỏ khoảng trắng trên cùng */
+body:has(.portfolio-filter) .post-single .post-content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+body:has(.portfolio-filter) .post-single {
+  padding-top: 0.5rem !important;
+}
+
+/* ===================================
+   PORTFOLIO FILTER BUTTONS
+   =================================== */
+
+.portfolio-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 3rem 0;
+  padding: 1.5rem 1rem;
+  flex-wrap: wrap;
+  background: var(--entry);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn {
+  padding: 0.6rem 1.5rem;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--content);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================================
+   PORTFOLIO GRID - 4 COLUMNS
+   =================================== */
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Desktop: 4 cột */
+  gap: 2rem;
+  margin: 0 0 3rem 0;
+}
+
+/* Card styling */
+.portfolio-card {
+  position: relative;
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: var(--entry);
+  cursor: pointer;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Hidden state for filtering */
+.portfolio-card.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+/* Image container */
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Overlay - mặc định ẩn */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-overlay h3 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+/* Hiện overlay khi hover */
+.portfolio-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.portfolio-card:hover .card-overlay h3 {
+  transform: translateY(0);
+}
+
+/* Content area */
+.card-content {
+  padding: 1.2rem;
+  background: var(--entry);
+}
+
+.card-content h4 {
+  margin: 0 0 0.8rem 0;
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0.4rem 0;
+  line-height: 1.5;
+  color: var(--content);
+  text-align: left !important;
+  font-size: 0.9rem;
+}
+
+.card-content strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE (TỐI ƯU)
+   =================================== */
+
+@media (max-width: 1200px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr); /* Tablet lớn: 3 cột */
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 cột */
+    gap: 1.5rem;
+  }
+
+  .card-image {
+    height: 180px;
+  }
+
+  .card-overlay h3 {
+    font-size: 1.5rem;
+  }
+
+  .portfolio-filter {
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Giảm padding header để tiết kiệm không gian */
+  header {
+    padding: 0.5rem 1rem !important;
+    min-height: auto !important;
+  }
+
+  /* Menu NGANG thay vì DỌC - tiết kiệm diện tích */
+  header #menu {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    justify-content: center !important;
+    padding: 0.5rem 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Menu items nhỏ gọn hơn */
+  header #menu li {
+    margin: 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    width: auto !important;
+    white-space: nowrap;
+  }
+
+  /* Avatar nhỏ hơn trên mobile */
+  .post-single .post-content > p:first-of-type img {
+    width: 250px;
+    max-width: 90%;
+  }
+}
+
+/* Mobile (2 columns) */
+@media (max-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr); /* Mobile: 2 cột */
+    gap: 1rem;
+  }
+
+  .card-image {
+    height: 150px;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-content h4 {
+    font-size: 1rem;
+  }
+
+  .card-content p {
+    font-size: 0.85rem;
+  }
+
+  .card-overlay h3 {
+    font-size: 1.2rem;
+  }
+
+  .portfolio-filter {
+    gap: 0.4rem;
+    padding: 0.8rem 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Màn hình cực nhỏ (< 480px) */
+@media (max-width: 480px) {
+  header {
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  header #menu {
+    gap: 0.3rem !important;
+    padding: 0.4rem 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Avatar còn nhỏ hơn trên điện thoại nhỏ */
+  .post-single .post-content > p:first-of-type img {
+    width: 200px;
+    max-width: 95%;
+  }
+
+  .portfolio-filter {
+    gap: 0.3rem;
+    padding: 0.6rem 0.3rem;
+  }
+
+  .filter-btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.65rem;
+  }
+}
+
+/* ===================================
+   DARK MODE
+   =================================== */
+
+.dark header #menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark header #menu li a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .portfolio-card {
+  background: var(--entry);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .portfolio-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.dark .card-content {
+  background: var(--entry);
+}
+
+.dark .portfolio-filter {
+  background: var(--entry);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark .filter-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .filter-btn:hover,
+.dark .filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ===================================
+   CERTIFICATE EXPANDABLE CARDS
+   =================================== */
+
+/* Expandable parent card indicator */
+.expandable-card {
+  cursor: pointer !important;
+  position: relative;
+}
+
+.expandable-card .expand-icon {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  transition: transform 0.3s ease;
+  color: var(--primary);
+}
+
+.expandable-card.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+/* Certificate subcards container */
+.certificate-subcards {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--entry);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Individual certificate card */
+.certificate-card {
+  background: var(--code-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Certificate thumbnail */
+.cert-thumb {
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.cert-thumb::after {
+  content: "🔍 Click để xem";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: #fff;
+  padding: 1rem 0.5rem 0.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificate-card:hover .cert-thumb::after {
+  opacity: 1;
+}
+
+/* Certificate info */
+.cert-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.cert-info h5 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.cert-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--content);
+  line-height: 1.4;
+}
+
+/* ===================================
+     MODAL LIGHTBOX FOR CERTIFICATES
+     =================================== */
+
+.cert-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.95);
+  animation: fadeIn 0.3s ease;
+  /* Flexbox để căn giữa */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cert-modal[style*="display: block"] {
+  display: flex !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container cho ảnh */
+.cert-modal-image-container {
+  position: relative;
+  max-width: 90%;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cert-modal-content {
+  display: block;
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Zoom state */
+.cert-modal-content.zoomed {
+  cursor: zoom-out;
+  max-width: none;
+  max-height: none;
+}
+
+#cert-modal-caption {
+  margin: 1rem auto 0;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+/* Close button */
+.cert-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 10000;
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.cert-modal-close:hover,
+.cert-modal-close:focus {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
+
+/* Zoom indicator */
+.zoom-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10001;
+}
+
+.zoom-indicator.show {
+  opacity: 1;
+}
+
+/* ===================================
+     RESPONSIVE - CERTIFICATES
+     =================================== */
+
+@media (max-width: 900px) {
+  .certificate-subcards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .cert-thumb {
+    height: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .certificate-subcards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .cert-thumb {
+    height: 180px;
+  }
+
+  .cert-modal-content {
+    max-width: 95%;
+  }
+
+  .cert-modal-close {
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+  }
+}
+
+/* Dark mode support */
+.dark .certificate-subcards {
+  background: var(--entry);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .certificate-card {
+  background: var(--code-bg);
+}
+
+/* ===================================
+   HOMEPAGE CUSTOM LAYOUT
+   =================================== */
+
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Hero Section */
+.home-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 1rem;
+  background: var(--entry);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.home-description {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Posts Grid */
+.posts-section {
+  margin-top: 2rem;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Post Card */
+.post-card {
+  background: var(--entry);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Post Thumbnail */
+.post-thumbnail {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--tertiary);
+}
+
+.post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-thumbnail img {
+  transform: scale(1.05);
+}
+
+/* Post Card Content */
+.post-card-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.post-card-title a {
+  color: var(--content);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.post-card-title a:hover {
+  color: var(--primary);
+}
+
+/* Meta Info */
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--secondary);
+  flex-wrap: wrap;
+}
+
+.meta-separator {
+  color: var(--border);
+}
+
+/* Summary */
+.post-card-summary {
+  color: var(--secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+/* Read More Link */
+.read-more {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.read-more:hover {
+  color: var(--primary);
+  transform: translateX(5px);
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--entry);
+  border-radius: 8px;
+}
+
+.pagination a {
+  padding: 0.8rem 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.pagination a:hover {
+  background: var(--primary);
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+.pagination-info {
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+/* ===================================
+     RESPONSIVE - HOMEPAGE
+     =================================== */
+
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .home-description {
+    font-size: 1rem;
+  }
+
+  .posts-grid {
+    gap: 1.5rem;
+  }
+
+  .post-card-title {
+    font-size: 1.3rem;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pagination a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .post-card-content {
+    padding: 1rem;
+  }
+
+  .post-thumbnail {
+    height: 150px;
+  }
+
+  .post-card-title {
+    font-size: 1.2rem;
+  }
+
+  .post-card-meta {
+    font-size: 0.85rem;
+  }
+}
+
+/* Dark Mode */
+.dark .home-hero {
+  background: var(--entry);
+}
+
+.dark .post-card {
+  background: var(--entry);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .post-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dark .pagination {
+  background: var(--entry);
+}

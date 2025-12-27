@@ -23,24 +23,10 @@
       <description></description>
     </item>
     <item>
-      <title>Java Programming</title>
-      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</link>
-      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Networking</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/categories/networking/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/networking/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Real-Time Applications</title>
-      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/</link>
-      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/</guid>
       <description></description>
     </item>
     <item>
@@ -55,13 +41,6 @@
       <link>http://localhost:1313/Blog-s_VuManhCuong/categories/tooling/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/tooling/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Web API</title>
-      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</link>
-      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</guid>
       <description></description>
     </item>
     <item>
@@ -83,6 +62,13 @@
       <link>http://localhost:1313/Blog-s_VuManhCuong/categories/node.js-tutorial/</link>
       <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/node.js-tutorial/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web API</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</guid>
       <description></description>
     </item>
     <item>
@@ -114,10 +100,24 @@
       <description></description>
     </item>
     <item>
+      <title>Java Programming</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Network Programming</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/categories/network-programming/</link>
       <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/network-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Technical Tutorial</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/technical-tutorial/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/technical-tutorial/</guid>
       <description></description>
     </item>
     <item>

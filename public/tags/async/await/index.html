@@ -11,7 +11,7 @@
 <meta name="description" content="Chia sẻ kiến thức về Java &amp; JavaScript Network Programming">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/tags/async/await/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.51e8f7abc48edf9de58328ec99ba81083516d67e040b34f72bcde32b3eb616b8.css" integrity="sha256-Uej3q8SO353lgyjsmbqBCDUW1n4ECzT3K83jKz62Frg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -140,11 +140,11 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>Fetch API trong JavaScript - Gọi REST API hiện đại Chủ đề: Web Development, JavaScript Modern, REST API
-1. Giới thiệu Nếu bạn đã từng làm việc với JavaScript những năm trước 2015, chắc hẳn bạn không thể quên “cơn ác mộng” mang tên XMLHttpRequest hay cấu trúc ajax cồng kềnh của jQuery. Code rối rắm, callback lồng nhau (callback hell) khiến việc lấy dữ liệu từ server trở thành một cực hình.
+    <p>Lời mở đầu: Nếu bạn đã từng làm việc với JavaScript những năm trước 2015, chắc hẳn bạn không thể quên “cơn ác mộng” mang tên XMLHttpRequest hay cấu trúc ajax cồng kềnh của jQuery. Code rối rắm, callback lồng nhau (callback hell) khiến việc lấy dữ liệu từ server trở thành một cực hình.
+Hãy tưởng tượng bạn đang đứng bên bờ sông, nhìn những chiếc thuyền nhỏ chở theo những thông điệp quý giá từ bờ này sang bờ kia. Trong thế giới lập trình web, Fetch API chính là những chiếc cầu hiện đại, thay thế cho những chiếc phà cũ kỹ XMLHttpRequest, mang theo dữ liệu một cách mượt mà và thanh thoát hơn.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-12-24 00:00:00 +0000 UTC'>December 24, 2025</span>&nbsp;·&nbsp;<span>10 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
+  <footer class="entry-footer"><span title='2025-12-24 00:00:00 +0000 UTC'>December 24, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
   <a class="entry-link" aria-label="post link to Fetch API trong JavaScript - Gọi REST API hiện đại" href="http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/"></a>
 </article>
     </main>
@@ -162,7 +162,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

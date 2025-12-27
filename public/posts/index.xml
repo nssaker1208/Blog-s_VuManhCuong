@@ -23,18 +23,11 @@
       <description>Tại sao API chạy ngon trên Postman nhưng lại lỗi trên trình duyệt? Tìm hiểu về Same-Origin Policy, cơ chế Preflight và cách xử lý lỗi CORS đúng chuẩn</description>
     </item>
     <item>
-      <title>UDP Socket Programming - Gửi và nhận Datagram</title>
+      <title>UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</guid>
-      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này</description>
-    </item>
-    <item>
-      <title>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</title>
-      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</link>
-      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</guid>
-      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time, xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại</description>
+      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này.</description>
     </item>
     <item>
       <title>Node.js HTTP Server từ đầu - Không dùng Framework</title>
@@ -44,6 +37,13 @@
       <description>Tự tay xây dựng HTTP Server bằng module &amp;#39;http&amp;#39; native của Node.js để hiểu rõ bản chất của Streams, Buffers và Request/Response cycle</description>
     </item>
     <item>
+      <title>WebSocket Client với JavaScript: Xây dựng Chat App không cần thư viện ngoài</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</guid>
+      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time. Xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại.</description>
+    </item>
+    <item>
       <title>Fetch API trong JavaScript - Gọi REST API hiện đại</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</link>
       <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
@@ -51,18 +51,11 @@
       <description>Hướng dẫn chi tiết sử dụng Fetch API với async/await, xử lý lỗi và Promise trong JavaScript hiện đại</description>
     </item>
     <item>
-      <title>WebSocket với Java Spring Boot</title>
-      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
-      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
-      <description>Hướng dẫn chi tiết xây dựng hệ thống thông báo thời gian thực với WebSocket, STOMP và Spring Boot</description>
-    </item>
-    <item>
       <title>HTTP Request/Response với Java HttpURLConnection</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</link>
       <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</guid>
-      <description>Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection</description>
+      <description>Cách gửi GET/POST request, xử lý JSON response từ API</description>
     </item>
     <item>
       <title>Java Multithreading - Quản Lý Kết Nối Mạng Hiệu Quả</title>
@@ -70,6 +63,13 @@
       <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</guid>
       <description>Hướng dẫn chi tiết về sử dụng Thread Pool và ExecutorService để xử lý nhiều client đồng thời một cách hiệu quả</description>
+    </item>
+    <item>
+      <title>WebSocket với Java Spring Boot</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
+      <description>Xây dựng Real-time Notification System với WebSocket API và Spring Boot</description>
     </item>
     <item>
       <title>Lập Trình Java Socket</title>

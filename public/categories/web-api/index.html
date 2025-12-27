@@ -11,7 +11,7 @@
 <meta name="description" content="Chia sẻ kiến thức về Java &amp; JavaScript Network Programming">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.51e8f7abc48edf9de58328ec99ba81083516d67e040b34f72bcde32b3eb616b8.css" integrity="sha256-Uej3q8SO353lgyjsmbqBCDUW1n4ECzT3K83jKz62Frg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -136,16 +136,17 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện
+    <h2 class="entry-hint-parent">WebSocket Client với JavaScript: Xây dựng Chat App không cần thư viện ngoài
     </h2>
   </header>
   <div class="entry-content">
-    <p>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện Chủ đề: Frontend Development, Real-time Communication, Native Web API
-1. Lời mở đầu Khi nhắc đến Real-time trên trình duyệt (Browser), cái tên đầu tiên bật ra trong đầu đa số lập trình viên là Socket.io. Không phủ nhận Socket.io rất tuyệt, nhưng nó giống như việc bạn dùng một chiếc xe tăng để đi chợ vậy. Đôi khi, nó quá “dư thừa” cho những nhu cầu cơ bản.
+    <p>Chào các bạn,
+Khi nhắc đến Real-time trên trình duyệt (Browser), cái tên đầu tiên bật ra trong đầu đa số lập trình viên là Socket.io. Không phủ nhận Socket.io rất tuyệt, nhưng nó giống như việc bạn dùng một chiếc xe tăng để đi chợ vậy. Đôi khi, nó quá “dư thừa” cho những nhu cầu cơ bản.
+Trình duyệt của bạn (Chrome, Firefox, Safari…) thực ra đã tích hợp sẵn một “vũ khí” rất mạnh: Native WebSocket API. Nó nhẹ, nhanh và không cần cài thêm bất kỳ gói npm nào.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>8 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
-  <a class="entry-link" aria-label="post link to WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/"></a>
+  <footer class="entry-footer"><span title='2025-12-25 00:00:00 +0000 UTC'>December 25, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
+  <a class="entry-link" aria-label="post link to WebSocket Client với JavaScript: Xây dựng Chat App không cần thư viện ngoài" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/"></a>
 </article>
     </main>
     
@@ -162,7 +163,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

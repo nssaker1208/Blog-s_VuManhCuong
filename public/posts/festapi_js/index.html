@@ -11,7 +11,7 @@
 <meta name="description" content="Hướng dẫn chi tiết sử dụng Fetch API với async/await, xử lý lỗi và Promise trong JavaScript hiện đại">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.cf26504812116e38747f5c037b51539e19f17e4b63193bed2d17533e5352b1f9.css" integrity="sha256-zyZQSBIRbjh0f1wDe1FTnhnxfktjGTvtLRdTPlNSsfk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -137,19 +137,20 @@
     <div class="post-description">
       Hướng dẫn chi tiết sử dụng Fetch API với async/await, xử lý lỗi và Promise trong JavaScript hiện đại
     </div>
-    <div class="post-meta"><span title='2025-12-24 00:00:00 +0000 UTC'>December 24, 2025</span>&nbsp;·&nbsp;<span>10 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
+    <div class="post-meta"><span title='2025-12-24 00:00:00 +0000 UTC'>December 24, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="fetch-api-trong-javascript---gọi-rest-api-hiện-đại">Fetch API trong JavaScript - Gọi REST API hiện đại<a hidden class="anchor" aria-hidden="true" href="#fetch-api-trong-javascript---gọi-rest-api-hiện-đại">#</a></h1>
-<p><strong>Chủ đề:</strong> Web Development, JavaScript Modern, REST API</p>
-<h2 id="1-giới-thiệu">1. Giới thiệu<a hidden class="anchor" aria-hidden="true" href="#1-giới-thiệu">#</a></h2>
+  <div class="post-content"><h2 id="lời-mở-đầu">Lời mở đầu:<a hidden class="anchor" aria-hidden="true" href="#lời-mở-đầu">#</a></h2>
 <p>Nếu bạn đã từng làm việc với JavaScript những năm trước 2015, chắc hẳn bạn không thể quên &ldquo;cơn ác mộng&rdquo; mang tên <code>XMLHttpRequest</code> hay cấu trúc <code>ajax</code> cồng kềnh của jQuery. Code rối rắm, callback lồng nhau (callback hell) khiến việc lấy dữ liệu từ server trở thành một cực hình.</p>
-<p><strong>Fetch API</strong> ra đời như một luồng gió mới, mang đến cách tiếp cận hiện đại và thanh lịch hơn trong việc giao tiếp với server. Từ những ngày đầu của Ajax, khi mà việc giao tiếp với server còn phức tạp và rườm rà, đến thời đại của Fetch API - chúng ta đã chứng kiến một cuộc cách mạng thầm lặng nhưng sâu sắc.</p>
-<h2 id="2-fetch-api-là-gì">2. Fetch API là gì?<a hidden class="anchor" aria-hidden="true" href="#2-fetch-api-là-gì">#</a></h2>
+<p>Hãy tưởng tượng bạn đang đứng bên bờ sông, nhìn những chiếc thuyền nhỏ chở theo những thông điệp quý giá từ bờ này sang bờ kia. Trong thế giới lập trình web, <strong>Fetch API</strong> chính là những chiếc cầu hiện đại, thay thế cho những chiếc phà cũ kỹ XMLHttpRequest, mang theo dữ liệu một cách mượt mà và thanh thoát hơn.</p>
+<p>Từ những ngày đầu của Ajax, khi mà việc giao tiếp với server còn phức tạp và rườm rà, đến thời đại của Fetch API - chúng ta đã chứng kiến một cuộc cách mạng thầm lặng nhưng sâu sắc. Hôm nay, chúng ta sẽ cùng khám phá nghệ thuật gọi REST API hiện đại, nơi mà mỗi dòng code không chỉ là lệnh máy tính mà còn là thơ ca của sự kết nối.</p>
+<p><img alt="Fetch API Overview" loading="lazy" src="https://sspark.genspark.ai/cfimages?u1=reRo8NtMzEsldBBAmd4%2BR95Ws8zRSbTkz5MgqLyfz79fYXK%2FRfE13sexFZW%2FZQX8X8gfJCmXID8I5t6RC8r4gYJBhRl1Ke9G2icU6i0Tew%3D%3D&u2=36jSbHWXHHFaG6zA&width=2560">
+<em>Hình 1: Fetch API - Cánh cửa hiện đại dẫn lối vào thế giới REST API, nơi dữ liệu được truyền tải một cách thanh lịch và hiệu quả</em></p>
+<h2 id="fetch-api-là-gì">Fetch API là gì?<a hidden class="anchor" aria-hidden="true" href="#fetch-api-là-gì">#</a></h2>
+<h3 id="bản-chất-của-fetch-api">Bản chất của Fetch API<a hidden class="anchor" aria-hidden="true" href="#bản-chất-của-fetch-api">#</a></h3>
 <p>Fetch API không chỉ đơn thuần là một phương pháp để gửi HTTP request - nó là một triết lý mới trong việc xử lý giao tiếp bất đồng bộ. Nó cung cấp phương thức toàn cục <code>fetch()</code> để giúp bạn lấy tài nguyên từ mạng một cách dễ dàng và logic hơn.</p>
 <p>Nếu <code>XMLHttpRequest</code> giống như một chiếc máy điện thoại bàn cũ kỹ với những nút bấm phức tạp, thì Fetch API như một chiếc smartphone hiện đại - đơn giản, trực quan và mạnh mẽ.</p>
-<h3 id="21-so-sánh-xmlhttprequest-vs-fetch-api">2.1. So sánh XMLHttpRequest vs Fetch API<a hidden class="anchor" aria-hidden="true" href="#21-so-sánh-xmlhttprequest-vs-fetch-api">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// XMLHttpRequest - Quá khứ với những dòng code rối rắm
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">xhr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLHttpRequest</span>();
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">xhr</span>.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#e6db74">&#34;/api/users&#34;</span>);
@@ -166,38 +167,22 @@
 </span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
 </span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>))
 </span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi:&#34;</span>, <span style="color:#a6e22e">error</span>));
-</span></span></code></pre></div><h3 id="22-tại-sao-nên-dùng-fetch-thay-vì-xmlhttprequest">2.2. Tại sao nên dùng Fetch thay vì XMLHttpRequest?<a hidden class="anchor" aria-hidden="true" href="#22-tại-sao-nên-dùng-fetch-thay-vì-xmlhttprequest">#</a></h3>
+</span></span></code></pre></div><h3 id="tại-sao-nên-dùng-fetch-thay-vì-xmlhttprequest">Tại sao nên dùng Fetch thay vì XMLHttpRequest?<a hidden class="anchor" aria-hidden="true" href="#tại-sao-nên-dùng-fetch-thay-vì-xmlhttprequest">#</a></h3>
+<p>Sự chuyển đổi từ XMLHttpRequest sang Fetch API giống như việc từ bỏ con đường đất gồ ghề để đi trên đường cao tốc mượt mà. Fetch API mang đến:</p>
 <ul>
-<li><strong>Promise-based:</strong> Fetch sử dụng Promises, giúp xử lý các thao tác bất đồng bộ sạch sẽ hơn, tránh callback hell</li>
-<li><strong>Cú pháp gọn gàng:</strong> Dễ đọc, dễ hiểu và &ldquo;giống tiếng Anh&rdquo; hơn</li>
-<li><strong>Stream API:</strong> Hỗ trợ xử lý dữ liệu dạng luồng (stream), hữu ích khi tải file lớn</li>
-<li><strong>Tích hợp sẵn:</strong> Không cần thêm thư viện, có sẵn trong trình duyệt hiện đại</li>
+<li><strong>Promise-based</strong>: etch sử dụng Promises, giúp xử lý các thao tác bất đồng bộ (asynchronous) sạch sẽ hơn, tránh callback hell.</li>
+<li><strong>Cú pháp gọn gàng</strong>: Dễ đọc, dễ hiểu và &ldquo;giống tiếng Anh&rdquo; hơn.</li>
+<li><strong>Stream API</strong>: Hỗ trợ xử lý dữ liệu dạng luồng (stream), hữu ích khi tải file lớn.</li>
 </ul>
-<h2 id="3-cơ-chế-hoạt-động-từ-promise-đến-asyncawait">3. Cơ chế hoạt động: Từ Promise đến Async/Await<a hidden class="anchor" aria-hidden="true" href="#3-cơ-chế-hoạt-động-từ-promise-đến-asyncawait">#</a></h2>
-<p>Bản chất của <code>fetch()</code> là trả về một <strong>Promise</strong>. Promise này sẽ <strong>Resolve</strong> (thành công) khi nhận được phản hồi từ server (ngay cả khi đó là lỗi 404 hay 500), và chỉ <strong>Reject</strong> (thất bại) khi có lỗi mạng (mất mạng, DNS lỗi) khiến request không thể thực hiện.</p>
-<h3 id="31-promise-based-approach">3.1. Promise-based approach<a hidden class="anchor" aria-hidden="true" href="#31-promise-based-approach">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng Promise chain (.then)
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://api.example.com/data&#34;</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Data:&#34;</span>, <span style="color:#a6e22e">data</span>);
-</span></span><span style="display:flex;"><span>  })
-</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Error:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>  });
-</span></span></code></pre></div><h3 id="32-asyncawait-approach-khuyến-nghị">3.2. Async/Await approach (Khuyến nghị)<a hidden class="anchor" aria-hidden="true" href="#32-asyncawait-approach-khuyến-nghị">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng async/await - code đồng bộ hơn, dễ đọc hơn
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Sự đơn giản đến mê hoặc của Fetch API
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fetchUserData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">userId</span>) =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/api/users/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">userId</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">userData</span>;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
@@ -205,56 +190,47 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetchUserData</span>(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>))
-</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>));
-</span></span></code></pre></div><h2 id="4-hướng-dẫn-thực-hành---crud-với-fetch-api">4. Hướng dẫn thực hành - CRUD với Fetch API<a hidden class="anchor" aria-hidden="true" href="#4-hướng-dẫn-thực-hành---crud-với-fetch-api">#</a></h2>
-<p>Chúng ta sẽ sử dụng API giả lập <code>JSONPlaceholder</code> để thực hành các thao tác CRUD (Create, Read, Update, Delete) cơ bản.</p>
-<h3 id="41-get-request---lấy-dữ-liệu">4.1. GET Request - Lấy dữ liệu<a hidden class="anchor" aria-hidden="true" href="#41-get-request---lấy-dữ-liệu">#</a></h3>
-<p>Đây là thao tác cơ bản nhất. Mặc định <code>fetch()</code> sẽ sử dụng phương thức GET.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Lấy danh sách users
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUsers</span>() {
+</span></span></code></pre></div><h2 id="cơ-chế-hoạt-động-từ-promise-đến-asyncawait">Cơ chế hoạt động: Từ Promise đến Async/Await<a hidden class="anchor" aria-hidden="true" href="#cơ-chế-hoạt-động-từ-promise-đến-asyncawait">#</a></h2>
+<p>Bản chất của <code>fetch()</code> là trả về một <strong>Promise</strong>. Promise này sẽ:</p>
+<ul>
+<li>
+<p><strong>Resolve (Thành công)</strong>: Khi nhận được phản hồi từ server (ngay cả khi đó là lỗi 404 hay 500).</p>
+</li>
+<li>
+<p><strong>Reject (Thất bại)</strong>: Chỉ khi có lỗi mạng (mất mạng, DNS lỗi) khiến request không thể thực hiện.</p>
+</li>
+</ul>
+<p>Tuy nhiên, việc dùng chuỗi <code>.then()</code> của Promise thuần túy đôi khi vẫn hơi dài dòng. Đó là lý do chúng ta nên kết hợp với Async/Await (được giới thiệu trong ES2017) để viết code bất đồng bộ trông giống như code đồng bộ tuần tự.</p>
+<p><img alt="Fetch API Overview" loading="lazy" src="https://blog.risingstack.com/wp-content/uploads/2021/06/async-await-nodejs-1024x486.png">
+<em>Hình 2: Luồng xử lý dữ liệu tuần tự khi sử dụng Async/Await, giúp code chạy từ trên xuống dưới dễ theo dõi.</em></p>
+<h2 id="hướng-dẫn-thực-hành-crud-với-fetch">Hướng dẫn thực hành (CRUD với Fetch)<a hidden class="anchor" aria-hidden="true" href="#hướng-dẫn-thực-hành-crud-với-fetch">#</a></h2>
+<p>Chúng ta sẽ sử dụng một API giả lập phổ biến là <code>JSONPlaceholder</code> để thực hành.</p>
+<h3 id="get-request-lấy-dữ-liệu">GET Request (Lấy dữ liệu)<a hidden class="anchor" aria-hidden="true" href="#get-request-lấy-dữ-liệu">#</a></h3>
+<p>Đây là thao tác cơ bản nhất. Mặc định <code>fetch</code> sẽ dùng phương thức GET.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Định nghĩa hàm bất đồng bộ
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUserData</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/users&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">users</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Users:&#34;</span>, <span style="color:#a6e22e">users</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">users</span>;
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi khi lấy danh sách users:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Lấy một user cụ thể
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUserById</span>(<span style="color:#a6e22e">id</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">`https://jsonplaceholder.typicode.com/users/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. Gửi request
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/users/1&#34;</span>
 </span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;User:&#34;</span>, <span style="color:#a6e22e">user</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. Chờ parse body sang JSON (đây cũng là một promise)
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;User Data:&#34;</span>, <span style="color:#a6e22e">data</span>);
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi khi lấy thông tin user:&#34;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi kết nối:&#34;</span>, <span style="color:#a6e22e">error</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Gọi hàm
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">getUsers</span>();
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getUserById</span>(<span style="color:#ae81ff">1</span>);
-</span></span></code></pre></div><h3 id="42-post-request---tạo-mới-dữ-liệu">4.2. POST Request - Tạo mới dữ liệu<a hidden class="anchor" aria-hidden="true" href="#42-post-request---tạo-mới-dữ-liệu">#</a></h3>
-<p>Khi gửi dữ liệu lên server, bạn cần thêm tham số thứ 2 vào <code>fetch()</code> để cấu hình <code>method</code>, <code>headers</code> và <code>body</code>.</p>
-<blockquote>
-<p><strong>Lưu ý quan trọng:</strong> Bạn phải dùng <code>JSON.stringify()</code> để chuyển object JavaScript thành chuỗi JSON, và khai báo header <code>Content-Type: application/json</code></p>
-</blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">createPost</span>(<span style="color:#a6e22e">postData</span>) {
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getUserData</span>();
+</span></span></code></pre></div><h3 id="post-request-tạo-mới-dữ-liệu">POST Request (Tạo mới dữ liệu)<a hidden class="anchor" aria-hidden="true" href="#post-request-tạo-mới-dữ-liệu">#</a></h3>
+<p>Khi gửi dữ liệu lên server, bạn cần thêm tham số thứ 2 vào hàm <code>fetch</code> để cấu hình <code>method</code>, <code>headers</code> và <code>body</code>.</p>
+<ul>
+<li><strong>Lưu ý quan trọng</strong>: Bạn phải dùng <code>JSON.stringify()</code> để chuyển object JavaScript thành chuỗi JSON trước khi gửi, và khai báo header <code>Content-Type</code>: <code>application/json</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">createPost</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newPost</span> <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Học Fetch API&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Fetch API rất mạnh mẽ và dễ dùng&#34;</span>,
@@ -263,322 +239,48 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/posts&#34;</span>, {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json; charset=UTF-8&#34;</span>,
-</span></span><span style="display:flex;"><span>      },
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">newPost</span>),
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>, <span style="color:#75715e">// Phương thức
+</span></span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json; charset=UTF-8&#34;</span>, <span style="color:#75715e">// Bắt buộc
+</span></span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">newPost</span>), <span style="color:#75715e">// Chuyển đổi dữ liệu
+</span></span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Đã tạo bài viết:&#34;</span>, <span style="color:#a6e22e">data</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi khi tạo bài viết:&#34;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi:&#34;</span>, <span style="color:#a6e22e">error</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">createPost</span>();
-</span></span></code></pre></div><h3 id="43-put-request---cập-nhật-toàn-bộ">4.3. PUT Request - Cập nhật toàn bộ<a hidden class="anchor" aria-hidden="true" href="#43-put-request---cập-nhật-toàn-bộ">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">updatePost</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">postData</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">updatedPost</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">id</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bài viết đã được cập nhật&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Nội dung mới hoàn toàn&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">userId</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">`https://jsonplaceholder.typicode.com/posts/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>,
-</span></span><span style="display:flex;"><span>      {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;PUT&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
-</span></span><span style="display:flex;"><span>        },
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">updatedPost</span>),
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Đã cập nhật bài viết:&#34;</span>, <span style="color:#a6e22e">data</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>;
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi khi cập nhật:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">updatePost</span>(<span style="color:#ae81ff">1</span>);
-</span></span></code></pre></div><h3 id="44-patch-request---cập-nhật-một-phần">4.4. PATCH Request - Cập nhật một phần<a hidden class="anchor" aria-hidden="true" href="#44-patch-request---cập-nhật-một-phần">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">patchPost</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">updates</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">partialUpdate</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Chỉ cập nhật title&#34;</span>,
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">`https://jsonplaceholder.typicode.com/posts/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>,
-</span></span><span style="display:flex;"><span>      {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;PATCH&#34;</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
-</span></span><span style="display:flex;"><span>        },
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">partialUpdate</span>),
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Đã cập nhật một phần:&#34;</span>, <span style="color:#a6e22e">data</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>;
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi khi patch:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">patchPost</span>(<span style="color:#ae81ff">1</span>);
-</span></span></code></pre></div><h3 id="45-delete-request---xóa-dữ-liệu">4.5. DELETE Request - Xóa dữ liệu<a hidden class="anchor" aria-hidden="true" href="#45-delete-request---xóa-dữ-liệu">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">deletePost</span>(<span style="color:#a6e22e">id</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(
-</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">`https://jsonplaceholder.typicode.com/posts/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>,
-</span></span><span style="display:flex;"><span>      {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;DELETE&#34;</span>,
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Đã xóa bài viết ID: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi khi xóa:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">deletePost</span>(<span style="color:#ae81ff">1</span>);
-</span></span></code></pre></div><h2 id="5-cái-bẫy-xử-lý-lỗi-must-read">5. Cái bẫy xử lý lỗi (Must Read!)<a hidden class="anchor" aria-hidden="true" href="#5-cái-bẫy-xử-lý-lỗi-must-read">#</a></h2>
+</span></span></code></pre></div><h2 id="cái-bẫy-xử-lý-lỗi-must-read">Cái bẫy &ldquo;Xử lý lỗi&rdquo; (Must Read)<a hidden class="anchor" aria-hidden="true" href="#cái-bẫy-xử-lý-lỗi-must-read">#</a></h2>
 <p>Khi server trả về lỗi <code>404 Not Found</code> hay <code>500 Server Error</code>, Fetch <strong>KHÔNG</strong> coi đó là lỗi để nhảy vào <code>catch</code>. Với Fetch, miễn là server có phản hồi, thì đó là thành công (Resolve). Nó chỉ nhảy vào <code>catch</code> khi mất mạng hoặc DNS lỗi (Network Error).</p>
-<h3 id="51-cách-xử-lý-lỗi-đúng-chuẩn">5.1. Cách xử lý lỗi đúng chuẩn<a hidden class="anchor" aria-hidden="true" href="#51-cách-xử-lý-lỗi-đúng-chuẩn">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fetchDataSafely</span>(<span style="color:#a6e22e">url</span>) {
+<p>Vậy nên, nếu bạn chỉ dùng <code>try&hellip;catch</code>, bạn sẽ bỏ lọt các lỗi logic.</p>
+<p><img alt="Fetch API Overview" loading="lazy" src="https://media.geeksforgeeks.org/wp-content/uploads/20250915122545914329/error_handling.webp">
+<em>Hình 3: Quy trình xử lý lỗi đúng chuẩn. Cần kiểm tra response.ok trước khi xử lý dữ liệu.</em></p>
+<p><strong>Code chuẩn để xử lý lỗi</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getDataSecurely</span>() {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;[https://api.example.com/data](https://api.example.com/data)&#34;</span>
+</span></span><span style="display:flex;"><span>    );
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// QUAN TRỌNG: Kiểm tra response.ok trước
-</span></span></span><span style="display:flex;"><span>    <span style="color:#75715e">// response.ok = true nếu status trong khoảng 200-299
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Kiểm tra thủ công: Status có nằm trong khoảng 200-299 không?
 </span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Tự ném lỗi để nhảy xuống catch
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`Lỗi HTTP! Status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>;
 </span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Bây giờ catch mới bắt được cả lỗi mạng lẫn lỗi HTTP
-</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Có lỗi xảy ra:&#34;</span>, <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xử lý chi tiết theo loại lỗi
-</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#34;404&#34;</span>)) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Tài nguyên không tồn tại&#34;</span>);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#34;500&#34;</span>)) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Lỗi server nội bộ&#34;</span>);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Lỗi kết nối mạng&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>; <span style="color:#75715e">// Re-throw nếu muốn xử lý ở cấp cao hơn
-</span></span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="52-xử-lý-lỗi-với-status-codes">5.2. Xử lý lỗi với status codes<a hidden class="anchor" aria-hidden="true" href="#52-xử-lý-lỗi-với-status-codes">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleResponse</span>(<span style="color:#a6e22e">response</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Xử lý chi tiết theo status code
-</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">400</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Bad Request - Dữ liệu không hợp lệ&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">401</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Unauthorized - Cần đăng nhập&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">403</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Forbidden - Không có quyền truy cập&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">404</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Not Found - Không tìm thấy tài nguyên&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">500</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Internal Server Error - Lỗi server&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Lúc này catch mới bắt được cả lỗi Mạng lẫn lỗi HTTP
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Có biến:&#34;</span>, <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getData</span>() {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://api.example.com/data&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">handleResponse</span>(<span style="color:#a6e22e">response</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>);
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Error:&#34;</span>, <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="6-các-tính-năng-nâng-cao">6. Các tính năng nâng cao<a hidden class="anchor" aria-hidden="true" href="#6-các-tính-năng-nâng-cao">#</a></h2>
-<h3 id="61-thêm-headers-authentication">6.1. Thêm Headers (Authentication)<a hidden class="anchor" aria-hidden="true" href="#61-thêm-headers-authentication">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fetchWithAuth</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">token</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>, {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Authorization</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`Bearer </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">token</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
-</span></span><span style="display:flex;"><span>      },
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Error:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;your-jwt-token-here&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetchWithAuth</span>(<span style="color:#e6db74">&#34;https://api.example.com/protected&#34;</span>, <span style="color:#a6e22e">token</span>);
-</span></span></code></pre></div><h3 id="62-timeout-cho-request">6.2. Timeout cho Request<a hidden class="anchor" aria-hidden="true" href="#62-timeout-cho-request">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fetchWithTimeout</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">timeout</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">controller</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AbortController</span>();
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">timeoutId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setTimeout</span>(() =&gt; <span style="color:#a6e22e">controller</span>.<span style="color:#a6e22e">abort</span>(), <span style="color:#a6e22e">timeout</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>, {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">signal</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">controller</span>.<span style="color:#a6e22e">signal</span>,
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">clearTimeout</span>(<span style="color:#a6e22e">timeoutId</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;AbortError&#34;</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Request timeout sau&#34;</span>, <span style="color:#a6e22e">timeout</span>, <span style="color:#e6db74">&#34;ms&#34;</span>);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Error:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetchWithTimeout</span>(<span style="color:#e6db74">&#34;https://api.example.com/data&#34;</span>, <span style="color:#ae81ff">3000</span>);
-</span></span></code></pre></div><h3 id="63-upload-file">6.3. Upload File<a hidden class="anchor" aria-hidden="true" href="#63-upload-file">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">uploadFile</span>(<span style="color:#a6e22e">file</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">formData</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">FormData</span>();
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">formData</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;file&#34;</span>, <span style="color:#a6e22e">file</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">formData</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;description&#34;</span>, <span style="color:#e6db74">&#34;My uploaded file&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://api.example.com/upload&#34;</span>, {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">formData</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Không cần set Content-Type header, browser tự động set
-</span></span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Upload success:&#34;</span>, <span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Upload failed:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng với input file
-</span></span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;fileInput&#34;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;change&#34;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">file</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">files</span>[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">file</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">uploadFile</span>(<span style="color:#a6e22e">file</span>);
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><h2 id="7-best-practices">7. Best Practices<a hidden class="anchor" aria-hidden="true" href="#7-best-practices">#</a></h2>
-<ul>
-<li><strong>Luôn kiểm tra response.ok:</strong> Không dựa vào catch để bắt lỗi HTTP</li>
-<li><strong>Sử dụng async/await:</strong> Code dễ đọc hơn Promise chain</li>
-<li><strong>Xử lý timeout:</strong> Tránh request treo mãi không có kết quả</li>
-<li><strong>Tạo utility function:</strong> Đóng gói logic fetch để tái sử dụng</li>
-<li><strong>Loading state:</strong> Hiển thị loading indicator khi đang fetch</li>
-<li><strong>Error handling UI:</strong> Thông báo lỗi thân thiện cho user</li>
-</ul>
-<h3 id="71-utility-function-mẫu">7.1. Utility Function mẫu<a hidden class="anchor" aria-hidden="true" href="#71-utility-function-mẫu">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Utility function tổng quát cho mọi request
-</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">apiClient</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">baseURL</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.example.com&#34;</span>,
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">request</span>(<span style="color:#a6e22e">endpoint</span>, <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {}) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">baseURL</span><span style="color:#e6db74">}${</span><span style="color:#a6e22e">endpoint</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>      ...<span style="color:#a6e22e">options</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
-</span></span><span style="display:flex;"><span>        ...<span style="color:#a6e22e">options</span>.<span style="color:#a6e22e">headers</span>,
-</span></span><span style="display:flex;"><span>      },
-</span></span><span style="display:flex;"><span>    };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">config</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">`HTTP error! status: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;API Error:&#34;</span>, <span style="color:#a6e22e">error</span>);
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">endpoint</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">request</span>(<span style="color:#a6e22e">endpoint</span>, { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">post</span>(<span style="color:#a6e22e">endpoint</span>, <span style="color:#a6e22e">data</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">request</span>(<span style="color:#a6e22e">endpoint</span>, {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">data</span>),
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">endpoint</span>, <span style="color:#a6e22e">data</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">request</span>(<span style="color:#a6e22e">endpoint</span>, {
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;PUT&#34;</span>,
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">data</span>),
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">delete</span>(<span style="color:#a6e22e">endpoint</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">request</span>(<span style="color:#a6e22e">endpoint</span>, { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;DELETE&#34;</span> });
-</span></span><span style="display:flex;"><span>  },
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sử dụng
-</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">apiClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/users&#34;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">users</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">users</span>));
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">apiClient</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/posts&#34;</span>, { <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;New Post&#34;</span> });
-</span></span></code></pre></div><h2 id="8-kết-luận">8. Kết luận<a hidden class="anchor" aria-hidden="true" href="#8-kết-luận">#</a></h2>
-<p>Fetch API kết hợp với Async/Await thực sự làm cho code JavaScript trở nên thanh thoát và dễ bảo trì hơn rất nhiều. Chỉ cần bạn nhớ kỹ quy tắc về xử lý lỗi với <code>response.ok</code>, bạn đã nắm chắc 80% công lực rồi. Fetch API không chỉ là một công cụ - nó là triết lý mới trong việc xây dựng ứng dụng web hiện đại, nơi mà sự đơn giản và hiệu quả đi đôi với nhau.</p>
-<p>Từ những ví dụ cơ bản đến các kỹ thuật nâng cao như authentication, timeout, và upload file, bạn đã có đủ kiến thức để tự tin xây dựng các ứng dụng web tương tác với REST API một cách chuyên nghiệp. Hãy thực hành nhiều, thử nghiệm với các API thực tế, và bạn sẽ thấy sức mạnh thực sự của Fetch API!</p>
+</span></span></code></pre></div><h2 id="lời-kết">Lời kết<a hidden class="anchor" aria-hidden="true" href="#lời-kết">#</a></h2>
+<p>Fetch API kết hợp với Async/Await thực sự làm cho code JavaScript trở nên thanh thoát hơn rất nhiều. Chỉ cần bạn nhớ kỹ quy tắc về xử lý lỗi <code>response.ok</code>, bạn đã nắm chắc 80% công lực rồi.</p>
+<p>Hy vọng những chia sẻ này giúp ích cho bạn trong dự án sắp tới. Nếu có thắc mắc, đừng ngại để lại bình luận nhé!</p>
+<p>Happy Coding! 🚀</p>
 
 
   </div>
@@ -593,15 +295,15 @@
       <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/frontend/">Frontend</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/">
+  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/">
     <span class="title">« Trang trước</span>
     <br>
-    <span>Node.js HTTP Server từ đầu - Không dùng Framework</span>
+    <span>WebSocket Client với JavaScript: Xây dựng Chat App không cần thư viện ngoài</span>
   </a>
-  <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/">
+  <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/">
     <span class="title">Trang tiếp theo »</span>
     <br>
-    <span>WebSocket với Java Spring Boot</span>
+    <span>HTTP Request/Response với Java HttpURLConnection</span>
   </a>
 </nav>
 
@@ -801,7 +503,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

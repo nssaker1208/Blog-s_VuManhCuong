@@ -6,14 +6,14 @@
     <description>Recent content in Web API on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</title>
+      <title>WebSocket Client với JavaScript: Xây dựng Chat App không cần thư viện ngoài</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</link>
-      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</guid>
-      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time, xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại</description>
+      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time. Xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại.</description>
     </item>
   </channel>
 </rss>

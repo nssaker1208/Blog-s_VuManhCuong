@@ -11,7 +11,7 @@
 <meta name="description" content="Chia sẻ kiến thức về Java &amp; JavaScript Network Programming">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/tags/network-programming/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.51e8f7abc48edf9de58328ec99ba81083516d67e040b34f72bcde32b3eb616b8.css" integrity="sha256-Uej3q8SO353lgyjsmbqBCDUW1n4ECzT3K83jKz62Frg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -136,17 +136,17 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">UDP Socket Programming - Gửi và nhận Datagram
+    <h2 class="entry-hint-parent">UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)
     </h2>
   </header>
   <div class="entry-content">
-    <p>UDP Socket Programming - Gửi và nhận Datagram Chủ đề: Network Programming, UDP Protocol, Java Socket
-1. Lời mở đầu Khi mới học lập trình mạng, chúng ta thường bắt đầu với TCP (Transmission Control Protocol). Nó an toàn, tin cậy, đảm bảo dữ liệu “đi đến nơi về đến chốn”. Nhưng trong thế giới thực, đôi khi “nhanh” quan trọng hơn “chính xác tuyệt đối”.
+    <p>Chào các đồng đạo lập trình,
+Khi mới học lập trình mạng, chúng ta thường bắt đầu với TCP (Transmission Control Protocol). Nó an toàn, tin cậy, đảm bảo dữ liệu “đi đến nơi về đến chốn”. Nhưng trong thế giới thực, đôi khi “nhanh” quan trọng hơn “chính xác tuyệt đối”.
 Hãy tưởng tượng bạn đang gọi video call. Nếu mạng lag, bạn thà bị mất hình một tích tắc (glitch) rồi video chạy tiếp mượt mà, hay bạn muốn video dừng hẳn lại 3 giây để chờ tải lại cái khung hình bị mất đó? Chắc chắn là phương án đầu tiên rồi. Đó chính là đất diễn của UDP.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>7 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
-  <a class="entry-link" aria-label="post link to UDP Socket Programming - Gửi và nhận Datagram" href="http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/"></a>
+  <footer class="entry-footer"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
+  <a class="entry-link" aria-label="post link to UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)" href="http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -169,8 +169,8 @@ Hãy tưởng tượng bạn đang gọi video call. Nếu mạng lag, bạn th�
     </h2>
   </header>
   <div class="entry-content">
-    <p>Lập Trình Java Socket Chủ đề: Lập trình mạng, Java Core
-1. Giới thiệu chung Trong kỷ nguyên số hóa, khả năng giao tiếp giữa các thiết bị và ứng dụng qua mạng là một yêu cầu cốt lõi. Java Socket là một trong những cơ chế nền tảng giúp các nhà phát triển hiện thực hóa điều này. Bài viết này đi sâu vào khái niệm, cấu trúc và cách triển khai Java Socket để xây dựng các ứng dụng mạng hiệu quả, dễ mở rộng.
+    <p>Chủ đề: Lập trình mạng, Java Core
+1. Giới thiệu chung Trong kỷ nguyên số hóa, khả năng giao tiếp giữa các thiết bị và ứng dụng qua mạng là một yêu cầu cốt lõi. Java Socket là một trong những cơ chế nền tảng giúp các nhà phát triển thực hiện điều này. Bài viết này sẽ đi sâu vào khái niệm, cấu trúc và cách triển khai Java Socket để xây dựng các ứng dụng mạng hiệu quả.
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-12-20 00:00:00 +0000 UTC'>December 20, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
@@ -191,7 +191,25 @@ Hãy tưởng tượng bạn đang gọi video call. Nếu mạng lag, bạn th�
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

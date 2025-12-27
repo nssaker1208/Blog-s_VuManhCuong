@@ -13,7 +13,7 @@
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</link>
       <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</guid>
-      <description>Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection</description>
+      <description>Cách gửi GET/POST request, xử lý JSON response từ API</description>
     </item>
   </channel>
 </rss>

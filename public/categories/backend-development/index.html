@@ -11,7 +11,7 @@
 <meta name="description" content="Chia sẻ kiến thức về Java &amp; JavaScript Network Programming">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/categories/backend-development/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.51e8f7abc48edf9de58328ec99ba81083516d67e040b34f72bcde32b3eb616b8.css" integrity="sha256-Uej3q8SO353lgyjsmbqBCDUW1n4ECzT3K83jKz62Frg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -136,17 +136,17 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">UDP Socket Programming - Gửi và nhận Datagram
+    <h2 class="entry-hint-parent">UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)
     </h2>
   </header>
   <div class="entry-content">
-    <p>UDP Socket Programming - Gửi và nhận Datagram Chủ đề: Network Programming, UDP Protocol, Java Socket
-1. Lời mở đầu Khi mới học lập trình mạng, chúng ta thường bắt đầu với TCP (Transmission Control Protocol). Nó an toàn, tin cậy, đảm bảo dữ liệu “đi đến nơi về đến chốn”. Nhưng trong thế giới thực, đôi khi “nhanh” quan trọng hơn “chính xác tuyệt đối”.
+    <p>Chào các đồng đạo lập trình,
+Khi mới học lập trình mạng, chúng ta thường bắt đầu với TCP (Transmission Control Protocol). Nó an toàn, tin cậy, đảm bảo dữ liệu “đi đến nơi về đến chốn”. Nhưng trong thế giới thực, đôi khi “nhanh” quan trọng hơn “chính xác tuyệt đối”.
 Hãy tưởng tượng bạn đang gọi video call. Nếu mạng lag, bạn thà bị mất hình một tích tắc (glitch) rồi video chạy tiếp mượt mà, hay bạn muốn video dừng hẳn lại 3 giây để chờ tải lại cái khung hình bị mất đó? Chắc chắn là phương án đầu tiên rồi. Đó chính là đất diễn của UDP.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>7 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
-  <a class="entry-link" aria-label="post link to UDP Socket Programming - Gửi và nhận Datagram" href="http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/"></a>
+  <footer class="entry-footer"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span></footer>
+  <a class="entry-link" aria-label="post link to UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)" href="http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -155,8 +155,8 @@ Hãy tưởng tượng bạn đang gọi video call. Nếu mạng lag, bạn th�
     </h2>
   </header>
   <div class="entry-content">
-    <p>Node.js HTTP Server từ đầu - Không dùng Framework Chủ đề: Backend Development, Node.js Core, HTTP Protocol
-1. Lời mở đầu Hãy thú thật đi, lần cuối cùng bạn viết một server Node.js mà không gõ dòng lệnh npm install express là khi nào? Chắc là đã rất lâu rồi, hoặc chưa bao giờ đúng không?
+    <p>Lời mở đầu Chào các bạn developers!
+Hãy thú thật đi, lần cuối cùng bạn viết một server Node.js mà không gõ dòng lệnh npm install express là khi nào? Chắc là đã rất lâu rồi, hoặc chưa bao giờ đúng không?
 Các Framework như Express, Fastify hay NestJS là những công cụ tuyệt vời. Chúng giúp ta tiết kiệm thời gian, xử lý routing (định tuyến) và middleware cực mượt. Nhưng bạn có bao giờ tự hỏi: “Bên dưới lớp vỏ hào nhoáng đó, Node.js thực sự xử lý một request như thế nào?”
 ...</p>
   </div>
@@ -178,7 +178,25 @@ Các Framework như Express, Fastify hay NestJS là những công cụ tuyệt v
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

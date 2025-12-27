@@ -9,11 +9,11 @@
     <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/udp/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>UDP Socket Programming - Gửi và nhận Datagram</title>
+      <title>UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</guid>
-      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này</description>
+      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này.</description>
     </item>
     <item>
       <title>Lập Trình Java Socket</title>

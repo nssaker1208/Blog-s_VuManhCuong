@@ -1,0 +1,73 @@
+baseURL = 'https://nssaker1208.github.io/Blog-s_VuManhCuong/'
+languageCode = 'vi'
+title = 'Blog Lập Trình Mạng'
+theme = 'PaperMod'
+
+[params]
+  description = "Chia sẻ kiến thức về Java & JavaScript Network Programming"
+  author = "Vũ Mạnh Cường"
+
+   # Theme Toggle Settings
+  defaultTheme = "auto"  # auto, light, dark
+  disableThemeToggle = false  # false = hiện nút toggle
+
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  comments = true
+  hideSiteTitleInHeader = true
+
+  # Profile Mode Configuration
+  [params.profileMode]
+    enabled = true
+    title = "Vũ Mạnh Cường" # Tên của bạn
+    subtitle = "Sinh viên / Network Developer"
+    imageUrl = "/Blog-s_VuManhCuong/images/avatar.jpg" # Đường dẫn ảnh của bạn
+    imageWidth = 300
+    imageHeight = 300
+    imageTitle = "Vũ Mạnh Cường Avatar"
+    
+    [[params.profileMode.buttons]]
+      name = "GitHub Profile"
+      url = "https://github.com/nssaker1208"
+
+  # Main Description
+  [params.homeInfoParams]
+    Title = "Hi, tôi là Cường 👋"
+    Content = "Sinh viên / Network Developer. Chia sẻ kiến thức về Java, JavaScript và lập trình mạng."
+
+# Menu Configuration
+[[menu.main]]
+  identifier = 'home'
+  name = 'Home'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  identifier = 'blog'
+  name = 'Blog'
+  url = '/posts'
+  weight = 2
+
+[[menu.main]]
+  identifier = 'about'
+  name = 'About'
+  url = '/about'
+  weight = 3
+
+[[menu.main]]
+  identifier = 'portfolio'
+  name = 'Portfolio'
+  url = '/portfolio'
+  weight = 4
+
+# Markup Configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Pagination
+[pagination]
+  pagerSize = 10

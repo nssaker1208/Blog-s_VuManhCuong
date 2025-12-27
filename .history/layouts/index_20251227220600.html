@@ -1,0 +1,74 @@
+{{ define "main" }}
+<main class="main home-page">
+  
+  <!-- Hero Section (Optional) -->
+  <section class="home-hero">
+    <h1 class="home-title">{{ .Site.Title }}</h1>
+    <p class="home-description">{{ .Site.Params.description }}</p>
+  </section>
+
+  <!-- Posts Grid -->
+  <section class="posts-section">
+    <div class="posts-grid">
+      {{ range (.Paginate (where .Site.RegularPages "Type" "posts")).Pages }}
+        <article class="post-card">
+          
+          <!-- Featured Image (if exists) -->
+          {{ if .Params.cover.image }}
+          <div class="post-thumbnail">
+            <a href="{{ .Permalink }}">
+              <img src="{{ .Params.cover.image }}" alt="{{ .Title }}" loading="lazy">
+            </a>
+          </div>
+          {{ end }}
+
+          <!-- Post Content -->
+          <div class="post-card-content">
+            
+            <!-- Title -->
+            <h2 class="post-card-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+
+            <!-- Meta Info -->
+            <div class="post-card-meta">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "January 2, 2006" }}
+              </time>
+              <span class="meta-separator">·</span>
+              <span class="read-time">{{ .ReadingTime }} phút</span>
+              <span class="meta-separator">·</span>
+              <span class="author">{{ .Params.author | default .Site.Author.name }}</span>
+            </div>
+
+            <!-- Summary -->
+            <p class="post-card-summary">{{ .Summary }}</p>
+
+            <!-- Read More Link -->
+            <a href="{{ .Permalink }}" class="read-more">Đọc tiếp →</a>
+          </div>
+
+        </article>
+      {{ end }}
+    </div>
+
+    <!-- Pagination -->
+    {{ if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination">
+      {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" class="pagination-prev">← Trang trước</a>
+      {{ end }}
+      
+      <span class="pagination-info">
+        Trang {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}
+      </span>
+
+      {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" class="pagination-next">Trang sau →</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+
+  </section>
+</main>
+{{ end }}

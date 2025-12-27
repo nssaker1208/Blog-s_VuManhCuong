@@ -11,7 +11,7 @@
 <meta name="description" content="Chia sẻ kiến thức về Java &amp; JavaScript Network Programming">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/categories/technical-tutorial/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.51e8f7abc48edf9de58328ec99ba81083516d67e040b34f72bcde32b3eb616b8.css" integrity="sha256-Uej3q8SO353lgyjsmbqBCDUW1n4ECzT3K83jKz62Frg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -119,6 +119,11 @@
                     <span>About</span>
                 </a>
             </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/portfolio" title="Portfolio">
+                    <span>Portfolio</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -131,14 +136,16 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">WebSocket với Java Spring Boot: Khúc Nhạc Thời Gian Thực Trong Thế Giới Lập Trình
+    <h2 class="entry-hint-parent">WebSocket với Java Spring Boot
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>Lời Mở Đầu Hãy tưởng tượng bạn đang ngồi trong một quán cà phê yên tĩnh, nhấm nháp tách cà phê đen đậm đà, và đột nhiên điện thoại rung lên với một thông báo: “Bạn có một tin nhắn mới”. Cảm giác ấy - sự kết nối tức thì, không cần phải chờ đợi hay làm mới trang - chính là linh hồn của WebSocket.
+Trong kỷ nguyên số hiện đại, người dùng mong đợi sự phản hồi tức thì. Việc phải nhấn nút “Refresh” (F5) để xem có thông báo mới hay không đã trở nên lỗi thời và gây trải nghiệm tồi tệ. Hãy tưởng tượng Facebook, Shopee hay ứng dụng ngân hàng của bạn không tự động hiện thông báo mới mà bạn phải tự tải lại trang?
+...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-12-20 10:00:00 +0700 +07'>December 20, 2024</span>&nbsp;·&nbsp;<span>0 phút</span>&nbsp;·&nbsp;<span>Tech Writer</span></footer>
-  <a class="entry-link" aria-label="post link to WebSocket với Java Spring Boot: Khúc Nhạc Thời Gian Thực Trong Thế Giới Lập Trình" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/"></a>
+  <footer class="entry-footer"><span title='2025-12-21 00:00:00 +0000 UTC'>December 21, 2025</span>&nbsp;·&nbsp;<span>9 phút</span>&nbsp;·&nbsp;<span>Vu Manh Cuong</span></footer>
+  <a class="entry-link" aria-label="post link to WebSocket với Java Spring Boot" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/"></a>
 </article>
     </main>
     
@@ -155,7 +162,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

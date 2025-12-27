@@ -6,14 +6,14 @@
     <description>Recent content in Backend Development on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <lastBuildDate>Fri, 20 Dec 2024 10:00:00 +0700</lastBuildDate>
+    <lastBuildDate>Sun, 21 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/backend-development/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>WebSocket với Java Spring Boot: Khúc Nhạc Thời Gian Thực Trong Thế Giới Lập Trình</title>
+      <title>WebSocket với Java Spring Boot</title>
       <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
-      <pubDate>Fri, 20 Dec 2024 10:00:00 +0700</pubDate>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
-      <description>Khám phá nghệ thuật xây dựng hệ thống thông báo real-time với WebSocket và Spring Boot - một hành trình từ lý thuyết đến thực hành với những dòng code đầy cảm xúc</description>
+      <description>Xây dựng Real-time Notification System với WebSocket API và Spring Boot</description>
     </item>
   </channel>
 </rss>

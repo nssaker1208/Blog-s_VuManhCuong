@@ -11,7 +11,7 @@
 <meta name="description" content="Hướng dẫn chi tiết về lập trình Java Socket, từ khái niệm cơ bản đến ví dụ thực tế">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.cf26504812116e38747f5c037b51539e19f17e4b63193bed2d17533e5352b1f9.css" integrity="sha256-zyZQSBIRbjh0f1wDe1FTnhnxfktjGTvtLRdTPlNSsfk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -141,42 +141,56 @@
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="lập-trình-java-socket">Lập Trình Java Socket<a hidden class="anchor" aria-hidden="true" href="#lập-trình-java-socket">#</a></h1>
-<p><strong>Chủ đề:</strong> Lập trình mạng, Java Core</p>
+  <div class="post-content"><p><strong>Chủ đề:</strong> Lập trình mạng, Java Core</p>
 <h2 id="1-giới-thiệu-chung">1. Giới thiệu chung<a hidden class="anchor" aria-hidden="true" href="#1-giới-thiệu-chung">#</a></h2>
-<p>Trong kỷ nguyên số hóa, khả năng giao tiếp giữa các thiết bị và ứng dụng qua mạng là một yêu cầu cốt lõi. Java Socket là một trong những cơ chế nền tảng giúp các nhà phát triển hiện thực hóa điều này. Bài viết này đi sâu vào khái niệm, cấu trúc và cách triển khai Java Socket để xây dựng các ứng dụng mạng hiệu quả, dễ mở rộng.</p>
+<p>Trong kỷ nguyên số hóa, khả năng giao tiếp giữa các thiết bị và ứng dụng qua mạng là một yêu cầu cốt lõi. Java Socket là một trong những cơ chế nền tảng giúp các nhà phát triển thực hiện điều này. Bài viết này sẽ đi sâu vào khái niệm, cấu trúc và cách triển khai Java Socket để xây dựng các ứng dụng mạng hiệu quả.</p>
 <h2 id="2-khái-niệm-về-socket">2. Khái niệm về Socket<a hidden class="anchor" aria-hidden="true" href="#2-khái-niệm-về-socket">#</a></h2>
-<p>Socket (ổ cắm mạng) là một điểm cuối <em>(endpoint)</em> trong kênh giao tiếp hai chiều giữa hai chương trình chạy trên mạng. Mỗi socket được gắn với một địa chỉ IP và một số cổng <em>(port)</em>, giúp tầng TCP có thể định danh chính xác tiến trình cần gửi/nhận dữ liệu.</p>
-<p><strong>Trong mô hình Client–Server:</strong></p>
+<p>Socket (ổ cắm) là một điểm cuối (endpoint) trong liên kết giao tiếp hai chiều giữa hai chương trình chạy trên mạng. Một socket được ràng buộc với một số cổng (port number) để tầng TCP (Transmission Control Protocol) có thể định danh ứng dụng mà dữ liệu được gửi đến.</p>
+<p>Trong mô hình Client-Server:</p>
 <ul>
-<li><strong>Server Socket:</strong> Lắng nghe các yêu cầu kết nối từ client trên một cổng cụ thể, chấp nhận kết nối và tạo socket con để giao tiếp.</li>
-<li><strong>Client Socket:</strong> Khởi tạo kết nối đến server thông qua địa chỉ IP và cổng mà server đang lắng nghe, sau đó gửi/nhận dữ liệu qua kết nối này.</li>
+<li><strong>Server Socket:</strong> Lắng nghe các yêu cầu kết nối từ Client trên một cổng cụ thể.</li>
+<li><strong>Client Socket:</strong> Khởi tạo kết nối đến Server thông qua địa chỉ IP và số cổng mà Server đang lắng nghe.</li>
 </ul>
+<div class="flex flex-col items-center my-6" style="text-align: center;">
+  <img
+    src="https://sspark.genspark.ai/cfimages?u1=dC7FpAl1OTtACSPbdkpjc7x6Lh1H4QpQp3Q3EkZobKWCQHNNz%2Bo8Z1LTAmttTXgeyKGlJBxxz1mHwjo9MZSvi3SBPUvOMr9qVNLBksZ1bTVF%2BBFkvUmC6os9v1phR%2FV4ef57s2zz8MDSQ0sjE55yeOGX8RAP3PjkNM65%2FGAfOmWx5M0P&u2=A5TpiZ5ytOQPckFz&width=2560"
+    alt="Mô hình Client-Server"
+    class="max-w-full h-auto rounded"
+  >
+  <p class="text-sm text-gray-500 mt-2" style="text-align: center; font-style: italic; font-weight: 600;">
+  Hình 1: Mô hình kiến trúc Client-Server
+</p>
+</div>
 <h2 id="3-các-loại-socket-trong-java">3. Các loại Socket trong Java<a hidden class="anchor" aria-hidden="true" href="#3-các-loại-socket-trong-java">#</a></h2>
-<p>Gói thư viện <code>java.net</code> cung cấp hai loại socket chính dựa trên giao thức truyền tải.</p>
-<h3 id="31-stream-socket-tcp">3.1. Stream Socket (TCP)<a hidden class="anchor" aria-hidden="true" href="#31-stream-socket-tcp">#</a></h3>
-<p>Stream Socket sử dụng giao thức <strong>TCP (Transmission Control Protocol)</strong>. TCP đảm bảo dữ liệu được truyền đi một cách tin cậy, đúng thứ tự và không bị mất gói, rất phù hợp với các ứng dụng yêu cầu độ chính xác cao như web server, email, truyền file.</p>
+<p>Gói thư viện <code>java.net</code> cung cấp hai loại socket chính dựa trên giao thức truyền tải:</p>
+<h3 id="31-stream-sockets-tcp">3.1. Stream Sockets (TCP)<a hidden class="anchor" aria-hidden="true" href="#31-stream-sockets-tcp">#</a></h3>
+<p>Sử dụng giao thức TCP (Transmission Control Protocol). Loại này đảm bảo dữ liệu được truyền đi một cách tin cậy, đúng thứ tự và không bị lỗi. Đây là loại socket phổ biến nhất cho các ứng dụng yêu cầu độ chính xác cao như web server, email, truyền file.</p>
 <ul>
-<li><strong>Class chính:</strong> <code>java.net.Socket</code>, <code>java.net.ServerSocket</code>.</li>
+<li>Class đại diện: <code>java.net.Socket</code> và <code>java.net.ServerSocket</code>.</li>
 </ul>
-<h3 id="32-datagram-socket-udp">3.2. Datagram Socket (UDP)<a hidden class="anchor" aria-hidden="true" href="#32-datagram-socket-udp">#</a></h3>
-<p>Datagram Socket sử dụng giao thức <strong>UDP (User Datagram Protocol)</strong>. UDP không thiết lập kết nối, dữ liệu được gửi đi dưới dạng các gói tin độc lập, không đảm bảo thứ tự cũng như độ tin cậy nhưng bù lại có độ trễ rất thấp.</p>
+<h3 id="32-datagram-sockets-udp">3.2. Datagram Sockets (UDP)<a hidden class="anchor" aria-hidden="true" href="#32-datagram-sockets-udp">#</a></h3>
+<p>Sử dụng giao thức UDP (User Datagram Protocol). Loại này không thiết lập kết nối (connectionless), dữ liệu được gửi đi dưới dạng các gói tin độc lập. Không đảm bảo thứ tự hoặc độ tin cậy nhưng tốc độ nhanh hơn. Thường dùng cho video streaming, game online.</p>
 <ul>
-<li><strong>Class chính:</strong> <code>java.net.DatagramSocket</code>, <code>java.net.DatagramPacket</code>.</li>
+<li>Class đại diện: <code>java.net.DatagramSocket</code> và <code>java.net.DatagramPacket</code>.</li>
 </ul>
+<p><img alt="So sánh TCP và UDP" loading="lazy" src="https://sspark.genspark.ai/cfimages?u1=sdXaynIu20TcS5Ua6dePtbyIj8nDgsh3%2Ba4fRPmkS9KMVtAykFVCvHFed2tKnXJe5NEXOuBXMxCapZ5cAqJ6cnUhn44%3D&u2=dywIQGJ5O4y4cUrJ&width=2560">
+<em>Hình 2: So sánh đặc điểm giữa giao thức TCP và UDP</em></p>
 <h2 id="4-cách-hoạt-động-của-tcp-socket">4. Cách hoạt động của TCP Socket<a hidden class="anchor" aria-hidden="true" href="#4-cách-hoạt-động-của-tcp-socket">#</a></h2>
-<p>Quy trình giao tiếp cơ bản giữa client và server thông qua TCP Socket thường diễn ra theo các bước sau:</p>
+<p>Quy trình giao tiếp cơ bản giữa Client và Server thông qua TCP Socket diễn ra theo các bước sau:</p>
 <ol>
 <li>Server khởi tạo đối tượng <code>ServerSocket</code> và chỉ định một cổng (port) để lắng nghe.</li>
-<li>Server gọi <code>accept()</code> và chờ kết nối – đây là lời gọi <em>blocking</em>.</li>
-<li>Client khởi tạo đối tượng <code>Socket</code>, chỉ định IP và cổng của server để yêu cầu kết nối.</li>
-<li>Khi kết nối thành công, server trả về một đối tượng <code>Socket</code> mới dùng riêng cho client đó.</li>
-<li>Cả hai bên sử dụng <code>InputStream</code> / <code>OutputStream</code> trên socket để gửi và nhận dữ liệu.</li>
-<li>Sau khi hoàn tất, mỗi bên gọi <code>close()</code> để đóng kết nối và giải phóng tài nguyên.</li>
+<li>Server gọi phương thức <code>accept()</code> và chờ đợi kết nối. Phương thức này sẽ chặn (block) luồng thực thi cho đến khi có một client kết nối.</li>
+<li>Client khởi tạo đối tượng <code>Socket</code>, chỉ định địa chỉ IP và cổng của Server để yêu cầu kết nối.</li>
+<li>Khi kết nối được thiết lập, Server trả về một đối tượng <code>Socket</code> mới để giao tiếp riêng với Client đó.</li>
+<li>Cả hai bên sử dụng các luồng nhập/xuất (InputStream/OutputStream) từ đối tượng Socket để gửi và nhận dữ liệu.</li>
+<li>Sau khi hoàn tất, cả hai bên đóng kết nối bằng phương thức <code>close()</code>.</li>
 </ol>
-<h2 id="5-ví-dụ-ứng-dụng-chat-đơn-giản-tcp">5. Ví dụ: Ứng dụng chat đơn giản (TCP)<a hidden class="anchor" aria-hidden="true" href="#5-ví-dụ-ứng-dụng-chat-đơn-giản-tcp">#</a></h2>
-<p>Để hiểu rõ hơn, ta xây dựng một ứng dụng chat dòng lệnh đơn giản, gồm một server và một client. Client gửi tin nhắn dạng văn bản, server nhận và phản hồi lại.</p>
-<h3 id="51-mã-nguồn-phía-server-serverexamplejava">5.1. Mã nguồn phía Server (ServerExample.java)<a hidden class="anchor" aria-hidden="true" href="#51-mã-nguồn-phía-server-serverexamplejava">#</a></h3>
+<p><img alt="Quy trình TCP Socket Communication" loading="lazy" src="https://sspark.genspark.ai/cfimages?u1=0yrCw3%2By0w3lo6TwYiv08IS5s0nX5sfVGXeCLeBCjEDLATska2K09gNxAdUIlucxfdmfV3LNA7h5Nww%3D&u2=DCFO9FN5rcM8EYvZ&width=2560">
+<em>Hình 3: Quy trình giao tiếp TCP Socket giữa Client và Server</em></p>
+<h2 id="5-ví-dụ-minh-họa-ứng-dụng-chat-đơn-giản-tcp">5. Ví dụ minh họa: Ứng dụng Chat đơn giản (TCP)<a hidden class="anchor" aria-hidden="true" href="#5-ví-dụ-minh-họa-ứng-dụng-chat-đơn-giản-tcp">#</a></h2>
+<p><img alt="Java Socket Programming Flow" loading="lazy" src="https://sspark.genspark.ai/cfimages?u1=YVjd1kpIUOrBw5xvfnTjWZFEXEYgWrI%2BUefZ9Yj3h3yFdYaKEZXMiQ%2B4Y4I4kbu8B99V7M7D1lsCvY1kBZRf86CvorXW6GsoHDJUWG7kBcwNKaKwqG1TDltcpZM0LoKKOw%3D%3D&u2=EMBKWiwPQHbBSC%2Bl&width=2560">
+<em>Hình 4: Luồng hoạt động của Socket Programming trong Java</em></p>
+<h3 id="51-mã-nguồn-phía-server-serverjava">5.1. Mã nguồn phía Server (Server.java)<a hidden class="anchor" aria-hidden="true" href="#51-mã-nguồn-phía-server-serverjava">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.*;
 </span></span><span style="display:flex;"><span>
@@ -206,6 +220,7 @@
 </span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            socket.<span style="color:#a6e22e">close</span>();
 </span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException ex) {
 </span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Lỗi Server: &#34;</span> <span style="color:#f92672">+</span> ex.<span style="color:#a6e22e">getMessage</span>());
@@ -213,7 +228,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="52-mã-nguồn-phía-client-clientexamplejava">5.2. Mã nguồn phía Client (ClientExample.java)<a hidden class="anchor" aria-hidden="true" href="#52-mã-nguồn-phía-client-clientexamplejava">#</a></h3>
+</span></span></code></pre></div><h3 id="52-mã-nguồn-phía-client-clientjava">5.2. Mã nguồn phía Client (Client.java)<a hidden class="anchor" aria-hidden="true" href="#52-mã-nguồn-phía-client-clientjava">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.*;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Scanner;
@@ -222,6 +237,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Kết nối đến localhost cổng 5000</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (Socket socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Socket(<span style="color:#e6db74">&#34;localhost&#34;</span>, 5000)) {
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Luồng để gửi dữ liệu đi</span>
 </span></span><span style="display:flex;"><span>            PrintWriter writer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PrintWriter(socket.<span style="color:#a6e22e">getOutputStream</span>(), <span style="color:#66d9ef">true</span>);
 </span></span><span style="display:flex;"><span>
@@ -252,7 +268,6 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="6-các-phương-thức-quan-trọng">6. Các phương thức quan trọng<a hidden class="anchor" aria-hidden="true" href="#6-các-phương-thức-quan-trọng">#</a></h2>
-<p>Một số phương thức thường gặp khi làm việc với <code>ServerSocket</code> và <code>Socket</code>:</p>
 <table>
   <thead>
       <tr>
@@ -265,51 +280,51 @@
       <tr>
           <td><strong>ServerSocket</strong></td>
           <td><code>accept()</code></td>
-          <td>Chờ và chấp nhận kết nối đến, trả về đối tượng <code>Socket</code> để giao tiếp.</td>
+          <td>Chờ và chấp nhận kết nối đến. Trả về đối tượng Socket để giao tiếp với client.</td>
       </tr>
       <tr>
           <td></td>
           <td><code>close()</code></td>
-          <td>Đóng server socket, giải phóng cổng đang lắng nghe.</td>
+          <td>Đóng server socket, giải phóng cổng.</td>
       </tr>
       <tr>
           <td><strong>Socket</strong></td>
           <td><code>getInputStream()</code></td>
-          <td>Trả về luồng nhập (<code>InputStream</code>) để đọc dữ liệu từ socket.</td>
+          <td>Trả về luồng nhập (InputStream) để đọc dữ liệu từ socket.</td>
       </tr>
       <tr>
           <td></td>
           <td><code>getOutputStream()</code></td>
-          <td>Trả về luồng xuất (<code>OutputStream</code>) để ghi dữ liệu vào socket.</td>
+          <td>Trả về luồng xuất (OutputStream) để ghi dữ liệu vào socket.</td>
       </tr>
       <tr>
           <td></td>
           <td><code>close()</code></td>
-          <td>Đóng kết nối socket, giải phóng tài nguyên.</td>
+          <td>Đóng kết nối socket.</td>
       </tr>
   </tbody>
 </table>
 <h2 id="7-ứng-dụng-thực-tế">7. Ứng dụng thực tế<a hidden class="anchor" aria-hidden="true" href="#7-ứng-dụng-thực-tế">#</a></h2>
-<p>Java Socket là nền tảng cho rất nhiều hệ thống mạng trong thực tế. Một số ví dụ điển hình:</p>
+<p>Java Socket là nền tảng cho rất nhiều ứng dụng mạng trong thực tế:</p>
 <ul>
-<li><strong>Hệ thống Chat:</strong> Xây dựng ứng dụng nhắn tin thời gian thực dạng console hoặc GUI, nơi nhiều client kết nối tới một server trung tâm để trao đổi tin nhắn.</li>
-<li><strong>Truyền File (FTP đơn giản):</strong> Tạo server cho phép client gửi/nhận file nhị phân, áp dụng thêm cơ chế xác thực và phân quyền.</li>
-<li><strong>Web Server tự xây:</strong> Hiện thực một HTTP server đơn giản lắng nghe trên cổng 80/8080, đọc HTTP request và trả về HTML response thủ công.</li>
-<li><strong>Remote Control / Monitoring:</strong> Điều khiển từ xa một service (bật/tắt, gửi lệnh) hoặc thu thập log, trạng thái hệ thống qua mạng nội bộ.</li>
-<li><strong>Game Multiplayer:</strong> Đồng bộ trạng thái game giữa nhiều người chơi, ví dụ gửi vị trí nhân vật, hành động, sự kiện trong game.</li>
+<li><strong>Hệ thống Chat:</strong> Ứng dụng nhắn tin tức thời (như ví dụ trên).</li>
+<li><strong>Truyền File (FTP):</strong> Xây dựng các ứng dụng gửi và nhận file giữa các máy tính.</li>
+<li><strong>Web Server:</strong> Các máy chủ web cơ bản xử lý HTTP request đều dựa trên socket.</li>
+<li><strong>Remote Method Invocation (RMI):</strong> Java RMI sử dụng socket bên dưới để gọi phương thức từ xa.</li>
+<li><strong>Game Multiplayer:</strong> Đồng bộ trạng thái game giữa các người chơi.</li>
 </ul>
 <h2 id="8-lưu-ý-khi-sử-dụng">8. Lưu ý khi sử dụng<a hidden class="anchor" aria-hidden="true" href="#8-lưu-ý-khi-sử-dụng">#</a></h2>
 <blockquote>
-<p>Luôn quản lý tài nguyên cẩn thận: socket, stream và thread phải được đóng/giải phóng đúng lúc.</p>
+<p><strong>Quản lý Tài nguyên:</strong> Luôn luôn đóng socket (sử dụng khối <code>try-with-resources</code> hoặc khối <code>finally</code>) sau khi sử dụng để tránh rò rỉ tài nguyên hệ thống.</p>
 </blockquote>
+<p>Ngoài ra, cần lưu ý các điểm sau:</p>
 <ul>
-<li><strong>Xử lý ngoại lệ:</strong> Mạng rất dễ xảy ra lỗi (mất kết nối, timeout, server down). Cần bao phủ code bằng <code>try-catch</code> phù hợp và log lỗi rõ ràng.</li>
-<li><strong>Đa luồng (Multithreading):</strong> Một <code>ServerSocket</code> cơ bản chỉ phục vụ 1 client tại một thời điểm; muốn phục vụ nhiều client, cần dùng thread per client hoặc thread pool.</li>
-<li><strong>Blocking I/O:</strong> Các phương thức như <code>accept()</code>, <code>readLine()</code> là blocking; nếu thiết kế không khéo, có thể làm &ldquo;treo&rdquo; cả ứng dụng.</li>
-<li><strong>Bảo mật:</strong> Khi triển khai thực tế, nên kết hợp thêm SSL/TLS, xác thực người dùng và mã hóa dữ liệu.</li>
+<li><strong>Xử lý ngoại lệ:</strong> Lập trình mạng rất dễ xảy ra lỗi (mất mạng, server chết, timeout). Cần xử lý kỹ các <code>IOException</code>.</li>
+<li><strong>Đa luồng (Multithreading):</strong> ServerSocket cơ bản chỉ xử lý một client tại một thời điểm. Để phục vụ nhiều client cùng lúc, cần sử dụng Multithreading (mỗi client một luồng riêng) hoặc Java NIO (Non-blocking I/O).</li>
+<li><strong>Blocking I/O:</strong> Các phương thức <code>read()</code> và <code>accept()</code> là các phương thức chặn (blocking). Chương trình sẽ dừng tại đó cho đến khi có dữ liệu hoặc kết nối.</li>
 </ul>
 <h2 id="9-kết-luận">9. Kết luận<a hidden class="anchor" aria-hidden="true" href="#9-kết-luận">#</a></h2>
-<p>Java Socket cung cấp nền tảng vững chắc để xây dựng các ứng dụng mạng từ đơn giản đến phức tạp. Dù ngày nay có nhiều framework cao cấp như Netty hay Spring WebFlux, việc hiểu rõ cơ chế hoạt động của Socket vẫn là kiến thức cốt lõi giúp bạn thiết kế hệ thống phân tán hiệu quả và chủ động hơn.</p>
+<p>Java Socket cung cấp một cơ chế mạnh mẽ và linh hoạt để phát triển các ứng dụng mạng. Mặc dù hiện nay có nhiều framework cao cấp hơn (như Netty, Spring Boot) giúp ẩn đi sự phức tạp của socket, việc hiểu rõ cơ chế hoạt động của Socket vẫn là kiến thức nền tảng quan trọng cho bất kỳ lập trình viên Java nào muốn chuyên sâu về hệ thống phân tán và lập trình mạng.</p>
 
 
   </div>
@@ -323,10 +338,10 @@
       <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/udp/">UDP</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/">
+  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/">
     <span class="title">« Trang trước</span>
     <br>
-    <span>Java Multithreading - Quản Lý Kết Nối Mạng Hiệu Quả</span>
+    <span>WebSocket với Java Spring Boot</span>
   </a>
 </nav>
 
@@ -398,118 +413,7 @@
     </li>
 </ul>
 
-  </footer><div
-  style="
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  "
->
-  <h3
-    style="
-      margin-bottom: 1.5rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--content);
-    "
-  >
-    💬 Bình luận & Thảo luận
-  </h3>
-
-  <div id="giscus-container"></div>
-</div>
-
-<script>
-  function getCurrentTheme() {
-    const bodyTheme = document.body.getAttribute("data-theme");
-    const htmlTheme = document.documentElement.getAttribute("data-theme");
-    const savedTheme = localStorage.getItem("pref-theme");
-
-    const theme = bodyTheme || htmlTheme || savedTheme || "light";
-    return theme === "dark" ? "dark" : "light";
-  }
-
-  function loadGiscus() {
-    const theme = getCurrentTheme();
-    const container = document.getElementById("giscus-container");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.setAttribute("data-repo", "nssaker1208/Blog-s_VuManhCuong");
-    script.setAttribute("data-repo-id", "R_kgDOQsFoig");
-    script.setAttribute("data-category", "Announcements");
-    script.setAttribute("data-category-id", "DIC_kwDOQsFois4C0Czk");
-    script.setAttribute("data-mapping", "pathname");
-    script.setAttribute("data-strict", "0");
-    script.setAttribute("data-reactions-enabled", "1");
-    script.setAttribute("data-emit-metadata", "0");
-    script.setAttribute("data-input-position", "bottom");
-    script.setAttribute("data-theme", theme);
-    script.setAttribute("data-lang", "vi");
-    script.setAttribute("crossorigin", "anonymous");
-    script.async = true;
-
-    container.appendChild(script);
-  }
-
-  function updateGiscusTheme() {
-    const theme = getCurrentTheme();
-    const iframe = document.querySelector("iframe.giscus-frame");
-
-    if (iframe) {
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: theme } } },
-        "https://giscus.app"
-      );
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadGiscus);
-  } else {
-    loadGiscus();
-  }
-
-  const bodyObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      if (mutation.attributeName === "data-theme") {
-        setTimeout(updateGiscusTheme, 100);
-      }
-    });
-  });
-
-  bodyObserver.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-
-  const htmlObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      if (mutation.attributeName === "data-theme") {
-        setTimeout(updateGiscusTheme, 100);
-      }
-    });
-  });
-
-  htmlObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-
-  document
-    .getElementById("theme-toggle")
-    ?.addEventListener("click", function () {
-      setTimeout(updateGiscusTheme, 200);
-    });
-
-  document.getElementById("moon")?.addEventListener("click", function () {
-    setTimeout(updateGiscusTheme, 200);
-  });
-</script>
+  </footer>
 </article>
     </main>
     
@@ -526,7 +430,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

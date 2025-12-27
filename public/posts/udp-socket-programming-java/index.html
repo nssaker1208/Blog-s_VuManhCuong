@@ -6,12 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>UDP Socket Programming - Gửi và nhận Datagram | Blog Lập Trình Mạng</title>
-<meta name="keywords" content="Java, Network Programming, UDP, Socket, IoT, Datagram">
-<meta name="description" content="Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này">
+<title>UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) | Blog Lập Trình Mạng</title>
+<meta name="keywords" content="Java, Network Programming, UDP, Socket, IoT">
+<meta name="description" content="Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này.">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.cf26504812116e38747f5c037b51539e19f17e4b63193bed2d17533e5352b1f9.css" integrity="sha256-zyZQSBIRbjh0f1wDe1FTnhnxfktjGTvtLRdTPlNSsfk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -132,48 +132,51 @@
   <header class="post-header">
     <div class="breadcrumbs"><a href="http://localhost:1313/Blog-s_VuManhCuong/">Trang chủ</a>&nbsp;»&nbsp;<a href="http://localhost:1313/Blog-s_VuManhCuong/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      UDP Socket Programming - Gửi và nhận Datagram
+      UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget)
     </h1>
     <div class="post-description">
-      Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này
+      Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này.
     </div>
-    <div class="post-meta"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>7 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
+    <div class="post-meta"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>6 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="udp-socket-programming---gửi-và-nhận-datagram">UDP Socket Programming - Gửi và nhận Datagram<a hidden class="anchor" aria-hidden="true" href="#udp-socket-programming---gửi-và-nhận-datagram">#</a></h1>
-<p><strong>Chủ đề:</strong> Network Programming, UDP Protocol, Java Socket</p>
-<h2 id="1-lời-mở-đầu">1. Lời mở đầu<a hidden class="anchor" aria-hidden="true" href="#1-lời-mở-đầu">#</a></h2>
+  <div class="post-content"><p>Chào các đồng đạo lập trình,</p>
 <p>Khi mới học lập trình mạng, chúng ta thường bắt đầu với <strong>TCP</strong> (Transmission Control Protocol). Nó an toàn, tin cậy, đảm bảo dữ liệu &ldquo;đi đến nơi về đến chốn&rdquo;. Nhưng trong thế giới thực, đôi khi &ldquo;nhanh&rdquo; quan trọng hơn &ldquo;chính xác tuyệt đối&rdquo;.</p>
 <p>Hãy tưởng tượng bạn đang gọi video call. Nếu mạng lag, bạn thà bị mất hình một tích tắc (glitch) rồi video chạy tiếp mượt mà, hay bạn muốn video dừng hẳn lại 3 giây để chờ tải lại cái khung hình bị mất đó? Chắc chắn là phương án đầu tiên rồi. Đó chính là đất diễn của <strong>UDP</strong>.</p>
 <p>Hôm nay, chúng ta sẽ đi sâu vào UDP Socket Programming để hiểu cách các gói tin (Datagram) bay lượn trong mạng như thế nào.</p>
-<h2 id="2-udp-là-gì-và-tại-sao-nó-lại-cẩu-thả">2. UDP là gì? (Và tại sao nó lại&hellip; cẩu thả?)<a hidden class="anchor" aria-hidden="true" href="#2-udp-là-gì-và-tại-sao-nó-lại-cẩu-thả">#</a></h2>
-<p><strong>UDP (User Datagram Protocol)</strong> là một giao thức không kết nối (connectionless). Khác với TCP - anh chàng thủ thư khó tính, luôn bắt bạn phải đăng ký, điểm danh (Handshake) rồi mới cho mượn sách - UDP giống như một anh shipper ném báo vào sân nhà bạn. Anh ta ném xong là đi, không cần biết bạn có nhặt được báo hay không, hay con chó nhà bạn có xé tan tờ báo đó không.</p>
-<h3 id="21-đặc-điểm-cốt-lõi-của-udp">2.1. Đặc điểm cốt lõi của UDP<a hidden class="anchor" aria-hidden="true" href="#21-đặc-điểm-cốt-lõi-của-udp">#</a></h3>
-<ul>
-<li><strong>Không kết nối:</strong> Client không cần kết nối với Server trước khi gửi. Cứ biết IP và Port là gửi thôi</li>
-<li><strong>Không đảm bảo:</strong> Gói tin có thể bị mất, bị trùng, hoặc đến sai thứ tự</li>
-<li><strong>Tốc độ cao:</strong> Vì bỏ qua các bước kiểm tra, xác nhận (ACK), UDP nhanh hơn TCP rất nhiều</li>
-<li><strong>Theo gói (Datagram):</strong> Dữ liệu được đóng gói thành các <code>DatagramPacket</code> độc lập</li>
-</ul>
-<h2 id="3-nguyên-lý-hoạt-động-mô-hình-datagram">3. Nguyên lý hoạt động: Mô hình Datagram<a hidden class="anchor" aria-hidden="true" href="#3-nguyên-lý-hoạt-động-mô-hình-datagram">#</a></h2>
+<h2 id="1-udp-là-gì-và-tại-sao-nó-lại-cẩu-thả">1. UDP là gì? (Và tại sao nó lại&hellip; cẩu thả?)<a hidden class="anchor" aria-hidden="true" href="#1-udp-là-gì-và-tại-sao-nó-lại-cẩu-thả">#</a></h2>
+<p><strong>UDP (User Datagram Protocol)</strong> là một giao thức không kết nối (connectionless).</p>
+<p>Khác với TCP - anh chàng thủ thư khó tính, luôn bắt bạn phải đăng ký, điểm danh (Handshake) rồi mới cho mượn sách - UDP giống như một anh shipper ném báo vào sân nhà bạn. Anh ta ném xong là đi, không cần biết bạn có nhặt được báo hay không, hay con chó nhà bạn có xé tan tờ báo đó không.</p>
+<h3 id="đặc-điểm-cốt-lõi">Đặc điểm cốt lõi:<a hidden class="anchor" aria-hidden="true" href="#đặc-điểm-cốt-lõi">#</a></h3>
+<ol>
+<li><strong>Không kết nối:</strong> Client không cần kết nối với Server trước khi gửi. Cứ biết IP và Port là gửi thôi.</li>
+<li><strong>Không đảm bảo:</strong> Gói tin có thể bị mất, bị trùng, hoặc đến sai thứ tự.</li>
+<li><strong>Tốc độ cao:</strong> Vì bỏ qua các bước kiểm tra, xác nhận (ACK), UDP nhanh hơn TCP rất nhiều.</li>
+<li><strong>Theo gói (Datagram):</strong> Dữ liệu được đóng gói thành các <code>DatagramPacket</code> độc lập.</li>
+</ol>
+<p><img alt="UDP Socket Programming" loading="lazy" src="https://miro.medium.com/v2/resize:fit:1400/1*DbRGqB3NrGTNp1ybss8KeQ.jpeg">
+<em>Hình 1: So sánh Header giữa TCP và UDP.</em></p>
+<h2 id="2-nguyên-lý-hoạt-động-mô-hình-datagram">2. Nguyên lý hoạt động: Mô hình Datagram<a hidden class="anchor" aria-hidden="true" href="#2-nguyên-lý-hoạt-động-mô-hình-datagram">#</a></h2>
 <p>Trong Java (và hầu hết các ngôn ngữ khác), để làm việc với UDP, chúng ta dùng hai lớp chính:</p>
 <ul>
-<li><strong>DatagramSocket:</strong> Cánh cổng để gửi/nhận dữ liệu (Giống cái hòm thư)</li>
-<li><strong>DatagramPacket:</strong> Gói hàng chứa dữ liệu, địa chỉ IP và Port người nhận (Giống cái phong bì thư)</li>
+<li><strong><code>DatagramSocket</code></strong>: Cánh cổng để gửi/nhận dữ liệu. (Giống cái hòm thư).</li>
+<li><strong><code>DatagramPacket</code></strong>: Gói hàng chứa dữ liệu, địa chỉ IP và Port người nhận. (Giống cái phong bì thư).</li>
 </ul>
-<h3 id="31-quy-trình-gửinhận">3.1. Quy trình gửi/nhận<a hidden class="anchor" aria-hidden="true" href="#31-quy-trình-gửinhận">#</a></h3>
+<p>Quy trình diễn ra như sau:</p>
 <ol>
-<li><strong>Sender (Người gửi):</strong> Đóng gói dữ liệu vào <code>DatagramPacket</code> → Ghi rõ địa chỉ người nhận → Đẩy ra <code>DatagramSocket</code></li>
-<li><strong>Receiver (Người nhận):</strong> Mở <code>DatagramSocket</code> tại một Port cụ thể → Tạo một <code>DatagramPacket</code> rỗng (như cái rổ) để hứng dữ liệu → Chờ đợi</li>
+<li><strong>Sender (Người gửi):</strong> Đóng gói dữ liệu vào <code>DatagramPacket</code> -&gt; Ghi rõ địa chỉ người nhận -&gt; Đẩy ra <code>DatagramSocket</code>.</li>
+<li><strong>Receiver (Người nhận):</strong> Mở <code>DatagramSocket</code> tại một Port cụ thể -&gt; Tạo một <code>DatagramPacket</code> rỗng (như cái rổ) để hứng dữ liệu -&gt; Chờ đợi.</li>
 </ol>
-<h2 id="4-thực-hành-xây-dựng-ứng-dụng-gửinhận-tin-nhắn">4. Thực hành: Xây dựng ứng dụng Gửi/Nhận tin nhắn<a hidden class="anchor" aria-hidden="true" href="#4-thực-hành-xây-dựng-ứng-dụng-gửinhận-tin-nhắn">#</a></h2>
+<p><img alt="UDP Socket Programming" loading="lazy" src="https://thietbimanggiare.com/wp-content/uploads/2024/02/Vi-du-ve-Flag-trong-quy-trinh-bat-tay-3-buoc-TCP.jpg">
+<em>Hình 2: Luồng đi của UDP. Lưu ý rằng không có bước &ldquo;Establish Connection&rdquo; (bắt tay 3 bước) như TCP. Sender cứ thế mà &ldquo;bắn&rdquo; (Fire).</em></p>
+<h2 id="3-thực-hành-xây-dựng-ứng-dụng-gửinhận-tin-nhắn-java">3. Thực hành: Xây dựng ứng dụng Gửi/Nhận tin nhắn (Java)<a hidden class="anchor" aria-hidden="true" href="#3-thực-hành-xây-dựng-ứng-dụng-gửinhận-tin-nhắn-java">#</a></h2>
 <p>Chúng ta sẽ viết một chương trình đơn giản:</p>
 <ul>
-<li><strong>Server:</strong> Chạy ở cổng 9876, chờ nhận tin nhắn và in ra màn hình</li>
-<li><strong>Client:</strong> Cho phép người dùng nhập tin nhắn và gửi tới Server</li>
+<li><strong>Server:</strong> Chạy ở cổng <code>9876</code>, chờ nhận tin nhắn và in ra màn hình.</li>
+<li><strong>Client:</strong> Cho phép người dùng nhập tin nhắn và gửi tới Server.</li>
 </ul>
-<h3 id="41-udpserverjava-người-nhận">4.1. UDPServer.java (Người nhận)<a hidden class="anchor" aria-hidden="true" href="#41-udpserverjava-người-nhận">#</a></h3>
+<h3 id="a-udpserverjava-người-nhận">A. UDPServer.java (Người nhận)<a hidden class="anchor" aria-hidden="true" href="#a-udpserverjava-người-nhận">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.*;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDPServer</span> {
@@ -182,6 +185,7 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. Mở cổng 9876 để lắng nghe</span>
 </span></span><span style="display:flex;"><span>            DatagramSocket serverSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DatagramSocket(9876);
 </span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Server đang chạy tại port 9876...&#34;</span>);
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Tạo bộ đệm để chứa dữ liệu nhận về (1KB)</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> receiveData <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>1024<span style="color:#f92672">]</span>;
 </span></span><span style="display:flex;"><span>
@@ -196,6 +200,7 @@
 </span></span><span style="display:flex;"><span>                String sentence <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String(receivePacket.<span style="color:#a6e22e">getData</span>(), 0, receivePacket.<span style="color:#a6e22e">getLength</span>());
 </span></span><span style="display:flex;"><span>                InetAddress IPAddress <span style="color:#f92672">=</span> receivePacket.<span style="color:#a6e22e">getAddress</span>();
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> port <span style="color:#f92672">=</span> receivePacket.<span style="color:#a6e22e">getPort</span>();
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Đã nhận từ &#34;</span> <span style="color:#f92672">+</span> IPAddress <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;:&#34;</span> <span style="color:#f92672">+</span> port <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; -&gt; &#34;</span> <span style="color:#f92672">+</span> sentence);
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
@@ -203,53 +208,42 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="42-udpclientjava-người-gửi">4.2. UDPClient.java (Người gửi)<a hidden class="anchor" aria-hidden="true" href="#42-udpclientjava-người-gửi">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.*;
+</span></span></code></pre></div><h3 id="b-udpclientjava-người-gửi">B. UDPClient.java (Người gửi)<a hidden class="anchor" aria-hidden="true" href="#b-udpclientjava-người-gửi">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">java</span>.<span style="color:#a6e22e">io</span>.<span style="color:#f92672">*</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">java</span>.<span style="color:#a6e22e">net</span>.<span style="color:#f92672">*</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDPClient</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] <span style="color:#a6e22e">args</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. Tạo Socket (Client không cần cố định port, hệ thống tự cấp)</span>
-</span></span><span style="display:flex;"><span>            DatagramSocket clientSocket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DatagramSocket();
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. Tạo Socket (Client không cần cố định port, hệ thống tự cấp)
+</span></span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">DatagramSocket</span> <span style="color:#a6e22e">clientSocket</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DatagramSocket</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Địa chỉ Server (localhost)</span>
-</span></span><span style="display:flex;"><span>            InetAddress IPAddress <span style="color:#f92672">=</span> InetAddress.<span style="color:#a6e22e">getByName</span>(<span style="color:#e6db74">&#34;localhost&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Địa chỉ Server (localhost)
+</span></span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">InetAddress</span> <span style="color:#a6e22e">IPAddress</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">InetAddress</span>.<span style="color:#a6e22e">getByName</span>(<span style="color:#e6db74">&#34;localhost&#34;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            BufferedReader inFromUser <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> InputStreamReader(System.<span style="color:#a6e22e">in</span>));
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Nhập tin nhắn để gửi (gõ &#39;exit&#39; để thoát):&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">BufferedReader</span> <span style="color:#a6e22e">inFromUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BufferedReader</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">InputStreamReader</span>(<span style="color:#a6e22e">System</span>.<span style="color:#66d9ef">in</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">System</span>.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Nhập tin nhắn để gửi (gõ &#39;exit&#39; để thoát):&#34;</span>);
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
-</span></span><span style="display:flex;"><span>                String sentence <span style="color:#f92672">=</span> inFromUser.<span style="color:#a6e22e">readLine</span>();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (sentence.<span style="color:#a6e22e">equalsIgnoreCase</span>(<span style="color:#e6db74">&#34;exit&#34;</span>)) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                String <span style="color:#a6e22e">sentence</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">inFromUser</span>.<span style="color:#a6e22e">readLine</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">sentence</span>.<span style="color:#a6e22e">equalsIgnoreCase</span>(<span style="color:#e6db74">&#34;exit&#34;</span>)) <span style="color:#66d9ef">break</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> sendData <span style="color:#f92672">=</span> sentence.<span style="color:#a6e22e">getBytes</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">byte</span>[] <span style="color:#a6e22e">sendData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">sentence</span>.<span style="color:#a6e22e">getBytes</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 2. Đóng gói dữ liệu: Phải ghi rõ gửi cho Ai (IPAddress) và Cổng nào (9876)</span>
-</span></span><span style="display:flex;"><span>                DatagramPacket sendPacket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DatagramPacket(
-</span></span><span style="display:flex;"><span>                    sendData,
-</span></span><span style="display:flex;"><span>                    sendData.<span style="color:#a6e22e">length</span>,
-</span></span><span style="display:flex;"><span>                    IPAddress,
-</span></span><span style="display:flex;"><span>                    9876
-</span></span><span style="display:flex;"><span>                );
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 2. Đóng gói dữ liệu: Phải ghi rõ gửi cho Ai (IPAddress) và Cổng nào (9876)
+</span></span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">DatagramPacket</span> <span style="color:#a6e22e">sendPacket</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DatagramPacket</span>(<span style="color:#a6e22e">sendData</span>, <span style="color:#a6e22e">sendData</span>.<span style="color:#a6e22e">length</span>, <span style="color:#a6e22e">IPAddress</span>, <span style="color:#ae81ff">9876</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 3. Bắn gói tin đi (Fire and Forget)</span>
-</span></span><span style="display:flex;"><span>                clientSocket.<span style="color:#a6e22e">send</span>(sendPacket);
-</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;&gt;&gt; Đã gửi gói tin đi.&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 3. Bắn gói tin đi (Fire and Forget)
+</span></span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">clientSocket</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">sendPacket</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">System</span>.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;&gt;&gt; Đã gửi gói tin đi.&#34;</span>);
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            clientSocket.<span style="color:#a6e22e">close</span>();
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">clientSocket</span>.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">Exception</span> <span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">printStackTrace</span>();
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="43-cách-chạy-chương-trình">4.3. Cách chạy chương trình<a hidden class="anchor" aria-hidden="true" href="#43-cách-chạy-chương-trình">#</a></h3>
-<ol>
-<li>Compile cả hai file: <code>javac UDPServer.java UDPClient.java</code></li>
-<li>Mở terminal thứ nhất, chạy Server: <code>java UDPServer</code></li>
-<li>Mở terminal thứ hai, chạy Client: <code>java UDPClient</code></li>
-<li>Nhập tin nhắn ở Client và xem kết quả ở Server</li>
-</ol>
-<h2 id="5-so-sánh-tcp-và-udp-khi-nào-dùng-cái-nào">5. So sánh TCP và UDP: Khi nào dùng cái nào?<a hidden class="anchor" aria-hidden="true" href="#5-so-sánh-tcp-và-udp-khi-nào-dùng-cái-nào">#</a></h2>
+</span></span></code></pre></div><h2 id="4-so-sánh-tcp-và-udp-khi-nào-dùng-cái-nào">4. So sánh TCP và UDP: Khi nào dùng cái nào?<a hidden class="anchor" aria-hidden="true" href="#4-so-sánh-tcp-và-udp-khi-nào-dùng-cái-nào">#</a></h2>
 <p>Đây là câu hỏi kinh điển khi đi phỏng vấn. Hãy nhìn bảng so sánh dưới đây:</p>
 <table>
   <thead>
@@ -263,12 +257,12 @@
       <tr>
           <td><strong>Kết nối</strong></td>
           <td>Hướng kết nối (Connection-oriented)</td>
-          <td>Không kết nối (Connectionless)</td>
+          <td>Thấp (Mất là mất luôn)</td>
       </tr>
       <tr>
           <td><strong>Độ tin cậy</strong></td>
           <td>Cao (Có ACK, gửi lại khi mất)</td>
-          <td>Thấp (Mất là mất luôn)</td>
+          <td>Mạnh mẽ, hỗ trợ params</td>
       </tr>
       <tr>
           <td><strong>Thứ tự</strong></td>
@@ -281,61 +275,33 @@
           <td>Rất nhanh</td>
       </tr>
       <tr>
-          <td><strong>Header Size</strong></td>
-          <td>20-60 bytes</td>
-          <td>8 bytes</td>
-      </tr>
-      <tr>
-          <td><strong>Overhead</strong></td>
-          <td>Cao (Handshake, ACK, Retransmission)</td>
-          <td>Thấp (Fire and Forget)</td>
-      </tr>
-      <tr>
           <td><strong>Ứng dụng</strong></td>
           <td>Web (HTTP), Email (SMTP), File (FTP)</td>
           <td>Video Call, Game Online, DNS, IoT, DHCP</td>
       </tr>
   </tbody>
 </table>
-<h3 id="51-tại-sao-game-online-dùng-udp">5.1. Tại sao Game Online dùng UDP?<a hidden class="anchor" aria-hidden="true" href="#51-tại-sao-game-online-dùng-udp">#</a></h3>
-<p>Hãy tưởng tượng bạn chơi bắn súng (CS:GO hay Valorant):</p>
+<p><strong>Tại sao Game Online dùng UDP?</strong></p>
+<p>Hãy tưởng tượng bạn chơi bắn súng (CS:GO hay Valorant).</p>
 <ul>
-<li><strong>Dùng TCP:</strong> Bạn bắn một viên đạn. Gói tin bị lạc. Game dừng hình lại, chờ 2 giây để gói tin đó được gửi lại. Lúc đó địch đã chạy mất rồi → Trải nghiệm tồi tệ</li>
-<li><strong>Dùng UDP:</strong> Gói tin &ldquo;bắn&rdquo; bị lạc? Kệ nó. Game tiếp tục cập nhật vị trí mới nhất của địch ở các gói tin sau đó (cập nhật 60-120 lần/giây). Bạn chỉ thấy giật nhẹ một cái rồi thôi</li>
+<li><strong>Dùng TCP</strong>: Bạn bắn một viên đạn. Gói tin bị lạc. Game dừng hình lại, chờ 2 giây để gói tin đó được gửi lại. Lúc đó địch đã chạy mất rồi -&gt; Trải nghiệm tồi tệ.</li>
+<li><strong>Dùng UDP</strong>: Gói tin &ldquo;bắn&rdquo; bị lạc? Kệ nó. Game tiếp tục cập nhật vị trí mới nhất của địch ở các gói tin sau đó (cập nhật 60-120 lần/giây). Bạn chỉ thấy giật nhẹ một cái rồi thôi.</li>
 </ul>
-<h2 id="6-lưu-ý-quan-trọng-khi-code-udp">6. Lưu ý quan trọng khi code UDP<a hidden class="anchor" aria-hidden="true" href="#6-lưu-ý-quan-trọng-khi-code-udp">#</a></h2>
-<p>Kinh nghiệm thực tế khi làm việc với UDP:</p>
-<h3 id="61-giới-hạn-kích-thước">6.1. Giới hạn kích thước<a hidden class="anchor" aria-hidden="true" href="#61-giới-hạn-kích-thước">#</a></h3>
-<p>Một gói UDP an toàn (MTU safe) thường nhỏ hơn 512 bytes (hoặc 1400 bytes tùy mạng). Đừng cố nhét cả file ảnh 5MB vào một gói tin UDP, nó sẽ bị router chặn hoặc phân mảnh (fragmentation) gây lỗi.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Kích thước buffer nên giới hạn</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> receiveData <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>512<span style="color:#f92672">]</span>; <span style="color:#75715e">// An toàn</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// byte[] receiveData = new byte[65535]; // Tối đa lý thuyết nhưng không khuyến khích</span>
-</span></span></code></pre></div><h3 id="62-mất-gói-tin">6.2. Mất gói tin<a hidden class="anchor" aria-hidden="true" href="#62-mất-gói-tin">#</a></h3>
-<p>Trong môi trường Localhost (mạng nội bộ), bạn hiếm khi thấy mất gói tin. Nhưng trên Internet, tỉ lệ mất gói tin là chuyện thường. Ứng dụng của bạn phải chấp nhận việc đó.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Ví dụ: Thêm số thứ tự (sequence number) để phát hiện mất gói</span>
-</span></span><span style="display:flex;"><span>String message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SEQ:123|Hello World&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> sendData <span style="color:#f92672">=</span> message.<span style="color:#a6e22e">getBytes</span>();
-</span></span></code></pre></div><h3 id="63-bảo-mật">6.3. Bảo mật<a hidden class="anchor" aria-hidden="true" href="#63-bảo-mật">#</a></h3>
-<p>UDP dễ bị giả mạo địa chỉ IP (IP Spoofing) hơn TCP, thường được dùng trong các cuộc tấn công DDoS (UDP Flood). Nếu cần bảo mật, hãy cân nhắc sử dụng DTLS (Datagram Transport Layer Security) - phiên bản TLS cho UDP.</p>
-<h3 id="64-broadcast-và-multicast">6.4. Broadcast và Multicast<a hidden class="anchor" aria-hidden="true" href="#64-broadcast-và-multicast">#</a></h3>
-<p>UDP hỗ trợ broadcast (gửi đến tất cả máy trong mạng) và multicast (gửi đến một nhóm máy), điều mà TCP không làm được.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Gửi broadcast đến tất cả máy trong mạng local</span>
-</span></span><span style="display:flex;"><span>InetAddress broadcastAddress <span style="color:#f92672">=</span> InetAddress.<span style="color:#a6e22e">getByName</span>(<span style="color:#e6db74">&#34;255.255.255.255&#34;</span>);
-</span></span><span style="display:flex;"><span>DatagramPacket packet <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DatagramPacket(data, data.<span style="color:#a6e22e">length</span>, broadcastAddress, 9876);
-</span></span><span style="display:flex;"><span>socket.<span style="color:#a6e22e">send</span>(packet);
-</span></span></code></pre></div><h2 id="7-use-cases-thực-tế-của-udp">7. Use Cases thực tế của UDP<a hidden class="anchor" aria-hidden="true" href="#7-use-cases-thực-tế-của-udp">#</a></h2>
-<ul>
-<li><strong>DNS (Domain Name System):</strong> Tra cứu tên miền cần nhanh, không cần độ tin cậy tuyệt đối</li>
-<li><strong>VoIP (Voice over IP):</strong> Cuộc gọi thoại/video như Zoom, Discord - độ trễ thấp quan trọng hơn</li>
-<li><strong>Online Gaming:</strong> CS:GO, PUBG, Valorant - cập nhật vị trí nhân vật real-time</li>
-<li><strong>IoT Sensors:</strong> Cảm biến nhiệt độ, độ ẩm gửi dữ liệu liên tục - mất 1-2 gói không quan trọng</li>
-<li><strong>Live Streaming:</strong> Twitch, YouTube Live - buffer và skip frame khi cần</li>
-<li><strong>DHCP:</strong> Cấp phát IP động cho các thiết bị trong mạng</li>
-</ul>
-<h2 id="8-kết-luận">8. Kết luận<a hidden class="anchor" aria-hidden="true" href="#8-kết-luận">#</a></h2>
+<h2 id="5-lưu-ý-quan-trọng-khi-code-udp-kinh-nghiệm-thực-tế">5. Lưu ý quan trọng khi code UDP (Kinh nghiệm thực tế)<a hidden class="anchor" aria-hidden="true" href="#5-lưu-ý-quan-trọng-khi-code-udp-kinh-nghiệm-thực-tế">#</a></h2>
+<ol>
+<li>
+<p><strong>Giới hạn kích thước</strong>: Một gói UDP an toàn (MTU safe) thường nhỏ hơn 512 bytes (hoặc 1400 bytes tùy mạng). Đừng cố nhét cả file ảnh 5MB vào một gói tin UDP, nó sẽ bị router chặn hoặc phân mảnh (fragmentation) gây lỗi.</p>
+</li>
+<li>
+<p><strong>Mất gói tin</strong>: Trong môi trường Localhost (mạng nội bộ), bạn hiếm khi thấy mất gói tin. Nhưng trên Internet, tỉ lệ mất gói tin là chuyện thường. Ứng dụng của bạn phải chấp nhận việc đó.</p>
+</li>
+<li>
+<p><strong>Bảo mật</strong>: UDP dễ bị giả mạo địa chỉ IP (IP Spoofing) hơn TCP, thường được dùng trong các cuộc tấn công DDoS (UDP Flood).</p>
+</li>
+</ol>
+<h2 id="6-kết-luận">6. Kết luận<a hidden class="anchor" aria-hidden="true" href="#6-kết-luận">#</a></h2>
 <p>Lập trình với UDP mang lại cảm giác tự do và tốc độ, nhưng cũng đòi hỏi bạn phải chấp nhận sự &ldquo;không hoàn hảo&rdquo; của đường truyền.</p>
 <p>Nếu bạn đang làm đồ án về <strong>Chat Room</strong> hay <strong>File Transfer</strong>, hãy dùng <strong>TCP</strong>. Nhưng nếu bạn đang làm <strong>Voice Chat</strong>, <strong>Stream Video</strong>, hay hệ thống <strong>thu thập dữ liệu cảm biến (IoT)</strong> cập nhật liên tục, <strong>UDP</strong> chính là chân ái.</p>
-<p>UDP là triết lý &ldquo;Fire and Forget&rdquo; - bắn đi và quên nó đi. Không đảm bảo, không cam kết, nhưng nhanh và hiệu quả. Trong nhiều tình huống thực tế, đó chính là những gì chúng ta cần. Hiểu rõ đặc tính của UDP giúp bạn chọn đúng công cụ cho đúng bài toán, và đó là dấu hiệu của một lập trình viên giỏi.</p>
 <p>Chúc các bạn code &ldquo;bug-free&rdquo; (hoặc ít nhất là tìm ra bug nhanh)!</p>
 
 
@@ -348,7 +314,6 @@
       <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/udp/">UDP</a></li>
       <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/socket/">Socket</a></li>
       <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/iot/">IoT</a></li>
-      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/datagram/">Datagram</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/">
@@ -356,18 +321,18 @@
     <br>
     <span>CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS?</span>
   </a>
-  <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/">
+  <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/">
     <span class="title">Trang tiếp theo »</span>
     <br>
-    <span>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</span>
+    <span>Node.js HTTP Server từ đầu - Không dùng Framework</span>
   </a>
 </nav>
 
 
 <ul class="share-buttons">
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on x"
-            href="https://x.com/intent/tweet/?text=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f&amp;hashtags=Java%2cNetworkProgramming%2cUDP%2cSocket%2cIoT%2cDatagram">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on x"
+            href="https://x.com/intent/tweet/?text=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f&amp;hashtags=Java%2cNetworkProgramming%2cUDP%2cSocket%2cIoT">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -375,8 +340,8 @@
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f&amp;title=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram&amp;summary=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram&amp;source=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f&amp;title=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29&amp;summary=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29&amp;source=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -384,8 +349,8 @@
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on reddit"
-            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f&title=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f&title=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -393,7 +358,7 @@
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on facebook"
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on facebook"
             href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
@@ -402,8 +367,8 @@
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on whatsapp"
-            href="https://api.whatsapp.com/send?text=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram%20-%20http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on whatsapp"
+            href="https://api.whatsapp.com/send?text=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29%20-%20http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -411,8 +376,8 @@
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on telegram"
-            href="https://telegram.me/share/url?text=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on telegram"
+            href="https://telegram.me/share/url?text=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -420,8 +385,8 @@
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming - Gửi và nhận Datagram on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=UDP%20Socket%20Programming%20-%20G%e1%bb%adi%20v%c3%a0%20nh%e1%ba%adn%20Datagram&u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share UDP Socket Programming: Nghệ thuật của sự &#39;Bắn và Quên&#39; (Fire and Forget) on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=UDP%20Socket%20Programming%3a%20Ngh%e1%bb%87%20thu%e1%ba%adt%20c%e1%bb%a7a%20s%e1%bb%b1%20%27B%e1%ba%afn%20v%c3%a0%20Qu%c3%aan%27%20%28Fire%20and%20Forget%29&u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fudp-socket-programming-java%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
@@ -431,118 +396,7 @@
     </li>
 </ul>
 
-  </footer><div
-  style="
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  "
->
-  <h3
-    style="
-      margin-bottom: 1.5rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--content);
-    "
-  >
-    💬 Bình luận & Thảo luận
-  </h3>
-
-  <div id="giscus-container"></div>
-</div>
-
-<script>
-  function getCurrentTheme() {
-    const bodyTheme = document.body.getAttribute("data-theme");
-    const htmlTheme = document.documentElement.getAttribute("data-theme");
-    const savedTheme = localStorage.getItem("pref-theme");
-
-    const theme = bodyTheme || htmlTheme || savedTheme || "light";
-    return theme === "dark" ? "dark" : "light";
-  }
-
-  function loadGiscus() {
-    const theme = getCurrentTheme();
-    const container = document.getElementById("giscus-container");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = "https://giscus.app/client.js";
-    script.setAttribute("data-repo", "nssaker1208/Blog-s_VuManhCuong");
-    script.setAttribute("data-repo-id", "R_kgDOQsFoig");
-    script.setAttribute("data-category", "Announcements");
-    script.setAttribute("data-category-id", "DIC_kwDOQsFois4C0Czk");
-    script.setAttribute("data-mapping", "pathname");
-    script.setAttribute("data-strict", "0");
-    script.setAttribute("data-reactions-enabled", "1");
-    script.setAttribute("data-emit-metadata", "0");
-    script.setAttribute("data-input-position", "bottom");
-    script.setAttribute("data-theme", theme);
-    script.setAttribute("data-lang", "vi");
-    script.setAttribute("crossorigin", "anonymous");
-    script.async = true;
-
-    container.appendChild(script);
-  }
-
-  function updateGiscusTheme() {
-    const theme = getCurrentTheme();
-    const iframe = document.querySelector("iframe.giscus-frame");
-
-    if (iframe) {
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: theme } } },
-        "https://giscus.app"
-      );
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadGiscus);
-  } else {
-    loadGiscus();
-  }
-
-  const bodyObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      if (mutation.attributeName === "data-theme") {
-        setTimeout(updateGiscusTheme, 100);
-      }
-    });
-  });
-
-  bodyObserver.observe(document.body, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-
-  const htmlObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      if (mutation.attributeName === "data-theme") {
-        setTimeout(updateGiscusTheme, 100);
-      }
-    });
-  });
-
-  htmlObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
-
-  document
-    .getElementById("theme-toggle")
-    ?.addEventListener("click", function () {
-      setTimeout(updateGiscusTheme, 200);
-    });
-
-  document.getElementById("moon")?.addEventListener("click", function () {
-    setTimeout(updateGiscusTheme, 200);
-  });
-</script>
+  </footer>
 </article>
     </main>
     
@@ -559,7 +413,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

@@ -8,10 +8,10 @@
 <meta name="robots" content="noindex, nofollow">
 <title>HTTP Request/Response với Java HttpURLConnection | Blog Lập Trình Mạng</title>
 <meta name="keywords" content="Java, HTTP, API, HttpURLConnection, REST, JSON">
-<meta name="description" content="Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection">
+<meta name="description" content="Cách gửi GET/POST request, xử lý JSON response từ API">
 <meta name="author" content="Vũ Mạnh Cường">
 <link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/">
-<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.cf26504812116e38747f5c037b51539e19f17e4b63193bed2d17533e5352b1f9.css" integrity="sha256-zyZQSBIRbjh0f1wDe1FTnhnxfktjGTvtLRdTPlNSsfk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
@@ -135,43 +135,45 @@
       HTTP Request/Response với Java HttpURLConnection
     </h1>
     <div class="post-description">
-      Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection
+      Cách gửi GET/POST request, xử lý JSON response từ API
     </div>
-    <div class="post-meta"><span title='2025-12-21 00:00:00 +0000 UTC'>December 21, 2025</span>&nbsp;·&nbsp;<span>9 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
+    <div class="post-meta"><span title='2025-12-21 00:00:00 +0000 UTC'>December 21, 2025</span>&nbsp;·&nbsp;<span>11 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="http-requestresponse-với-java-httpurlconnection">HTTP Request/Response với Java HttpURLConnection<a hidden class="anchor" aria-hidden="true" href="#http-requestresponse-với-java-httpurlconnection">#</a></h1>
-<p><strong>Chủ đề:</strong> Lập trình mạng, Java Core, Web Development</p>
-<h2 id="1-giới-thiệu">1. Giới thiệu<a hidden class="anchor" aria-hidden="true" href="#1-giới-thiệu">#</a></h2>
-<p>Trong thế giới số hóa ngày nay, việc giao tiếp giữa các ứng dụng qua mạng Internet đã trở thành một phần không thể thiếu. HTTP (HyperText Transfer Protocol) là giao thức nền tảng của World Wide Web, hoạt động theo mô hình request-response. Java cung cấp <code>HttpURLConnection</code> - một class mạnh mẽ để thực hiện các HTTP request mà không cần thêm thư viện ngoài.</p>
-<h2 id="2-hiểu-về-giao-thức-http">2. Hiểu về giao thức HTTP<a hidden class="anchor" aria-hidden="true" href="#2-hiểu-về-giao-thức-http">#</a></h2>
-<p>HTTP hoạt động theo mô hình client-server, giống như một cuộc đối thoại: client gửi yêu cầu (request), server xử lý và trả về kết quả (response). Mỗi lần bạn truy cập một trang web, tải file, hoặc gửi dữ liệu lên server, tất cả đều thông qua HTTP.</p>
-<h3 id="21-các-thành-phần-của-http-request">2.1. Các thành phần của HTTP Request<a hidden class="anchor" aria-hidden="true" href="#21-các-thành-phần-của-http-request">#</a></h3>
+  <div class="post-content"><h1 id="1-http-requestresponse-với-java-httpurlconnection-nghệ-thuật-giao-tiếp-mạng">1. HTTP Request/Response với Java HttpURLConnection: Nghệ Thuật Giao Tiếp Mạng<a hidden class="anchor" aria-hidden="true" href="#1-http-requestresponse-với-java-httpurlconnection-nghệ-thuật-giao-tiếp-mạng">#</a></h1>
+<p>Trong thế giới số hóa ngày nay, việc giao tiếp giữa các ứng dụng qua mạng Internet đã trở thành một phần không thể thiếu. Giống như cách chúng ta trò chuyện bằng ngôn ngữ tự nhiên, các máy tính cũng cần một &ldquo;ngôn ngữ chung&rdquo; để hiểu nhau - và HTTP (HyperText Transfer Protocol) chính là ngôn ngữ ấy.</p>
+<p>Hãy tưởng tượng bạn đang ngồi trong một quán cà phê, muốn gọi một ly cappuccino. Bạn sẽ gọi người phục vụ (request), họ sẽ ghi lại yêu cầu của bạn, chuẩn bị đồ uống và mang đến cho bạn (response). HTTP hoạt động theo cách tương tự - client gửi yêu cầu, server xử lý và trả về kết quả.</p>
+<h2 id="hiểu-về-giao-thức-http-cuộc-đối-thoại-giữa-client-và-server">Hiểu Về Giao Thức HTTP: Cuộc Đối Thoại Giữa Client và Server<a hidden class="anchor" aria-hidden="true" href="#hiểu-về-giao-thức-http-cuộc-đối-thoại-giữa-client-và-server">#</a></h2>
+<p>HTTP là giao thức nền tảng của World Wide Web, hoạt động theo mô hình request-response. Mỗi lần bạn truy cập một trang web, tải một file, hoặc gửi dữ liệu lên server, tất cả đều thông qua HTTP.</p>
+<p><img alt="HTTP Request-Response Cycle" loading="lazy" src="https://media.geeksforgeeks.org/wp-content/uploads/20250705152348042640/Request-and-Response-Cycle.webp"></p>
+<p><em>Chu trình Request-Response trong giao thức HTTP - một cuộc đối thoại liền mạch giữa client và server</em></p>
+<h3 id="các-thành-phần-chính-của-http-request">Các Thành Phần Chính Của HTTP Request:<a hidden class="anchor" aria-hidden="true" href="#các-thành-phần-chính-của-http-request">#</a></h3>
 <ul>
-<li><strong>Method:</strong> Loại hành động (GET, POST, PUT, DELETE&hellip;)</li>
-<li><strong>URL:</strong> Địa chỉ tài nguyên cần truy cập</li>
-<li><strong>Headers:</strong> Thông tin bổ sung về request</li>
-<li><strong>Body:</strong> Dữ liệu gửi kèm (chủ yếu với POST/PUT)</li>
+<li><strong>Method</strong>: Loại hành động (GET, POST, PUT, DELETE&hellip;)</li>
+<li><strong>URL</strong>: Địa chỉ tài nguyên cần truy cập</li>
+<li><strong>Headers</strong>: Thông tin bổ sung về request</li>
+<li><strong>Body</strong>: Dữ liệu gửi kèm (chủ yếu với POST/PUT)</li>
 </ul>
-<h3 id="22-các-thành-phần-của-http-response">2.2. Các thành phần của HTTP Response<a hidden class="anchor" aria-hidden="true" href="#22-các-thành-phần-của-http-response">#</a></h3>
+<h3 id="các-thành-phần-chính-của-http-response">Các Thành Phần Chính Của HTTP Response:<a hidden class="anchor" aria-hidden="true" href="#các-thành-phần-chính-của-http-response">#</a></h3>
 <ul>
-<li><strong>Status Code:</strong> Mã trạng thái (200 OK, 404 Not Found, 500 Internal Server Error&hellip;)</li>
-<li><strong>Headers:</strong> Thông tin về response</li>
-<li><strong>Body:</strong> Dữ liệu trả về (HTML, JSON, XML&hellip;)</li>
+<li><strong>Status Code</strong>: Mã trạng thái (200, 404, 500&hellip;)</li>
+<li><strong>Headers</strong>: Thông tin về response</li>
+<li><strong>Body</strong>: Dữ liệu trả về (HTML, JSON, XML&hellip;)</li>
 </ul>
-<h2 id="3-java-httpurlconnection">3. Java HttpURLConnection<a hidden class="anchor" aria-hidden="true" href="#3-java-httpurlconnection">#</a></h2>
-<p><code>HttpURLConnection</code> là một class trong package <code>java.net</code>, cung cấp các phương thức để thực hiện HTTP request. Đây là phần của Java Standard Edition, có sẵn mà không cần thêm dependency.</p>
-<p><strong>Đặc điểm nổi bật:</strong></p>
+<h2 id="java-httpurlconnection-cầu-nối-đến-thế-giới-web">Java HttpURLConnection: Cầu Nối Đến Thế Giới Web<a hidden class="anchor" aria-hidden="true" href="#java-httpurlconnection-cầu-nối-đến-thế-giới-web">#</a></h2>
+<p>Java cung cấp cho chúng ta <code>HttpURLConnection</code> - một class mạnh mẽ để thực hiện các HTTP request. Đây là một phần của Java Standard Edition, có sẵn mà không cần thêm thư viện ngoài.</p>
+<p><img alt="Java HttpURLConnection Overview" loading="lazy" src="https://sspark.genspark.ai/cfimages?u1=Q8G82RIXhkM0Snmhi0cLsHSIv3I3DBnslkTo0jBVBRM2HOCqVK1V1NPcnFZztgUT%2FwWc%2BFrO4SzvI5uHK3NXharRuYCTS%2B0KQgZn1vB4fAyMaFlGIK7m1nO3L0VaJPFzF1Qq4l0%3D&u2=PGJmuvHzVpmTYkkn&width=2560"></p>
+<p><em>HttpURLConnection - công cụ mạnh mẽ của Java để thực hiện các HTTP request</em></p>
+<h3 id="đặc-điểm-nổi-bật-của-httpurlconnection">Đặc Điểm Nổi Bật của HttpURLConnection:<a hidden class="anchor" aria-hidden="true" href="#đặc-điểm-nổi-bật-của-httpurlconnection">#</a></h3>
 <ul>
-<li><strong>Tích hợp sẵn:</strong> Không cần thêm thư viện ngoài</li>
-<li><strong>Linh hoạt:</strong> Hỗ trợ tất cả HTTP methods (GET, POST, PUT, DELETE&hellip;)</li>
-<li><strong>Hiệu quả:</strong> Quản lý connection tốt với timeout và retry</li>
-<li><strong>Bảo mật:</strong> Hỗ trợ HTTPS một cách tự nhiên</li>
+<li><strong>Tích hợp sẵn</strong>: Không cần thêm dependency</li>
+<li><strong>Linh hoạt</strong>: Hỗ trợ tất cả HTTP methods</li>
+<li><strong>Hiệu quả</strong>: Quản lý connection tốt</li>
+<li><strong>Bảo mật</strong>: Hỗ trợ HTTPS một cách tự nhiên</li>
 </ul>
-<h2 id="4-gửi-get-request">4. Gửi GET Request<a hidden class="anchor" aria-hidden="true" href="#4-gửi-get-request">#</a></h2>
-<p>GET request được sử dụng để lấy thông tin từ server mà không làm thay đổi dữ liệu. Đây là phương thức đơn giản và phổ biến nhất trong HTTP.</p>
-<h3 id="41-ví-dụ-code-get-request">4.1. Ví dụ code GET Request<a hidden class="anchor" aria-hidden="true" href="#41-ví-dụ-code-get-request">#</a></h3>
+<h2 id="gửi-get-request-nghệ-thuật-lấy-thông-tin">Gửi GET Request: Nghệ Thuật &ldquo;Lấy&rdquo; Thông Tin<a hidden class="anchor" aria-hidden="true" href="#gửi-get-request-nghệ-thuật-lấy-thông-tin">#</a></h2>
+<p>GET request giống như việc bạn hỏi thông tin - đơn giản, trực tiếp và không làm thay đổi gì trên server. Hãy cùng xem cách thực hiện một GET request đến một API thực tế:\</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.BufferedReader;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.InputStreamReader;
@@ -209,7 +211,7 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> responseCode <span style="color:#f92672">=</span> connection.<span style="color:#a6e22e">getResponseCode</span>();
 </span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Response Code: &#34;</span> <span style="color:#f92672">+</span> responseCode);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Đọc response</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Đọc response</span>
 </span></span><span style="display:flex;"><span>            BufferedReader reader;
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (responseCode <span style="color:#f92672">&gt;=</span> 200 <span style="color:#f92672">&amp;&amp;</span> responseCode <span style="color:#f92672">&lt;</span> 300) {
 </span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Success response</span>
@@ -250,18 +252,19 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="42-giải-thích-các-bước-quan-trọng">4.2. Giải thích các bước quan trọng<a hidden class="anchor" aria-hidden="true" href="#42-giải-thích-các-bước-quan-trọng">#</a></h3>
+</span></span></code></pre></div><h3 id="giải-thích-code">Giải Thích Code:<a hidden class="anchor" aria-hidden="true" href="#giải-thích-code">#</a></h3>
 <ol>
-<li><strong>URL Creation:</strong> Tạo object URL từ string</li>
-<li><strong>Connection Setup:</strong> Mở kết nối và thiết lập các thuộc tính</li>
-<li><strong>Headers:</strong> Thêm các header cần thiết như Accept và User-Agent</li>
-<li><strong>Timeout:</strong> Thiết lập thời gian chờ để tránh treo ứng dụng</li>
-<li><strong>Response Handling:</strong> Xử lý response khác nhau tùy theo status code</li>
-<li><strong>Resource Management:</strong> Đảm bảo đóng connection và stream</li>
+<li><strong>URL Creation</strong>: Tạo object URL từ string</li>
+<li><strong>Connection Setup</strong>: Mở kết nối và thiết lập các thuộc tính</li>
+<li><strong>Headers</strong>: Thêm các header cần thiết như Accept và User-Agent</li>
+<li><strong>Timeout</strong>: Thiết lập thời gian chờ để tránh treo ứng dụng</li>
+<li><strong>Response Handling</strong>: Xử lý response khác nhau tùy theo status code</li>
+<li><strong>Resource Management</strong>: Đảm bảo đóng connection và stream</li>
 </ol>
-<h2 id="5-gửi-post-request">5. Gửi POST Request<a hidden class="anchor" aria-hidden="true" href="#5-gửi-post-request">#</a></h2>
-<p>POST request phức tạp hơn GET vì nó gửi dữ liệu lên server. Phương thức này thường được sử dụng để tạo mới dữ liệu, gửi form, hoặc upload file.</p>
-<h3 id="51-ví-dụ-code-post-request-với-json">5.1. Ví dụ code POST Request với JSON<a hidden class="anchor" aria-hidden="true" href="#51-ví-dụ-code-post-request-với-json">#</a></h3>
+<h2 id="gửi-post-request-nghệ-thuật-gửi-dữ-liệu">Gửi POST Request: Nghệ Thuật &ldquo;Gửi&rdquo; Dữ Liệu<a hidden class="anchor" aria-hidden="true" href="#gửi-post-request-nghệ-thuật-gửi-dữ-liệu">#</a></h2>
+<p>POST request phức tạp hơn GET vì nó gửi dữ liệu lên server. Giống như việc bạn điền form và gửi đi, POST request thường được dùng để tạo mới dữ liệu.</p>
+<p><img alt="GET vs POST Request" loading="lazy" src="https://sspark.genspark.ai/cfimages?u1=nPyzLZgsOpj3Pqd%2BcyvuLJlMj53u%2BFTuWxOia1rOI1hpEEcJhudeoK%2FfZ0D1iNXXy%2FQQLH0HbeTp78LXOjdkGs9BXsc7qe62LCJaTddNhpuD&u2=gerRMxSuIIJgMJLr&width=2560"></p>
+<p><em>Sự khác biệt giữa GET và POST request - hai phương thức cơ bản trong HTTP</em></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.HttpURLConnection;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.URL;
@@ -363,16 +366,16 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="52-điểm-khác-biệt-chính-của-post-request">5.2. Điểm khác biệt chính của POST Request<a hidden class="anchor" aria-hidden="true" href="#52-điểm-khác-biệt-chính-của-post-request">#</a></h3>
-<ul>
-<li><strong>setDoOutput(true):</strong> Cho phép gửi dữ liệu ra ngoài</li>
-<li><strong>Content-Type Header:</strong> Chỉ định kiểu dữ liệu gửi đi (application/json)</li>
-<li><strong>OutputStream:</strong> Sử dụng để ghi dữ liệu vào request body</li>
-<li><strong>Content-Length:</strong> Chỉ định độ dài của dữ liệu</li>
-</ul>
-<h2 id="6-xử-lý-json-response">6. Xử lý JSON Response<a hidden class="anchor" aria-hidden="true" href="#6-xử-lý-json-response">#</a></h2>
-<p>JSON (JavaScript Object Notation) là định dạng dữ liệu phổ biến nhất trong các REST API. Để xử lý JSON response, chúng ta cần parse chuỗi JSON thành các object Java.</p>
-<h3 id="61-sử-dụng-thư-viện-gson">6.1. Sử dụng thư viện Gson<a hidden class="anchor" aria-hidden="true" href="#61-sử-dụng-thư-viện-gson">#</a></h3>
+</span></span></code></pre></div><h3 id="điểm-khác-biệt-chính-của-post-request">Điểm Khác Biệt Chính Của POST Request:<a hidden class="anchor" aria-hidden="true" href="#điểm-khác-biệt-chính-của-post-request">#</a></h3>
+<ol>
+<li><strong>setDoOutput(true)</strong>: Cho phép gửi dữ liệu ra</li>
+<li><strong>Content-Type Header</strong>: Chỉ định kiểu dữ liệu gửi đi</li>
+<li><strong>OutputStream</strong>: Sử dụng để ghi dữ liệu vào request body</li>
+<li><strong>Content-Length</strong>: Chỉ định độ dài của dữ liệu (tùy chọn)</li>
+</ol>
+<h2 id="xử-lý-json-response-từ-chuỗi-đến-đối-tượng">Xử Lý JSON Response: Từ Chuỗi Đến Đối Tượng<a hidden class="anchor" aria-hidden="true" href="#xử-lý-json-response-từ-chuỗi-đến-đối-tượng">#</a></h2>
+<p>JSON (JavaScript Object Notation) là định dạng dữ liệu phổ biến nhất trong các REST API ngày nay. Việc xử lý JSON response đòi hỏi chúng ta phải parse chuỗi JSON thành các object Java.</p>
+<h3 id="cách-1-sử-dụng-thư-viện-gson">Cách 1: Sử Dụng Thư Viện Gson<a hidden class="anchor" aria-hidden="true" href="#cách-1-sử-dụng-thư-viện-gson">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> com.google.gson.Gson;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.google.gson.JsonObject;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.google.gson.JsonParser;
@@ -446,8 +449,15 @@
 </span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Body: &#34;</span> <span style="color:#f92672">+</span> jsonObject.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;body&#34;</span>).<span style="color:#a6e22e">getAsString</span>());
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="7-xác-thực-api-với-token">7. Xác thực API với Token<a hidden class="anchor" aria-hidden="true" href="#7-xác-thực-api-với-token">#</a></h2>
-<p>Trong thực tế, hầu hết các API đều yêu cầu xác thực người dùng thông qua Token (JWT - JSON Web Token) hoặc API Key. Việc này được thực hiện thông qua header <code>Authorization</code>.</p>
+</span></span></code></pre></div><h3 id="giải-thích-code-1">Giải Thích Code:<a hidden class="anchor" aria-hidden="true" href="#giải-thích-code-1">#</a></h3>
+<ul>
+<li>Sau khi nhận <strong>HTTP Response</strong> từ <code>HttpURLConnection</code>, ta thường nhận về chuỗi JSON</li>
+<li>Để xử lý, ta có 2 cách: <strong>mapping sang đối tượng Java</strong> (dễ quản lý, dùng trong ứng dụng lớn) hoặc <strong>truy cập trực tiếp JsonObject</strong> (nhanh gọn khi chỉ cần vài trường).</li>
+</ul>
+<h2 id="bảo-mật-api-gửi-request-với-authentication">Bảo Mật API: Gửi Request Với Authentication<a hidden class="anchor" aria-hidden="true" href="#bảo-mật-api-gửi-request-với-authentication">#</a></h2>
+<p>Trong thực tế, rất ít API mở công khai (public) hoàn toàn. Hầu hết các hệ thống đều yêu cầu xác thực người dùng thông qua Token (thường là JWT - JSON Web Token) hoặc API Key. Với <code>HttpURLConnection</code>, việc này được thực hiện thông qua việc tùy chỉnh <strong>Request Headers</strong>.</p>
+<p><strong>Gửi Request Với Bearer Token</strong></p>
+<p>Đây là chuẩn xác thực phổ biến nhất hiện nay. Chúng ta cần thêm header <code>Authorization</code> vào request.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">sendAuthenticatedRequest</span>(String urlString, String token) <span style="color:#66d9ef">throws</span> IOException {
 </span></span><span style="display:flex;"><span>    URL url <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL(urlString);
 </span></span><span style="display:flex;"><span>    HttpURLConnection connection <span style="color:#f92672">=</span> (HttpURLConnection) url.<span style="color:#a6e22e">openConnection</span>();
@@ -475,17 +485,21 @@
 </span></span><span style="display:flex;"><span>        connection.<span style="color:#a6e22e">disconnect</span>();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><blockquote>
-<p><strong>Lưu ý:</strong> Không bao giờ hard-code Token hoặc API Key trong code. Hãy sử dụng biến môi trường (Environment Variables) hoặc file config để bảo mật.</p>
-</blockquote>
-<h2 id="8-xử-lý-lỗi-nâng-cao">8. Xử lý lỗi nâng cao<a hidden class="anchor" aria-hidden="true" href="#8-xử-lý-lỗi-nâng-cao">#</a></h2>
-<p>Một ứng dụng tốt không chỉ chạy mượt khi mọi thứ hoàn hảo, mà còn phải xử lý tốt các trường hợp lỗi. <code>HttpURLConnection</code> ném ra <code>IOException</code> cho các lỗi mạng, nhưng với các lỗi logic từ server (4xx, 5xx), chúng ta cần xử lý <code>ErrorStream</code>.</p>
-<p><strong>Phân loại Status Code:</strong></p>
+</span></span></code></pre></div><p><em>Lưu ý: Không bao giờ hard-code (lưu cứng) API Key hoặc Token trong code. Hãy sử dụng biến môi trường (Environment Variables) hoặc file config để bảo mật.</em></p>
+<h2 id="xử-lý-lỗi-nâng-cao-khi-server-nói-không">Xử Lý Lỗi Nâng Cao: Khi Server Nói &ldquo;Không&rdquo;<a hidden class="anchor" aria-hidden="true" href="#xử-lý-lỗi-nâng-cao-khi-server-nói-không">#</a></h2>
+<p>Một ứng dụng tốt không phải là ứng dụng chạy mượt khi mọi thứ hoàn hảo, mà là ứng dụng vẫn đứng vững khi có lỗi xảy ra. <code>HttpURLConnection</code> ném ra <code>IOException</code> cho các lỗi mạng, nhưng với các lỗi logic từ server (4xx, 5xx), chúng ta cần xử lý <code>ErrorStream</code>.</p>
+<p><strong>Chiến lược xử lý lỗi:</strong></p>
+<ol>
+<li><strong>Phân loại Status Code:</strong></li>
+</ol>
 <ul>
-<li><strong>2xx:</strong> Thành công (200 OK, 201 Created)</li>
-<li><strong>4xx:</strong> Lỗi do client (400 Bad Request, 401 Unauthorized, 404 Not Found)</li>
-<li><strong>5xx:</strong> Lỗi do server (500 Internal Server Error, 503 Service Unavailable)</li>
+<li><strong>2xx</strong>: Thành công.</li>
+<li><strong>4xx</strong> (Client Error): Lỗi do người gửi (VD: 400 Bad Request, 401 Unauthorized, 404 Not Found).</li>
+<li><strong>5xx</strong> (Server Error): Lỗi do server (VD: 500 Internal Server Error, 503 Service Unavailable).</li>
 </ul>
+<ol start="2">
+<li><strong>Đọc Error Body</strong>: Server thường trả về chi tiết lỗi dưới dạng JSON trong <code>ErrorStream</code>.</li>
+</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Đoạn code xử lý luồng input/error stream tối ưu</span>
 </span></span><span style="display:flex;"><span>InputStream stream;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (status <span style="color:#f92672">&gt;</span> 299) {
@@ -499,18 +513,60 @@
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Đọc stream và parse JSON lỗi để hiển thị thông báo thân thiện cho user</span>
-</span></span></code></pre></div><h2 id="9-best-practices">9. Best Practices<a hidden class="anchor" aria-hidden="true" href="#9-best-practices">#</a></h2>
+</span></span></code></pre></div><p>Việc viết lại <code>url.openConnection()</code>, <code>setRequestProperty</code>, <code>BufferedReader</code> lặp đi lặp lại vi phạm nguyên tắc DRY (Don&rsquo;t Repeat Yourself). Một lập trình viên chuyên nghiệp sẽ đóng gói (wrap) các logic này lại.</p>
+<p>Dưới đây là ý tưởng thiết kế một class <code>HttpClientUtil</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HttpClientUtil</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enum định nghĩa các method</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> HttpMethod { GET, POST, PUT, DELETE }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">execute</span>(String urlStr, HttpMethod method, String body, String token) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        URL url <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL(urlStr);
+</span></span><span style="display:flex;"><span>        HttpURLConnection conn <span style="color:#f92672">=</span> (HttpURLConnection) url.<span style="color:#a6e22e">openConnection</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">setRequestMethod</span>(method.<span style="color:#a6e22e">name</span>());
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">setConnectTimeout</span>(15000); <span style="color:#75715e">// 15s timeout</span>
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">setReadTimeout</span>(15000);
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">setRequestProperty</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (token <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            conn.<span style="color:#a6e22e">setRequestProperty</span>(<span style="color:#e6db74">&#34;Authorization&#34;</span>, <span style="color:#e6db74">&#34;Bearer &#34;</span> <span style="color:#f92672">+</span> token);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Gửi Body nếu có (POST/PUT)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (body <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> (method <span style="color:#f92672">==</span> HttpMethod.<span style="color:#a6e22e">POST</span> <span style="color:#f92672">||</span> method <span style="color:#f92672">==</span> HttpMethod.<span style="color:#a6e22e">PUT</span>)) {
+</span></span><span style="display:flex;"><span>            conn.<span style="color:#a6e22e">setDoOutput</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> (OutputStream os <span style="color:#f92672">=</span> conn.<span style="color:#a6e22e">getOutputStream</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> input <span style="color:#f92672">=</span> body.<span style="color:#a6e22e">getBytes</span>(<span style="color:#e6db74">&#34;utf-8&#34;</span>);
+</span></span><span style="display:flex;"><span>                os.<span style="color:#a6e22e">write</span>(input, 0, input.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Đọc Response (Sử dụng try-with-resources của Java 7+ cho gọn)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> conn.<span style="color:#a6e22e">getResponseCode</span>();
+</span></span><span style="display:flex;"><span>        InputStream stream <span style="color:#f92672">=</span> (status <span style="color:#f92672">&gt;</span> 299) <span style="color:#f92672">?</span> conn.<span style="color:#a6e22e">getErrorStream</span>() : conn.<span style="color:#a6e22e">getInputStream</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (stream <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (BufferedReader br <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> InputStreamReader(stream, <span style="color:#e6db74">&#34;utf-8&#34;</span>))) {
+</span></span><span style="display:flex;"><span>            StringBuilder response <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>            String responseLine;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> ((responseLine <span style="color:#f92672">=</span> br.<span style="color:#a6e22e">readLine</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                response.<span style="color:#a6e22e">append</span>(responseLine.<span style="color:#a6e22e">trim</span>());
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> response.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="nhìn-về-tương-lai-java-11-httpclient">Nhìn Về Tương Lai: Java 11 HttpClient<a hidden class="anchor" aria-hidden="true" href="#nhìn-về-tương-lai-java-11-httpclient">#</a></h2>
+<p>Mặc dù <code>HttpURLConnection</code> (có từ Java 1.1) vẫn hoạt động tốt, nhưng nó có cú pháp khá cồng kềnh và cũ kỹ. Từ Java 11, Oracle đã giới thiệu <code>java.net.http.HttpClient</code> - một API hiện đại, hỗ trợ Asynchronous (bất đồng bộ) và HTTP/2.</p>
+<p>So sánh nhanh:</p>
 <ul>
-<li><strong>Sử dụng try-with-resources:</strong> Đảm bảo các stream và connection được đóng tự động</li>
-<li><strong>Thiết lập timeout:</strong> Tránh ứng dụng bị treo khi server không phản hồi</li>
-<li><strong>Xử lý lỗi đầy đủ:</strong> Kiểm tra status code và đọc error stream khi có lỗi</li>
-<li><strong>Tạo utility class:</strong> Đóng gói logic HTTP request vào class riêng để tái sử dụng</li>
-<li><strong>Bảo mật thông tin:</strong> Không hard-code token, API key trong source code</li>
+<li><strong>HttpURLConnection</strong>: Cổ điển, blocking I/O, code dài dòng.</li>
+<li><strong>Java 11 HttpClient</strong>: Hiện đại, Fluent API (chuỗi hàm), hỗ trợ Non-blocking.</li>
 </ul>
-<h2 id="10-nhìn-về-tương-lai-java-11-httpclient">10. Nhìn về tương lai: Java 11 HttpClient<a hidden class="anchor" aria-hidden="true" href="#10-nhìn-về-tương-lai-java-11-httpclient">#</a></h2>
-<p>Mặc dù <code>HttpURLConnection</code> vẫn hoạt động tốt, nhưng từ Java 11, Oracle đã giới thiệu <code>java.net.http.HttpClient</code> - một API hiện đại hơn, hỗ trợ Asynchronous và HTTP/2.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// Ví dụ với Java 11 HttpClient</span>
-</span></span><span style="display:flex;"><span>HttpClient client <span style="color:#f92672">=</span> HttpClient.<span style="color:#a6e22e">newHttpClient</span>();
+<p>Ví dụ cùng một tác vụ GET request với <strong>Java 11 HttpClient</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>HttpClient client <span style="color:#f92672">=</span> HttpClient.<span style="color:#a6e22e">newHttpClient</span>();
 </span></span><span style="display:flex;"><span>HttpRequest request <span style="color:#f92672">=</span> HttpRequest.<span style="color:#a6e22e">newBuilder</span>()
 </span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">uri</span>(URI.<span style="color:#a6e22e">create</span>(<span style="color:#e6db74">&#34;https://jsonplaceholder.typicode.com/posts/1&#34;</span>))
 </span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">build</span>();
@@ -518,45 +574,18 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Code cực kỳ ngắn gọn và dễ đọc</span>
 </span></span><span style="display:flex;"><span>HttpResponse<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> response <span style="color:#f92672">=</span> client.<span style="color:#a6e22e">send</span>(request, HttpResponse.<span style="color:#a6e22e">BodyHandlers</span>.<span style="color:#a6e22e">ofString</span>());
 </span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(response.<span style="color:#a6e22e">body</span>());
-</span></span></code></pre></div><p><strong>So sánh nhanh:</strong></p>
-<table>
-  <thead>
-      <tr>
-          <th>Đặc điểm</th>
-          <th>HttpURLConnection</th>
-          <th>Java 11 HttpClient</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Phiên bản Java</strong></td>
-          <td>Java 1.1+</td>
-          <td>Java 11+</td>
-      </tr>
-      <tr>
-          <td><strong>Cú pháp</strong></td>
-          <td>Dài dòng, phức tạp</td>
-          <td>Ngắn gọn, Fluent API</td>
-      </tr>
-      <tr>
-          <td><strong>HTTP/2</strong></td>
-          <td>Không hỗ trợ</td>
-          <td>Hỗ trợ</td>
-      </tr>
-      <tr>
-          <td><strong>Async</strong></td>
-          <td>Không</td>
-          <td>Có</td>
-      </tr>
-      <tr>
-          <td><strong>Use case</strong></td>
-          <td>Legacy projects</td>
-          <td>Modern applications</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="11-kết-luận">11. Kết luận<a hidden class="anchor" aria-hidden="true" href="#11-kết-luận">#</a></h2>
-<p><code>HttpURLConnection</code> là công cụ cơ bản nhưng mạnh mẽ để thực hiện HTTP request trong Java. Việc nắm vững cách sử dụng nó không chỉ giúp bạn hiểu sâu về cách HTTP hoạt động mà còn giúp làm việc với các hệ thống legacy một cách dễ dàng. Tuy nhiên, trong các dự án mới, hãy cân nhắc sử dụng các thư viện hiện đại như <strong>OkHttp</strong>, <strong>Apache HttpClient</strong> hoặc <strong>Java 11 HttpClient</strong> để tăng năng suất và hiệu năng.</p>
+</span></span></code></pre></div><h2 id="lời-kết">LỜI KẾT:<a hidden class="anchor" aria-hidden="true" href="#lời-kết">#</a></h2>
+<ul>
+<li>
+<p><strong>HttpURLConnection</strong> giống như một con dao của quân đội Thụy Sĩ: tuy cũ kỹ nhưng bền bỉ và có sẵn ở mọi nơi. Việc nắm vững cách sử dụng nó không chỉ giúp bạn hiểu sâu về cách HTTP hoạt động &ldquo;dưới nắp ca-pô&rdquo; mà còn giúp bạn làm việc với các hệ thống legacy (cũ) một cách dễ dàng.</p>
+</li>
+<li>
+<p>Tuy nhiên, trong các dự án mới (Greenfield projects), hãy cân nhắc sử dụng các thư viện bên thứ 3 như <strong>OkHttp</strong>, <strong>Apache HttpClient</strong> hoặc <strong>Java 11 HttpClient</strong> để tăng năng suất và hiệu năng.</p>
+</li>
+<li>
+<p>Hi vọng bài viết này đã cung cấp cho bạn cái nhìn toàn diện về lập trình mạng cơ bản trong Java. Happy Coding!</p>
+</li>
+</ul>
 
 
   </div>
@@ -571,10 +600,10 @@
       <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/json/">JSON</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/">
+  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/">
     <span class="title">« Trang trước</span>
     <br>
-    <span>WebSocket với Java Spring Boot</span>
+    <span>Fetch API trong JavaScript - Gọi REST API hiện đại</span>
   </a>
   <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/">
     <span class="title">Trang tiếp theo »</span>
@@ -779,7 +808,25 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script>
+  
+  let lastScroll = 0;
+  const header = document.querySelector("header.header");
+
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.pageYOffset;
+
+    
+    if (currentScroll > 10) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+
+    lastScroll = currentScroll;
+  });
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');
