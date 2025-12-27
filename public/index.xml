@@ -2,48 +2,133 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Blog Lập Trình Mạng</title>
-    <link>http://localhost:1313/my-blog/</link>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/</link>
     <description>Recent content on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/my-blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Giới thiệu</title>
-      <link>http://localhost:1313/my-blog/about/</link>
-      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/about/</guid>
-      <description>&lt;h1 id=&#34;xin-chào-tôi-là-vũ-mạnh-cường&#34;&gt;Xin chào, tôi là Vũ Mạnh Cường&lt;/h1&gt;
-&lt;p&gt;Tôi là sinh viên trường Đại học Công nghệ TP.HCM (HUTECH). Tôi thuộc khóa K22 chuyên ngành Công nghệ phần mềm thuộc khoa Công nghệ thông tin.&lt;/p&gt;
-&lt;h2 id=&#34;kỹ-năng&#34;&gt;Kỹ năng&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Ngôn ngữ:&lt;/strong&gt; Java, JavaScript, C#&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Network Programming:&lt;/strong&gt; Socket, HTTP, WebSocket&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Tools:&lt;/strong&gt; Git, Maven, Node.js&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;học-vấn&#34;&gt;Học vấn&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Trường: Đại học Công nghệ TP.HCM (HUTECH)&lt;/li&gt;
-&lt;li&gt;Chuyên ngành: Công nghệ phần mềm&lt;/li&gt;
-&lt;li&gt;Khoa: Công nghệ thông tin&lt;/li&gt;
-&lt;li&gt;Khóa học: Java Network Programming, JavaScript Web Development&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;liên-hệ&#34;&gt;Liên hệ&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Email: &lt;a href=&#34;mailto:nssaker1208@gmail.com&#34;&gt;nssaker1208@gmail.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;GitHub: github.com/nssaker1208&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <title></title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/portfolio/</link>
+      <pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/portfolio/</guid>
+      <description>&lt;div class=&#34;portfolio-filter&#34;&gt;
+  &lt;button class=&#34;filter-btn active&#34; data-filter=&#34;all&#34;&gt;All&lt;/button&gt;
+  &lt;button class=&#34;filter-btn&#34; data-filter=&#34;passion&#34;&gt;Sở thích&lt;/button&gt;
+  &lt;button class=&#34;filter-btn&#34; data-filter=&#34;skills&#34;&gt;Kỹ năng&lt;/button&gt;
+  &lt;button class=&#34;filter-btn&#34; data-filter=&#34;education&#34;&gt;Học vấn&lt;/button&gt;
+  &lt;button class=&#34;filter-btn&#34; data-filter=&#34;experience&#34;&gt;Kinh nghiệm&lt;/button&gt;
+  &lt;button class=&#34;filter-btn&#34; data-filter=&#34;goals&#34;&gt;Mục tiêu&lt;/button&gt;
+  &lt;button class=&#34;filter-btn&#34; data-filter=&#34;certificates&#34;&gt;Khóa học/Chứng chỉ&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&#34;portfolio-grid&#34;&gt;
+  &lt;!-- Card 1: Kỹ năng --&gt;
+  &lt;figure class=&#34;portfolio-card&#34; data-category=&#34;skills&#34;&gt;
+    &lt;div class=&#34;card-image&#34; style=&#34;background-image: url(&#39;https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&#39;);&#34;&gt;
+      &lt;div class=&#34;card-overlay&#34;&gt;
+        &lt;h3&gt;💻 Kỹ năng&lt;/h3&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figcaption class=&#34;card-content&#34;&gt;
+      &lt;h4&gt;Kỹ năng kỹ thuật&lt;/h4&gt;
+      &lt;p&gt;&lt;strong&gt;Java:&lt;/strong&gt; Spring Boot, Maven, Socket Programming&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;JavaScript:&lt;/strong&gt; Node.js, Express, React&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Database:&lt;/strong&gt; MySQL, MongoDB&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Tools:&lt;/strong&gt; Git, Docker, Postman&lt;/p&gt;
+    &lt;/figcaption&gt;
+  &lt;/figure&gt;
+  &lt;!-- Card 2: Mục tiêu --&gt;
+  &lt;figure class=&#34;portfolio-card&#34; data-category=&#34;goals&#34;&gt;
+    &lt;div class=&#34;card-image&#34; style=&#34;background-image: url(&#39;https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&#39;);&#34;&gt;
+      &lt;div class=&#34;card-overlay&#34;&gt;
+        &lt;h3&gt;🎯 Mục tiêu&lt;/h3&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;figcaption class=&#34;card-content&#34;&gt;
+      &lt;h4&gt;Mục tiêu nghề nghiệp&lt;/h4&gt;
+      &lt;p&gt;&lt;strong&gt;Ngắn hạn:&lt;/strong&gt; Thành thạo Full-Stack Development, hoàn thành 3+ dự án cá nhân&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Socket Programming trong Java - Xây dựng Chat Server cơ bản</title>
-      <link>http://localhost:1313/my-blog/posts/socket-java/</link>
+      <title>Axios vs Fetch - So sánh thư viện HTTP Client trong JavaScript</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/</guid>
+      <description>Phân tích sâu về ưu nhược điểm của Axios và Fetch API. Khi nào nên dùng thư viện ngoài, khi nào nên dùng hàng Native? Đâu là lựa chọn tối ưu cho dự án của bạn?</description>
+    </item>
+    <item>
+      <title>CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS?</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</guid>
+      <description>Tại sao API chạy ngon trên Postman nhưng lại lỗi trên trình duyệt? Tìm hiểu về Same-Origin Policy, cơ chế Preflight và cách xử lý lỗi CORS đúng chuẩn</description>
+    </item>
+    <item>
+      <title>UDP Socket Programming - Gửi và nhận Datagram</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</guid>
+      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này</description>
+    </item>
+    <item>
+      <title>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</guid>
+      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time, xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại</description>
+    </item>
+    <item>
+      <title>Node.js HTTP Server từ đầu - Không dùng Framework</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/</guid>
+      <description>Tự tay xây dựng HTTP Server bằng module &amp;#39;http&amp;#39; native của Node.js để hiểu rõ bản chất của Streams, Buffers và Request/Response cycle</description>
+    </item>
+    <item>
+      <title>Fetch API trong JavaScript - Gọi REST API hiện đại</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</guid>
+      <description>Hướng dẫn chi tiết sử dụng Fetch API với async/await, xử lý lỗi và Promise trong JavaScript hiện đại</description>
+    </item>
+    <item>
+      <title>WebSocket với Java Spring Boot</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
+      <description>Hướng dẫn chi tiết xây dựng hệ thống thông báo thời gian thực với WebSocket, STOMP và Spring Boot</description>
+    </item>
+    <item>
+      <title>HTTP Request/Response với Java HttpURLConnection</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</guid>
+      <description>Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection</description>
+    </item>
+    <item>
+      <title>Java Multithreading - Quản Lý Kết Nối Mạng Hiệu Quả</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</guid>
+      <description>Hướng dẫn chi tiết về sử dụng Thread Pool và ExecutorService để xử lý nhiều client đồng thời một cách hiệu quả</description>
+    </item>
+    <item>
+      <title>Lập Trình Java Socket</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</link>
       <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/posts/socket-java/</guid>
-      <description>&lt;h2 id=&#34;giới-thiệu&#34;&gt;Giới thiệu&lt;/h2&gt;
-&lt;p&gt;Socket Programming là kỹ thuật cơ bản trong lập trình mạng&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;tạo-server-socket&#34;&gt;Tạo Server Socket&lt;/h2&gt;
-&lt;p&gt;ServerSocket serverSocket = new ServerSocket(8080);
-Socket clientSocket = serverSocket.accept();&lt;/p&gt;</description>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</guid>
+      <description>Hướng dẫn chi tiết về lập trình Java Socket, từ khái niệm cơ bản đến ví dụ thực tế</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/about/</guid>
+      <description>&lt;p&gt;&lt;img alt=&#34;Avatar&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/Blog-s_VuManhCuong/images/avatar.jpg&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;xin-chào-tôi-là-vũ-mạnh-cường&#34;&gt;Xin chào, tôi là Vũ Mạnh Cường&lt;/h1&gt;
+&lt;h2 id=&#34;giới-thiệu-bản-thân&#34;&gt;Giới thiệu bản thân&lt;/h2&gt;
+&lt;p&gt;Tôi là sinh viên khóa K22 chuyên ngành Công nghệ phần mềm tại Trường Đại học Công nghệ TP.HCM (HUTECH). Với đam mê lập trình và phát triển phần mềm, tôi luôn tìm tòi để mở rộng kiến thức và kỹ năng trong lĩnh vực công nghệ thông tin.&lt;/p&gt;
+&lt;p&gt;Trong suốt quá trình học tập, tôi đã tham gia các dự án thực tế về network programming và web development. Tôi yêu thích việc giải quyết các bài toán kỹ thuật phức tạp và xây dựng những ứng dụng có ý nghĩa thực tiễn.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

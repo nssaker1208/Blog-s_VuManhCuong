@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Java Programming on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</link>
+    <description>Recent content in Java Programming on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UDP Socket Programming - Gửi và nhận Datagram</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</guid>
+      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này</description>
+    </item>
+    <item>
+      <title>WebSocket với Java Spring Boot</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
+      <description>Hướng dẫn chi tiết xây dựng hệ thống thông báo thời gian thực với WebSocket, STOMP và Spring Boot</description>
+    </item>
+    <item>
+      <title>HTTP Request/Response với Java HttpURLConnection</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</guid>
+      <description>Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection</description>
+    </item>
+  </channel>
+</rss>

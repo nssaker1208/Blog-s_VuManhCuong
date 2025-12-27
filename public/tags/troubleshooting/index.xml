@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Troubleshooting on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/tags/troubleshooting/</link>
+    <description>Recent content in Troubleshooting on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS?</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</guid>
+      <description>Tại sao API chạy ngon trên Postman nhưng lại lỗi trên trình duyệt? Tìm hiểu về Same-Origin Policy, cơ chế Preflight và cách xử lý lỗi CORS đúng chuẩn</description>
+    </item>
+  </channel>
+</rss>

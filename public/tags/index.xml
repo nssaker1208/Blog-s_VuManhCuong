@@ -2,31 +2,290 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Blog Lập Trình Mạng</title>
-    <link>http://localhost:1313/my-blog/tags/</link>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/tags/</link>
     <description>Recent content in Tags on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/my-blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Java</title>
-      <link>http://localhost:1313/my-blog/tags/java/</link>
-      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/tags/java/</guid>
+      <title>Axios</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/axios/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/axios/</guid>
       <description></description>
     </item>
     <item>
-      <title>Network</title>
-      <link>http://localhost:1313/my-blog/tags/network/</link>
-      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/tags/network/</guid>
+      <title>Best Practices</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/best-practices/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/best-practices/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Chat App</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/chat-app/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/chat-app/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CORS</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/cors/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/cors/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Datagram</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/datagram/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/datagram/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fetch API</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/fetch-api/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/fetch-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Frontend</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/frontend/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/frontend/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HTTP</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/http/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/http/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HTTP Client</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/http-client/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/http-client/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IoT</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/iot/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/iot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JavaScript</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/javascript/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/javascript/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Native API</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/native-api/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/native-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network Programming</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/network-programming/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/network-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Real-Time</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/real-time/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/real-time/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Same-Origin Policy</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/same-origin-policy/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/same-origin-policy/</guid>
       <description></description>
     </item>
     <item>
       <title>Socket</title>
-      <link>http://localhost:1313/my-blog/tags/socket/</link>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/socket/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/socket/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Troubleshooting</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/troubleshooting/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/troubleshooting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>UDP</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/udp/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/udp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web Security</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/web-security/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/web-security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WebSocket</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/websocket/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/websocket/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Backend</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/backend/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/backend/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Core Concepts</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/core-concepts/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/core-concepts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>No Framework</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/no-framework/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/no-framework/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node.js</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/node.js/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/node.js/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Streams</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/streams/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/streams/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Async/Await</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/async/await/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/async/await/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Promise</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/promise/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/promise/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>REST API</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/rest-api/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/rest-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Notification System</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/notification-system/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/notification-system/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spring Boot</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/spring-boot/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/spring-boot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>STOMP</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/stomp/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/stomp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>API</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/api/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ExecutorService</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/executorservice/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/executorservice/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HttpURLConnection</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/httpurlconnection/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/httpurlconnection/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JSON</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/json/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/json/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Multithreading</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/multithreading/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/multithreading/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>REST</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/rest/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/rest/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Thread Pool</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/thread-pool/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/thread-pool/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TCP</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/tags/tcp/</link>
       <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/tags/socket/</guid>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/tags/tcp/</guid>
       <description></description>
     </item>
   </channel>

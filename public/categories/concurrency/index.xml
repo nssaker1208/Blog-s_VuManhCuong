@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Concurrency on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/categories/concurrency/</link>
+    <description>Recent content in Concurrency on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Sun, 21 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/categories/concurrency/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java Multithreading - Quản Lý Kết Nối Mạng Hiệu Quả</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</guid>
+      <description>Hướng dẫn chi tiết về sử dụng Thread Pool và ExecutorService để xử lý nhiều client đồng thời một cách hiệu quả</description>
+    </item>
+  </channel>
+</rss>

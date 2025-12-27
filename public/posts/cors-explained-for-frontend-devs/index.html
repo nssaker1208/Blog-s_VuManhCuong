@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+
+<head><script src="/Blog-s_VuManhCuong/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Blog-s_VuManhCuong/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? | Blog Lập Trình Mạng</title>
+<meta name="keywords" content="CORS, Frontend, Web Security, HTTP, Troubleshooting, Same-Origin Policy">
+<meta name="description" content="Tại sao API chạy ngon trên Postman nhưng lại lỗi trên trình duyệt? Tìm hiểu về Same-Origin Policy, cơ chế Preflight và cách xử lý lỗi CORS đúng chuẩn">
+<meta name="author" content="Vũ Mạnh Cường">
+<link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/Blog-s_VuManhCuong/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/Blog-s_VuManhCuong/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+    <link rel="stylesheet" href="/Blog-s_VuManhCuong/css/output.css">
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/Blog-s_VuManhCuong/" accesskey="h" title="Blog Lập Trình Mạng (Alt + H)">Blog Lập Trình Mạng</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/posts" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/about" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/portfolio" title="Portfolio">
+                    <span>Portfolio</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/Blog-s_VuManhCuong/">Trang chủ</a>&nbsp;»&nbsp;<a href="http://localhost:1313/Blog-s_VuManhCuong/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS?
+    </h1>
+    <div class="post-description">
+      Tại sao API chạy ngon trên Postman nhưng lại lỗi trên trình duyệt? Tìm hiểu về Same-Origin Policy, cơ chế Preflight và cách xử lý lỗi CORS đúng chuẩn
+    </div>
+    <div class="post-meta"><span title='2025-12-26 00:00:00 +0000 UTC'>December 26, 2025</span>&nbsp;·&nbsp;<span>7 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="cors-là-gì-vì-sao-frontend-hay-bị-lỗi-cors">CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS?<a hidden class="anchor" aria-hidden="true" href="#cors-là-gì-vì-sao-frontend-hay-bị-lỗi-cors">#</a></h1>
+<p><strong>Chủ đề:</strong> Web Security, CORS, Same-Origin Policy, Frontend Development</p>
+<h2 id="1-lời-mở-đầu">1. Lời mở đầu<a hidden class="anchor" aria-hidden="true" href="#1-lời-mở-đầu">#</a></h2>
+<p>Hãy thú thật đi, đã bao nhiêu lần bạn nhìn thấy dòng lỗi đỏ lòm này và chỉ muốn đập bàn phím?</p>
+<blockquote>
+<p><em>Access to fetch at &lsquo;<a href="https://api.backend.com/data'">https://api.backend.com/data'</a> from origin &lsquo;http://localhost:3000&rsquo; has been blocked by CORS policy: No &lsquo;Access-Control-Allow-Origin&rsquo; header is present on the requested resource.</em></p>
+</blockquote>
+<p>Nhiều bạn mới (và cả mình ngày xưa) thường nghĩ: <em>&ldquo;Chắc code mình sai chỗ nào rồi&rdquo;</em>. Sau đó, bạn google và tìm đủ mọi cách để sửa code Frontend.</p>
+<p>Nhưng sự thật phũ phàng là: <strong>Bạn không thể sửa lỗi CORS bằng code Frontend (JavaScript) thuần túy.</strong></p>
+<p>Để hiểu tại sao, chúng ta phải quay lại cội nguồn của vấn đề: <strong>SOP</strong>.</p>
+<h2 id="2-nguồn-gốc-chính-sách-cùng-nguồn-same-origin-policy">2. Nguồn gốc: Chính sách cùng nguồn (Same-Origin Policy)<a hidden class="anchor" aria-hidden="true" href="#2-nguồn-gốc-chính-sách-cùng-nguồn-same-origin-policy">#</a></h2>
+<p>Trước khi trách CORS, hãy cảm ơn nó. Trình duyệt được sinh ra với một sứ mệnh bảo mật cao cả: <strong>Không tin tưởng bất kỳ ai.</strong></p>
+<p>Mặc định, trình duyệt áp dụng chính sách <strong>Same-Origin Policy (SOP)</strong>. Chính sách này quy định rằng: Một trang web chỉ được phép gọi API (fetch/xhr) tới server nếu server đó có <strong>CÙNG NGUỒN (Same Origin)</strong> với trang web.</p>
+<h3 id="21-vậy-thế-nào-là-cùng-nguồn">2.1. Vậy thế nào là &ldquo;Cùng Nguồn&rdquo;?<a hidden class="anchor" aria-hidden="true" href="#21-vậy-thế-nào-là-cùng-nguồn">#</a></h3>
+<p>Hai URL được coi là cùng nguồn khi chúng giống hệt nhau ở 3 điểm:</p>
+<ol>
+<li><strong>Giao thức (Protocol):</strong> http vs https</li>
+<li><strong>Tên miền (Domain):</strong> google.com vs facebook.com</li>
+<li><strong>Cổng (Port):</strong> 80 vs 3000</li>
+</ol>
+<h3 id="22-tại-sao-cần-sop">2.2. Tại sao cần SOP?<a hidden class="anchor" aria-hidden="true" href="#22-tại-sao-cần-sop">#</a></h3>
+<p>Hãy tưởng tượng bạn vừa đăng nhập vào <code>facebook.com</code>. Trình duyệt lưu cookie đăng nhập của bạn. Sau đó, bạn lỡ bấm vào một trang web đen <code>evil.com</code>. Nếu không có SOP, trang <code>evil.com</code> có thể âm thầm gửi request đến <code>facebook.com</code> bằng cookie của bạn và đọc tin nhắn trộm. SOP ngăn chặn điều này bằng cách chặn <code>evil.com</code> gọi API sang <code>facebook.com</code>.</p>
+<h2 id="3-cors-tấm-hộ-chiếu-thông-hành">3. CORS: &ldquo;Tấm hộ chiếu&rdquo; thông hành<a hidden class="anchor" aria-hidden="true" href="#3-cors-tấm-hộ-chiếu-thông-hành">#</a></h2>
+<p>SOP rất an toàn, nhưng quá cứng nhắc. Trong thế giới hiện đại, Frontend (React/Vue chạy ở <code>localhost:3000</code>) thường gọi API tới Backend (Node/Java chạy ở <code>localhost:8080</code> hoặc domain khác). Theo luật SOP, việc này bị cấm.</p>
+<p>Đó là lúc <strong>CORS (Cross-Origin Resource Sharing)</strong> ra đời.</p>
+<p>CORS không phải là một lỗi. <strong>CORS là một cơ chế nới lỏng bảo mật</strong>, cho phép Server &ldquo;cấp visa&rdquo; cho những Domain lạ được phép truy cập vào tài nguyên của mình.</p>
+<h2 id="4-nguyên-lý-hoạt-động-câu-chuyện-về-preflight-request">4. Nguyên lý hoạt động: Câu chuyện về &ldquo;Preflight Request&rdquo;<a hidden class="anchor" aria-hidden="true" href="#4-nguyên-lý-hoạt-động-câu-chuyện-về-preflight-request">#</a></h2>
+<p>Đây là phần khiến nhiều bạn bối rối nhất. Đôi khi bạn thấy trong Network tab có 2 requests giống hệt nhau, cái đầu tiên là <code>OPTIONS</code>. Đó chính là <strong>Preflight Request</strong>.</p>
+<p>Trình duyệt chia các request thành 2 loại:</p>
+<h3 id="41-simple-request-yêu-cầu-đơn-giản">4.1. Simple Request (Yêu cầu đơn giản)<a hidden class="anchor" aria-hidden="true" href="#41-simple-request-yêu-cầu-đơn-giản">#</a></h3>
+<p>Với các request đơn giản (GET, POST không có header lạ), trình duyệt gửi thẳng request đi.</p>
+<ul>
+<li><strong>Server:</strong> Trả về dữ liệu kèm header <code>Access-Control-Allow-Origin: *</code></li>
+<li><strong>Trình duyệt:</strong> Kiểm tra header đó. Nếu khớp, cho phép Frontend đọc. Nếu không, báo lỗi đỏ</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Simple Request Example
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://api.example.com/data&#34;</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>))
+</span></span><span style="display:flex;"><span>  .<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">error</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;CORS Error:&#34;</span>, <span style="color:#a6e22e">error</span>));
+</span></span></code></pre></div><h3 id="42-preflighted-request-yêu-cầu-cần-kiểm-tra-trước">4.2. Preflighted Request (Yêu cầu cần kiểm tra trước)<a hidden class="anchor" aria-hidden="true" href="#42-preflighted-request-yêu-cầu-cần-kiểm-tra-trước">#</a></h3>
+<p>Nếu bạn gửi request phức tạp (dùng <code>PUT</code>, <code>DELETE</code>, hoặc gửi <code>Content-Type: application/json</code>, gửi kèm Token&hellip;), trình duyệt cực kỳ cẩn thận.</p>
+<ol>
+<li><strong>Bước 1 (Hỏi đường):</strong> Trình duyệt tự động gửi một request rỗng với method <strong>OPTIONS</strong>
+<ul>
+<li><em>&ldquo;Này Server, lát nữa thằng Frontend định gửi method PUT kèm header Authorization đấy, anh có cho phép không?&rdquo;</em></li>
+</ul>
+</li>
+<li><strong>Bước 2 (Trả lời):</strong> Server phản hồi
+<ul>
+<li><em>&ldquo;Ok, tôi cho phép domain đó, method đó.&rdquo;</em> (Status 200 hoặc 204)</li>
+</ul>
+</li>
+<li><strong>Bước 3 (Gửi thật):</strong> Lúc này trình duyệt mới dám gửi request <code>PUT</code> thật sự đi</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Preflighted Request Example
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://api.example.com/users&#34;</span>, {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;PUT&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Authorization</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bearer token123&#34;</span>,
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;John&#34;</span> }),
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Trình duyệt sẽ tự động gửi OPTIONS request trước:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// OPTIONS https://api.example.com/users
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Access-Control-Request-Method: PUT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Access-Control-Request-Headers: Content-Type, Authorization
+</span></span></span></code></pre></div><h2 id="5-tại-sao-postman-chạy-được-mà-browser-thì-không">5. Tại sao Postman chạy được mà Browser thì không?<a hidden class="anchor" aria-hidden="true" href="#5-tại-sao-postman-chạy-được-mà-browser-thì-không">#</a></h2>
+<p>Đây là câu hỏi kinh điển.</p>
+<ul>
+<li><strong>Postman:</strong> Là một công cụ dành cho Developer. Nó <strong>không phải là trình duyệt</strong>. Nó không quan tâm đến bảo mật người dùng, không có cookie session của ngân hàng hay Facebook. Do đó, nó <strong>bỏ qua SOP/CORS</strong> và gửi request thẳng tuột</li>
+<li><strong>Trình duyệt:</strong> Phải bảo vệ người dùng bình thường khỏi các trang web độc hại. Nó bắt buộc phải tuân thủ luật chơi này</li>
+</ul>
+<h2 id="6-cách-xử-lý-lỗi-cors-đúng-và-sai">6. Cách xử lý lỗi CORS (Đúng và Sai)<a hidden class="anchor" aria-hidden="true" href="#6-cách-xử-lý-lỗi-cors-đúng-và-sai">#</a></h2>
+<p>Khi gặp lỗi này, đừng vội cài extension để bypass (đó chỉ là tự lừa dối bản thân thôi).</p>
+<h3 id="61-cách-1-cấu-hình-lại-server-giải-pháp-triệt-để">6.1. Cách 1: Cấu hình lại Server (Giải pháp triệt để)<a hidden class="anchor" aria-hidden="true" href="#61-cách-1-cấu-hình-lại-server-giải-pháp-triệt-để">#</a></h3>
+<p>Lỗi CORS là do Server chưa cho phép Domain của bạn truy cập. Hãy bảo Backend Developer thêm các Header sau vào response:</p>
+<pre tabindex="0"><code>Access-Control-Allow-Origin: http://localhost:3000
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization
+</code></pre><p><strong>Node.js (Express):</strong></p>
+<p>Dùng gói <code>cors</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Cách 1: Allow tất cả origins (Không khuyến khích cho production)
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">cors</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Cách 2: Chỉ định cụ thể origins (Khuyến khích)
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cors</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">origin</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;http://localhost:3000&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">credentials</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// Nếu cần gửi cookies
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#e6db74">&#34;POST&#34;</span>, <span style="color:#e6db74">&#34;PUT&#34;</span>, <span style="color:#e6db74">&#34;DELETE&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">allowedHeaders</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;Authorization&#34;</span>],
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/api/data&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;CORS enabled!&#34;</span> });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p><strong>Java (Spring Boot):</strong></p>
+<p>Thêm annotation <code>@CrossOrigin</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.bind.annotation.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@CrossOrigin</span>(origins <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://localhost:3000&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApiController</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/api/data&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> ResponseEntity<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getData</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ResponseEntity.<span style="color:#a6e22e">ok</span>(<span style="color:#e6db74">&#34;CORS enabled!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Hoặc cấu hình global</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CorsConfig</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> WebMvcConfigurer <span style="color:#a6e22e">corsConfigurer</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> WebMvcConfigurer() {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCorsMappings</span>(CorsRegistry registry) {
+</span></span><span style="display:flex;"><span>                    registry.<span style="color:#a6e22e">addMapping</span>(<span style="color:#e6db74">&#34;/**&#34;</span>)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">allowedOrigins</span>(<span style="color:#e6db74">&#34;http://localhost:3000&#34;</span>)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">allowedMethods</span>(<span style="color:#e6db74">&#34;GET&#34;</span>, <span style="color:#e6db74">&#34;POST&#34;</span>, <span style="color:#e6db74">&#34;PUT&#34;</span>, <span style="color:#e6db74">&#34;DELETE&#34;</span>, <span style="color:#e6db74">&#34;OPTIONS&#34;</span>)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">allowedHeaders</span>(<span style="color:#e6db74">&#34;*&#34;</span>)
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">allowCredentials</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="62-cách-2-dùng-proxy-giải-pháp-cho-frontend-dev-khi-code">6.2. Cách 2: Dùng Proxy (Giải pháp cho Frontend Dev khi code)<a hidden class="anchor" aria-hidden="true" href="#62-cách-2-dùng-proxy-giải-pháp-cho-frontend-dev-khi-code">#</a></h3>
+<p>Nếu Backend không chịu sửa (hoặc đó là API của bên thứ 3), bạn có thể lừa trình duyệt bằng cách dùng Proxy.</p>
+<p>Nguyên lý: <code>Browser</code> → <code>Proxy Server (Cùng nguồn)</code> → <code>Real API</code>. Vì Server gọi Server thì không bị dính SOP!</p>
+<p><strong>Trong React/Vite:</strong></p>
+<p>Cấu hình file <code>vite.config.js</code> hoặc <code>setupProxy.js</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// vite.config.js
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">defineConfig</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;vite&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">defineConfig</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">server</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">proxy</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;/api&#34;</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">target</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.backend.com&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">changeOrigin</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rewrite</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">path</span>) =&gt; <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/^\/api/</span>, <span style="color:#e6db74">&#34;&#34;</span>),
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// setupProxy.js (Create React App)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">createProxyMiddleware</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http-proxy-middleware&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">app</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;/api&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">createProxyMiddleware</span>({
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">target</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;https://api.backend.com&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">changeOrigin</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">pathRewrite</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;^/api&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Lúc này Frontend sẽ gọi <code>http://localhost:3000/api/...</code> Trình duyệt thấy cùng là <code>localhost:3000</code> nên vui vẻ cho qua.</p>
+<h3 id="63-cách-không-nên-làm">6.3. Cách KHÔNG nên làm<a hidden class="anchor" aria-hidden="true" href="#63-cách-không-nên-làm">#</a></h3>
+<ul>
+<li><strong>Cài extension &ldquo;CORS Unblock&rdquo;:</strong> Chỉ hoạt động trên máy bạn, không giải quyết được vấn đề khi deploy</li>
+<li><strong>Disable web security:</strong> <code>chrome --disable-web-security</code> - Nguy hiểm và không practical</li>
+<li><strong>Set <code>Access-Control-Allow-Origin</code> từ Frontend:</strong> Không có tác dụng gì, header này phải từ Server</li>
+</ul>
+<h2 id="7-best-practices">7. Best Practices<a hidden class="anchor" aria-hidden="true" href="#7-best-practices">#</a></h2>
+<ul>
+<li><strong>Không dùng wildcard (*) trong production:</strong> Chỉ định cụ thể origins được phép</li>
+<li><strong>Xử lý OPTIONS request:</strong> Đảm bảo server trả về status 200/204 cho preflight</li>
+<li><strong>Cache preflight response:</strong> Sử dụng <code>Access-Control-Max-Age</code> để giảm số lần preflight</li>
+<li><strong>Kiểm tra credentials:</strong> Nếu dùng <code>credentials: true</code>, không được dùng wildcard origin</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Backend Example với Best Practices
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cors</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">origin</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">origin</span>, <span style="color:#a6e22e">callback</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">allowedOrigins</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;https://myapp.com&#34;</span>, <span style="color:#e6db74">&#34;https://staging.myapp.com&#34;</span>];
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Allow requests with no origin (mobile apps, Postman)
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">origin</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">allowedOrigins</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">origin</span>) <span style="color:#f92672">===</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;CORS not allowed&#34;</span>), <span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">credentials</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">maxAge</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">86400</span>, <span style="color:#75715e">// Cache preflight 24 hours
+</span></span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h2 id="8-tổng-kết">8. Tổng kết<a hidden class="anchor" aria-hidden="true" href="#8-tổng-kết">#</a></h2>
+<p>CORS không phải là kẻ thù, nó là vệ sĩ bảo vệ người dùng của bạn.</p>
+<p><strong>Tóm tắt lại:</strong></p>
+<ol>
+<li>Lỗi CORS xảy ra tại <strong>Trình duyệt</strong>, do trình duyệt chặn lại</li>
+<li>Frontend <strong>không thể fix</strong> lỗi này bằng code JS thuần</li>
+<li>Cách fix chuẩn nhất là <strong>Cấu hình tại Server</strong></li>
+<li>Cách fix tạm thời khi dev là dùng <strong>Proxy</strong></li>
+</ol>
+<p>Hy vọng bài viết này giúp bạn bớt &ldquo;cay cú&rdquo; mỗi khi nhìn thấy dòng chữ đỏ ấy. Lần sau gặp lỗi, hãy tự tin nhắn tin cho team Backend: &ldquo;Anh ơi, enable CORS cho em với, nhớ handle cả method OPTIONS nhé!&rdquo;</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/cors/">CORS</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/frontend/">Frontend</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/web-security/">Web Security</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/http/">HTTP</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/troubleshooting/">Troubleshooting</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/same-origin-policy/">Same-Origin Policy</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/">
+    <span class="title">« Trang trước</span>
+    <br>
+    <span>Axios vs Fetch - So sánh thư viện HTTP Client trong JavaScript</span>
+  </a>
+  <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/">
+    <span class="title">Trang tiếp theo »</span>
+    <br>
+    <span>UDP Socket Programming - Gửi và nhận Datagram</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on x"
+            href="https://x.com/intent/tweet/?text=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f&amp;hashtags=CORS%2cFrontend%2cWebSecurity%2cHTTP%2cTroubleshooting%2cSame-OriginPolicy">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f&amp;title=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f&amp;summary=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f&amp;source=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f&title=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on whatsapp"
+            href="https://api.whatsapp.com/send?text=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f%20-%20http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on telegram"
+            href="https://telegram.me/share/url?text=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS? on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=CORS%20L%c3%a0%20G%c3%ac%3f%20V%c3%ac%20Sao%20Frontend%20Hay%20B%e1%bb%8b%20L%e1%bb%97i%20CORS%3f&u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fcors-explained-for-frontend-devs%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer><div
+  style="
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  "
+>
+  <h3
+    style="
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--content);
+    "
+  >
+    💬 Bình luận & Thảo luận
+  </h3>
+
+  <div id="giscus-container"></div>
+</div>
+
+<script>
+  function getCurrentTheme() {
+    const bodyTheme = document.body.getAttribute("data-theme");
+    const htmlTheme = document.documentElement.getAttribute("data-theme");
+    const savedTheme = localStorage.getItem("pref-theme");
+
+    const theme = bodyTheme || htmlTheme || savedTheme || "light";
+    return theme === "dark" ? "dark" : "light";
+  }
+
+  function loadGiscus() {
+    const theme = getCurrentTheme();
+    const container = document.getElementById("giscus-container");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "nssaker1208/Blog-s_VuManhCuong");
+    script.setAttribute("data-repo-id", "R_kgDOQsFoig");
+    script.setAttribute("data-category", "Announcements");
+    script.setAttribute("data-category-id", "DIC_kwDOQsFois4C0Czk");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-theme", theme);
+    script.setAttribute("data-lang", "vi");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  function updateGiscusTheme() {
+    const theme = getCurrentTheme();
+    const iframe = document.querySelector("iframe.giscus-frame");
+
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        "https://giscus.app"
+      );
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadGiscus);
+  } else {
+    loadGiscus();
+  }
+
+  const bodyObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "data-theme") {
+        setTimeout(updateGiscusTheme, 100);
+      }
+    });
+  });
+
+  bodyObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  const htmlObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "data-theme") {
+        setTimeout(updateGiscusTheme, 100);
+      }
+    });
+  });
+
+  htmlObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener("click", function () {
+      setTimeout(updateGiscusTheme, 200);
+    });
+
+  document.getElementById("moon")?.addEventListener("click", function () {
+    setTimeout(updateGiscusTheme, 200);
+  });
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/Blog-s_VuManhCuong/">Blog Lập Trình Mạng</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+
+</html>

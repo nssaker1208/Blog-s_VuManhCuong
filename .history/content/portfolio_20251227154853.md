@@ -1,0 +1,111 @@
+---
+title: ""
+date: 2025-12-27
+draft: false
+ShowBreadCrumbs: false
+ShowReadingTime: false
+ShowPostNavLinks: false
+hidemeta: true
+---
+
+<div class="portfolio-filter">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="passion">Sở thích</button>
+  <button class="filter-btn" data-filter="skills">Kỹ năng</button>
+  <button class="filter-btn" data-filter="education">Học vấn</button>
+  <button class="filter-btn" data-filter="experience">Kinh nghiệm</button>
+  <button class="filter-btn" data-filter="goals">Mục tiêu</button>
+  <button class="filter-btn" data-filter="certificates">Khóa học/Chứng chỉ</button>
+</div>
+
+<div class="portfolio-grid">
+  
+  <!-- Card 1: Kỹ năng -->
+  <figure class="portfolio-card" data-category="skills">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800');">
+      <div class="card-overlay">
+        <h3>💻 Kỹ năng</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Kỹ năng kỹ thuật</h4>
+      <p><strong>Java:</strong> Spring Boot, Maven, Socket Programming</p>
+      <p><strong>JavaScript:</strong> Node.js, Express, React</p>
+      <p><strong>Database:</strong> MySQL, MongoDB</p>
+      <p><strong>Tools:</strong> Git, Docker, Postman</p>
+    </figcaption>
+  </figure>
+
+  <!-- Card 2: Mục tiêu -->
+  <figure class="portfolio-card" data-category="goals">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800');">
+      <div class="card-overlay">
+        <h3>🎯 Mục tiêu</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Mục tiêu nghề nghiệp</h4>
+      <p><strong>Ngắn hạn:</strong> Thành thạo Full-Stack Development, hoàn thành 3+ dự án cá nhân</p>
+      <p><strong>Dài hạn:</strong> Trở thành Technical Lead, chuyên sâu Distributed Systems</p>
+    </figcaption>
+  </figure>
+
+  <!-- Card 3: Kinh nghiệm -->
+  <figure class="portfolio-card" data-category="experience">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800');">
+      <div class="card-overlay">
+        <h3>💼 Kinh nghiệm</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Kinh nghiệm làm việc</h4>
+      <p><strong>Java Chat App:</strong> Socket TCP/UDP, Multithreading, Swing GUI</p>
+      <p><strong>REST API:</strong> Node.js, Express, MongoDB, JWT Auth</p>
+      <p><strong>HTTP Client:</strong> Axios vs Fetch comparison</p>
+    </figcaption>
+  </figure>
+
+  <!-- Card 4: Học vấn -->
+  <figure class="portfolio-card" data-category="education">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800');">
+      <div class="card-overlay">
+        <h3>🎓 Học vấn</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Trường học & Bằng cấp</h4>
+      <p><strong>HUTECH</strong> - Công nghệ phần mềm (K22)</p>
+      <p><strong>GPA:</strong> 3.4/4.0</p>
+      <p><strong>Môn nổi bật:</strong> Java Network Programming (A), JavaScript Web Dev (A-)</p>
+    </figcaption>
+  </figure>
+
+  <!-- Card 5: Sở thích -->
+  <figure class="portfolio-card" data-category="passion">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800');">
+      <div class="card-overlay">
+        <h3>🔥 Sở thích</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Đam mê & Sở thích</h4>
+      <p>Đam mê lập trình mạng, real-time communication, và kiến trúc phân tán. Yêu thích nghiên cứu design patterns và clean architecture.</p>
+    </figcaption>
+  </figure>
+
+  <!-- Card 6: Chứng chỉ -->
+  <figure class="portfolio-card" data-category="certificates">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800');">
+      <div class="card-overlay">
+        <h3>📜 Chứng chỉ</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Khóa học & Chứng chỉ</h4>
+      <p><strong>Đã hoàn thành:</strong> Java Network Programming, JavaScript Web Dev, Git & GitHub</p>
+      <p><strong>Đang học:</strong> Docker & Containerization, Advanced Java</p>
+    </figcaption>
+  </figure>
+</div>
+
+<script src="/Blog-s_VuManhCuong/js/portfolio-filter.js"></script>

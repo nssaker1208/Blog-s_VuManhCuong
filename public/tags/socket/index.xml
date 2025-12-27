@@ -2,22 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Socket on Blog Lập Trình Mạng</title>
-    <link>http://localhost:1313/my-blog/tags/socket/</link>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/tags/socket/</link>
     <description>Recent content in Socket on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/my-blog/tags/socket/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/socket/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Socket Programming trong Java - Xây dựng Chat Server cơ bản</title>
-      <link>http://localhost:1313/my-blog/posts/socket-java/</link>
+      <title>UDP Socket Programming - Gửi và nhận Datagram</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</guid>
+      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này</description>
+    </item>
+    <item>
+      <title>Lập Trình Java Socket</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</link>
       <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/posts/socket-java/</guid>
-      <description>&lt;h2 id=&#34;giới-thiệu&#34;&gt;Giới thiệu&lt;/h2&gt;
-&lt;p&gt;Socket Programming là kỹ thuật cơ bản trong lập trình mạng&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;tạo-server-socket&#34;&gt;Tạo Server Socket&lt;/h2&gt;
-&lt;p&gt;ServerSocket serverSocket = new ServerSocket(8080);
-Socket clientSocket = serverSocket.accept();&lt;/p&gt;</description>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</guid>
+      <description>Hướng dẫn chi tiết về lập trình Java Socket, từ khái niệm cơ bản đến ví dụ thực tế</description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,134 @@
+/* ===================================
+   XÓA LOGO VÀ CĂN GIỮA MENU
+   =================================== */
+
+/* Ẩn logo/title */
+header .logo,
+header .logo a {
+  display: none !important;
+}
+
+/* Đảm bảo header có layout flex để xử lý spacing */
+header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Wrapper của logo và menu */
+.logo-switches {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+
+/* Căn giữa menu */
+header nav,
+header nav#menu {
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+header #menu {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+header #menu li {
+  list-style: none !important;
+}
+
+/* Style menu links */
+header #menu a {
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+header #menu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+header #menu li a[aria-current="page"] {
+  font-weight: bold;
+  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* ===================================
+   NÚT DARK MODE - ĐẶT Ở GÓC PHẢI
+   =================================== */
+
+/* Container của các nút (dark mode, language, search...) */
+.theme-toggle,
+#theme-toggle,
+button[aria-label*="theme"],
+button[aria-label*="Theme"],
+.list-page-control,
+.top-link {
+  position: absolute !important;
+  right: 1rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Nếu có nhiều buttons, xếp chúng thành row */
+.logo-switches > button,
+.logo-switches > .theme-toggle {
+  margin-left: 0.5rem;
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .logo-switches {
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Đặt dark mode button ở góc phải trên mobile */
+  .theme-toggle,
+  #theme-toggle,
+  button[aria-label*="theme"] {
+    position: absolute !important;
+    right: 1rem !important;
+    top: 1rem !important;
+  }
+
+  header #menu {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+    margin-top: 2rem;
+  }
+
+  header #menu a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================================
+   DARK MODE COLORS
+   =================================== */
+
+.dark header #menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark header #menu li a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.05);
+}

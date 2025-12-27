@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Streams on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/tags/streams/</link>
+    <description>Recent content in Streams on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Thu, 25 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/streams/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Node.js HTTP Server từ đầu - Không dùng Framework</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/</guid>
+      <description>Tự tay xây dựng HTTP Server bằng module &amp;#39;http&amp;#39; native của Node.js để hiểu rõ bản chất của Streams, Buffers và Request/Response cycle</description>
+    </item>
+  </channel>
+</rss>

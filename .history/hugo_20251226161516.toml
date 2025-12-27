@@ -1,0 +1,48 @@
+baseURL = 'https://nssaker1208.github.io/Blog-s_VuManhCuong/'
+languageCode = 'vi'
+title = 'Blog Lập Trình Mạng'
+theme = 'PaperMod'
+
+[params]
+  description = "Chia sẻ kiến thức về Java & JavaScript Network Programming"
+  author = "Vũ Mạnh Cường"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  comments = true
+
+[[menu.main]]
+  identifier = 'home'
+  name = 'Home'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  identifier = 'blog'
+  name = 'Blog'
+  url = '/posts'
+  weight = 2
+
+[[menu.main]]
+  identifier = 'about'
+  name = 'About'
+  url = '/about'
+  weight = 3
+
+[[menu.main]]
+  identifier = 'skills'
+  name = 'My Skills'
+  url = '/skills'
+  weight = 4
+
+[[menu.main]]
+  identifier = 'portfolio'
+  name = 'Portfolio'
+  url = '/portfolio'
+  weight = 5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

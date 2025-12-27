@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Real-Time Applications on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/</link>
+    <description>Recent content in Real-Time Applications on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</guid>
+      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time, xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại</description>
+    </item>
+    <item>
+      <title>WebSocket với Java Spring Boot</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
+      <description>Hướng dẫn chi tiết xây dựng hệ thống thông báo thời gian thực với WebSocket, STOMP và Spring Boot</description>
+    </item>
+  </channel>
+</rss>

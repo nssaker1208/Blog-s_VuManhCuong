@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Best Practices on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/tags/best-practices/</link>
+    <description>Recent content in Best Practices on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/best-practices/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Axios vs Fetch - So sánh thư viện HTTP Client trong JavaScript</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/</guid>
+      <description>Phân tích sâu về ưu nhược điểm của Axios và Fetch API. Khi nào nên dùng thư viện ngoài, khi nào nên dùng hàng Native? Đâu là lựa chọn tối ưu cho dự án của bạn?</description>
+    </item>
+  </channel>
+</rss>

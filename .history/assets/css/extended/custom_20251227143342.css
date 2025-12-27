@@ -1,0 +1,96 @@
+---
+title: "Portfolio"
+date: 2025-12-27
+draft: false
+ShowBreadCrumbs: false
+ShowReadingTime: false
+ShowPostNavLinks: false
+hidemeta: true
+---
+
+<div class="portfolio-grid">
+  
+  <figure class="portfolio-card">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800');">
+      <div class="card-overlay">
+        <h3>💻 Kỹ năng</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Kỹ năng kỹ thuật</h4>
+      <ul>
+        <li><strong>Java:</strong> Spring Boot, Maven, Socket Programming</li>
+        <li><strong>JavaScript:</strong> Node.js, Express, React</li>
+        <li><strong>Database:</strong> MySQL, MongoDB</li>
+        <li><strong>Tools:</strong> Git, Docker, Postman</li>
+      </ul>
+    </figcaption>
+  </figure>
+
+  <figure class="portfolio-card">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800');">
+      <div class="card-overlay">
+        <h3>🎯 Mục tiêu</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Mục tiêu nghề nghiệp</h4>
+      <p><strong>Ngắn hạn:</strong> Thành thạo Full-Stack Development, hoàn thành 3+ dự án cá nhân</p>
+      <p><strong>Dài hạn:</strong> Trở thành Technical Lead, chuyên sâu Distributed Systems</p>
+    </figcaption>
+  </figure>
+
+  <figure class="portfolio-card">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800');">
+      <div class="card-overlay">
+        <h3>💼 Công việc</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Kinh nghiệm làm việc</h4>
+      <p><strong>Java Chat App:</strong> Socket TCP/UDP, Multithreading, Swing GUI</p>
+      <p><strong>REST API:</strong> Node.js, Express, MongoDB, JWT Auth</p>
+      <p><strong>HTTP Client:</strong> Axios vs Fetch performance comparison</p>
+    </figcaption>
+  </figure>
+
+  <figure class="portfolio-card">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800');">
+      <div class="card-overlay">
+        <h3>🎓 Học vấn</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Trường học & Bằng cấp</h4>
+      <p><strong>HUTECH</strong> - Công nghệ phần mềm (K22)</p>
+      <p><strong>GPA:</strong> 3.4/4.0</p>
+      <p><strong>Môn nổi bật:</strong> Java Network Programming (A), JavaScript Web Dev (A-)</p>
+    </figcaption>
+  </figure>
+
+  <figure class="portfolio-card">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800');">
+      <div class="card-overlay">
+        <h3>🔥 Đam mê</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Sở thích & Đam mê</h4>
+      <p>Đam mê lập trình mạng, real-time communication, và kiến trúc phân tán. Yêu thích nghiên cứu design patterns và clean architecture.</p>
+    </figcaption>
+  </figure>
+
+  <figure class="portfolio-card">
+    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800');">
+      <div class="card-overlay">
+        <h3>📜 Chứng chỉ</h3>
+      </div>
+    </div>
+    <figcaption class="card-content">
+      <h4>Khóa học & Chứng chỉ</h4>
+      <p><strong>Đã hoàn thành:</strong> Java Network Programming, JavaScript Web Dev, Git & GitHub</p>
+      <p><strong>Đang học:</strong> Docker & Containerization, Advanced Java</p>
+    </figcaption>
+  </figure>
+
+</div>

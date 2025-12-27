@@ -2,10 +2,130 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Blog Lập Trình Mạng</title>
-    <link>http://localhost:1313/my-blog/categories/</link>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/categories/</link>
     <description>Recent content in Categories on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <atom:link href="http://localhost:1313/my-blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Backend Development</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/backend-development/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/backend-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Frontend Development</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/frontend-development/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/frontend-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java Programming</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/java-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Networking</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/networking/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/networking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Real-Time Applications</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/real-time-applications/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/security/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tooling</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/tooling/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/tooling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web API</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/web-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web Development</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/web-development/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/web-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Deep Dive</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/deep-dive/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/deep-dive/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node.js Tutorial</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/node.js-tutorial/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/node.js-tutorial/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JavaScript Tutorial</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/javascript-tutorial/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/javascript-tutorial/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>API Development</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/api-development/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/api-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Concurrency</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/concurrency/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/concurrency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java Core</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/java-core/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/java-core/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network Programming</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/network-programming/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/network-programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Programming</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/categories/programming/</link>
+      <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/categories/programming/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

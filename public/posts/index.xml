@@ -2,22 +2,81 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Blog Lập Trình Mạng</title>
-    <link>http://localhost:1313/my-blog/posts/</link>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/posts/</link>
     <description>Recent content in Posts on Blog Lập Trình Mạng</description>
     <generator>Hugo -- 0.153.0</generator>
     <language>vi</language>
-    <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/my-blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Socket Programming trong Java - Xây dựng Chat Server cơ bản</title>
-      <link>http://localhost:1313/my-blog/posts/socket-java/</link>
+      <title>Axios vs Fetch - So sánh thư viện HTTP Client trong JavaScript</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/axios-vs-fetch-comparison/</guid>
+      <description>Phân tích sâu về ưu nhược điểm của Axios và Fetch API. Khi nào nên dùng thư viện ngoài, khi nào nên dùng hàng Native? Đâu là lựa chọn tối ưu cho dự án của bạn?</description>
+    </item>
+    <item>
+      <title>CORS Là Gì? Vì Sao Frontend Hay Bị Lỗi CORS?</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/cors-explained-for-frontend-devs/</guid>
+      <description>Tại sao API chạy ngon trên Postman nhưng lại lỗi trên trình duyệt? Tìm hiểu về Same-Origin Policy, cơ chế Preflight và cách xử lý lỗi CORS đúng chuẩn</description>
+    </item>
+    <item>
+      <title>UDP Socket Programming - Gửi và nhận Datagram</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/udp-socket-programming-java/</guid>
+      <description>Tại sao game online lại dùng UDP thay vì TCP? Hướng dẫn lập trình gửi/nhận Datagram bằng Java và so sánh chi tiết hai giao thức huyền thoại này</description>
+    </item>
+    <item>
+      <title>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/</guid>
+      <description>Hướng dẫn chi tiết cách sử dụng Native WebSocket API trong trình duyệt để xây dựng ứng dụng Chat Real-time, xử lý kết nối, gửi nhận tin nhắn và tự động kết nối lại</description>
+    </item>
+    <item>
+      <title>Node.js HTTP Server từ đầu - Không dùng Framework</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/</link>
+      <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/</guid>
+      <description>Tự tay xây dựng HTTP Server bằng module &amp;#39;http&amp;#39; native của Node.js để hiểu rõ bản chất của Streams, Buffers và Request/Response cycle</description>
+    </item>
+    <item>
+      <title>Fetch API trong JavaScript - Gọi REST API hiện đại</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</guid>
+      <description>Hướng dẫn chi tiết sử dụng Fetch API với async/await, xử lý lỗi và Promise trong JavaScript hiện đại</description>
+    </item>
+    <item>
+      <title>WebSocket với Java Spring Boot</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</link>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/websocket_java/</guid>
+      <description>Hướng dẫn chi tiết xây dựng hệ thống thông báo thời gian thực với WebSocket, STOMP và Spring Boot</description>
+    </item>
+    <item>
+      <title>HTTP Request/Response với Java HttpURLConnection</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/httpurlconnection-java/</guid>
+      <description>Hướng dẫn chi tiết về cách gửi GET/POST request, xử lý JSON response từ API với Java HttpURLConnection</description>
+    </item>
+    <item>
+      <title>Java Multithreading - Quản Lý Kết Nối Mạng Hiệu Quả</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</link>
+      <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/multithreading-java/</guid>
+      <description>Hướng dẫn chi tiết về sử dụng Thread Pool và ExecutorService để xử lý nhiều client đồng thời một cách hiệu quả</description>
+    </item>
+    <item>
+      <title>Lập Trình Java Socket</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</link>
       <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/my-blog/posts/socket-java/</guid>
-      <description>&lt;h2 id=&#34;giới-thiệu&#34;&gt;Giới thiệu&lt;/h2&gt;
-&lt;p&gt;Socket Programming là kỹ thuật cơ bản trong lập trình mạng&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;tạo-server-socket&#34;&gt;Tạo Server Socket&lt;/h2&gt;
-&lt;p&gt;ServerSocket serverSocket = new ServerSocket(8080);
-Socket clientSocket = serverSocket.accept();&lt;/p&gt;</description>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/socket-java/</guid>
+      <description>Hướng dẫn chi tiết về lập trình Java Socket, từ khái niệm cơ bản đến ví dụ thực tế</description>
     </item>
   </channel>
 </rss>

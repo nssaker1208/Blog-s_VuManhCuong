@@ -1,0 +1,127 @@
+{{- if and .Params.comments (eq .Type "posts") -}}
+<div
+  style="
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  "
+>
+  <h3
+    style="
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--content);
+    "
+  >
+    💬 Bình luận & Thảo luận
+  </h3>
+
+  <div id="giscus-container"></div>
+</div>
+
+<script>
+  function getCurrentTheme() {
+    // PaperMod version mới dùng data-theme attribute
+    const bodyTheme = document.body.getAttribute("data-theme");
+    const htmlTheme = document.documentElement.getAttribute("data-theme");
+    const savedTheme = localStorage.getItem("pref-theme");
+
+    // Ưu tiên: data-theme > localStorage > mặc định
+    const theme = bodyTheme || htmlTheme || savedTheme || "light";
+
+    console.log("Theme detected:", theme); // Debug
+    return theme === "dark" ? "dark" : "light";
+  }
+
+  function loadGiscus() {
+    const theme = getCurrentTheme();
+    const container = document.getElementById("giscus-container");
+
+    if (!container) return;
+
+    // Xóa nội dung cũ
+    container.innerHTML = "";
+
+    // Tạo script Giscus với theme đúng
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "nssaker1208/Blog-s_VuManhCuong");
+    script.setAttribute("data-repo-id", "R_kgDOQsFoig");
+    script.setAttribute("data-category", "Announcements");
+    script.setAttribute("data-category-id", "DIC_kwDOQsFois4C0Czk");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-theme", theme);
+    script.setAttribute("data-lang", "vi");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  function updateGiscusTheme() {
+    const theme = getCurrentTheme();
+    const iframe = document.querySelector("iframe.giscus-frame");
+
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        "https://giscus.app"
+      );
+    }
+  }
+
+  // Load Giscus khi trang ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadGiscus);
+  } else {
+    loadGiscus();
+  }
+
+  // Theo dõi thay đổi data-theme trên body
+  const bodyObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "data-theme") {
+        console.log("Theme changed, updating Giscus..."); // Debug
+        setTimeout(updateGiscusTheme, 100);
+      }
+    });
+  });
+
+  bodyObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  // Theo dõi thay đổi data-theme trên html (backup)
+  const htmlObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "data-theme") {
+        console.log("Theme changed on HTML, updating Giscus..."); // Debug
+        setTimeout(updateGiscusTheme, 100);
+      }
+    });
+  });
+
+  htmlObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  // Lắng nghe nút toggle theme
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener("click", function () {
+      setTimeout(updateGiscusTheme, 200);
+    });
+
+  // Lắng nghe nút moon/sun (PaperMod có thể dùng ID khác)
+  document.getElementById("moon")?.addEventListener("click", function () {
+    setTimeout(updateGiscusTheme, 200);
+  });
+</script>
+{{- end -}}

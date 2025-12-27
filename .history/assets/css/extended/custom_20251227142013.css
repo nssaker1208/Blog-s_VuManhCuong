@@ -1,0 +1,249 @@
+/* ===================================
+   CHỈ XÓA LOGO VÀ CĂN GIỮA MENU
+   =================================== */
+
+/* Ẩn hoàn toàn logo/title ở header */
+header .logo,
+header .logo a {
+  display: none !important;
+}
+
+/* Căn giữa CHỈ phần header navigation */
+header nav,
+header nav#menu {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Căn giữa list menu items */
+header #menu {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+header #menu li {
+  list-style: none !important;
+}
+
+/* Style cho menu links */
+header #menu a {
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+header #menu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight trang hiện tại */
+header #menu li a[aria-current="page"] {
+  font-weight: bold;
+  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* ===================================
+   ẨN BREADCRUMBS VÀ PAGE TITLE (LIST PAGES)
+   =================================== */
+
+/* Ẩn breadcrumbs ở trang list */
+.page-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn page header title */
+.page-header h1 {
+  display: none !important;
+}
+
+/* Hoặc ẩn toàn bộ page header */
+.page-header {
+  display: none !important;
+}
+
+/* ===================================
+   ẨN POST HEADER Ở TRANG ABOUT/SINGLE
+   =================================== */
+
+/* Ẩn breadcrumbs ở trang single post/page */
+.post-single .post-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn meta mặc định ở mọi nơi */
+.post-single .post-header .post-meta {
+  display: none !important;
+}
+
+/* CHỈ HIỆN meta khi breadcrumbs chứa "posts" */
+.post-header:has(.breadcrumbs a[href*="posts"]) .post-meta {
+  display: block !important;
+}
+
+/* LOẠI BỎ KHOẢNG TRẮNG khi meta bị ẩn */
+.post-single .post-header:not(:has(.breadcrumbs a[href*="posts"])) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Giảm khoảng cách giữa header và content khi không có meta */
+.post-single:not(:has(.breadcrumbs a[href*="posts"])) .post-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Giảm padding của post-header khi meta bị ẩn */
+.post-single .post-header:not(:has(.post-meta[style*="display: block"])) {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* ===================================
+   AVATAR TRONG TRANG ABOUT - CHỈ CĂN GIỮA ẢNH
+   =================================== */
+
+/* CHỈ căn giữa đoạn văn đầu tiên NÀO CÓ ẢNH */
+.post-single .post-content > p:first-of-type:has(img) {
+  text-align: center !important;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style cho ảnh avatar - HÌNH CHỮ NHẬT */
+.post-single .post-content > p:first-of-type img {
+  display: inline-block;
+  width: 300px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  margin: 0 auto;
+}
+
+.post-single .post-content > p:first-of-type img:hover {
+  transform: scale(1.02);
+}
+
+/* ===================================
+   CĂN ĐỀU NỘI DUNG VĂN BẢN
+   =================================== */
+
+/* Căn đều tất cả đoạn văn trong post content */
+.post-single .post-content p {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+/* NGOẠI LỆ: CHỈ căn giữa paragraph đầu tiên CÓ ẢNH */
+.post-single .post-content > p:first-of-type:has(img) {
+  text-align: center !important;
+}
+
+/* Paragraph đầu tiên KHÔNG CÓ ẢNH vẫn căn đều (justify) */
+.post-single .post-content > p:first-of-type:not(:has(img)) {
+  text-align: justify !important;
+  display: block !important;
+}
+
+/* Đảm bảo heading, list, strong luôn căn trái */
+.post-single .post-content h1,
+.post-single .post-content h2,
+.post-single .post-content h3,
+.post-single .post-content h4,
+.post-single .post-content h5,
+.post-single .post-content h6,
+.post-single .post-content ul,
+.post-single .post-content ol,
+.post-single .post-content blockquote {
+  text-align: left !important;
+}
+
+/* Đảm bảo các paragraph có strong (Chủ đề:) căn trái */
+.post-single .post-content p:has(strong) {
+  text-align: left !important;
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE (TỐI ƯU)
+   =================================== */
+
+@media (max-width: 768px) {
+  /* Giảm padding header để tiết kiệm không gian */
+  header {
+    padding: 0.5rem 1rem !important;
+    min-height: auto !important;
+  }
+
+  /* Menu NGANG thay vì DỌC - tiết kiệm diện tích */
+  header #menu {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    justify-content: center !important;
+    padding: 0.5rem 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Menu items nhỏ gọn hơn */
+  header #menu li {
+    margin: 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    width: auto !important;
+    white-space: nowrap;
+  }
+
+  /* Avatar nhỏ hơn trên mobile */
+  .post-single .post-content > p:first-of-type img {
+    width: 250px;
+    max-width: 90%;
+  }
+}
+
+/* Màn hình cực nhỏ (< 480px) */
+@media (max-width: 480px) {
+  header {
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  header #menu {
+    gap: 0.3rem !important;
+    padding: 0.4rem 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Avatar còn nhỏ hơn trên điện thoại nhỏ */
+  .post-single .post-content > p:first-of-type img {
+    width: 200px;
+    max-width: 95%;
+  }
+}
+
+/* ===================================
+   DARK MODE
+   =================================== */
+
+.dark header #menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark header #menu li a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.05);
+}

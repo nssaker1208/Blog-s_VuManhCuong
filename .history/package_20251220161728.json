@@ -1,0 +1,23 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nssaker1208/Blog-s_VuManhCuong.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nssaker1208/Blog-s_VuManhCuong/issues"
+  },
+  "homepage": "https://github.com/nssaker1208/Blog-s_VuManhCuong#readme",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

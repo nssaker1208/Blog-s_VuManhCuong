@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+
+<head><script src="/Blog-s_VuManhCuong/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Blog-s_VuManhCuong/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Node.js HTTP Server từ đầu - Không dùng Framework | Blog Lập Trình Mạng</title>
+<meta name="keywords" content="Node.js, Backend, HTTP, Core Concepts, No Framework, Streams">
+<meta name="description" content="Tự tay xây dựng HTTP Server bằng module &#39;http&#39; native của Node.js để hiểu rõ bản chất của Streams, Buffers và Request/Response cycle">
+<meta name="author" content="Vũ Mạnh Cường">
+<link rel="canonical" href="http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/">
+<link crossorigin="anonymous" href="/Blog-s_VuManhCuong/assets/css/stylesheet.7ae4c8aa25c2ffeaea41d39e0721be1a271517cfd18da0799719e09165801097.css" integrity="sha256-euTIqiXC/&#43;rqQdOeByG&#43;GicVF8/RjaB5lxngkWWAEJc=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/Blog-s_VuManhCuong/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Blog-s_VuManhCuong/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/Blog-s_VuManhCuong/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/Blog-s_VuManhCuong/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/Blog-s_VuManhCuong/posts/nodejs-http-server-from-scratch/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+    <link rel="stylesheet" href="/Blog-s_VuManhCuong/css/output.css">
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/Blog-s_VuManhCuong/" accesskey="h" title="Blog Lập Trình Mạng (Alt + H)">Blog Lập Trình Mạng</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/posts" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/about" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Blog-s_VuManhCuong/portfolio" title="Portfolio">
+                    <span>Portfolio</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/Blog-s_VuManhCuong/">Trang chủ</a>&nbsp;»&nbsp;<a href="http://localhost:1313/Blog-s_VuManhCuong/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Node.js HTTP Server từ đầu - Không dùng Framework
+    </h1>
+    <div class="post-description">
+      Tự tay xây dựng HTTP Server bằng module &#39;http&#39; native của Node.js để hiểu rõ bản chất của Streams, Buffers và Request/Response cycle
+    </div>
+    <div class="post-meta"><span title='2025-12-25 00:00:00 +0000 UTC'>December 25, 2025</span>&nbsp;·&nbsp;<span>7 phút</span>&nbsp;·&nbsp;<span>Vũ Mạnh Cường</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="nodejs-http-server-từ-đầu---không-dùng-framework">Node.js HTTP Server từ đầu - Không dùng Framework<a hidden class="anchor" aria-hidden="true" href="#nodejs-http-server-từ-đầu---không-dùng-framework">#</a></h1>
+<p><strong>Chủ đề:</strong> Backend Development, Node.js Core, HTTP Protocol</p>
+<h2 id="1-lời-mở-đầu">1. Lời mở đầu<a hidden class="anchor" aria-hidden="true" href="#1-lời-mở-đầu">#</a></h2>
+<p>Hãy thú thật đi, lần cuối cùng bạn viết một server Node.js mà <strong>không</strong> gõ dòng lệnh <code>npm install express</code> là khi nào? Chắc là đã rất lâu rồi, hoặc chưa bao giờ đúng không?</p>
+<p>Các Framework như Express, Fastify hay NestJS là những công cụ tuyệt vời. Chúng giúp ta tiết kiệm thời gian, xử lý routing (định tuyến) và middleware cực mượt. Nhưng bạn có bao giờ tự hỏi: <em>&ldquo;Bên dưới lớp vỏ hào nhoáng đó, Node.js thực sự xử lý một request như thế nào?&rdquo;</em></p>
+<p>Hôm nay, hãy cùng mình &ldquo;tay không bắt giặc&rdquo;, xây dựng một HTTP Server hoàn chỉnh chỉ bằng những gì Node.js cung cấp sẵn. Tin mình đi, hiểu được cái này, level debug của bạn sẽ tăng lên đáng kể đấy.</p>
+<h2 id="2-bản-chất-của-http-server-trong-nodejs">2. Bản chất của HTTP Server trong Node.js<a hidden class="anchor" aria-hidden="true" href="#2-bản-chất-của-http-server-trong-nodejs">#</a></h2>
+<p>Node.js được sinh ra cho mạng (networking). Module <code>http</code> là một trong những module cốt lõi nhất, được viết bằng C++ và Javascript để tương tác trực tiếp với các luồng dữ liệu mạng.</p>
+<p>Khi bạn khởi tạo một server, thực chất bạn đang tạo ra một quy trình lắng nghe (listener) các sự kiện. Mô hình hoạt động của nó dựa trên <strong>Event Loop</strong> (Vòng lặp sự kiện). Khác với các server đa luồng truyền thống (như Apache + PHP ngày xưa), Node.js server đơn luồng (single-threaded) nhưng xử lý bất đồng bộ. Mỗi request đến không tạo ra một thread mới, mà kích hoạt một sự kiện <code>request</code>.</p>
+<h3 id="21-các-thành-phần-chính-của-http-module">2.1. Các thành phần chính của HTTP Module<a hidden class="anchor" aria-hidden="true" href="#21-các-thành-phần-chính-của-http-module">#</a></h3>
+<ul>
+<li><strong>http.Server:</strong> Class chính để tạo HTTP server</li>
+<li><strong>http.IncomingMessage:</strong> Đại diện cho request từ client</li>
+<li><strong>http.ServerResponse:</strong> Đại diện cho response gửi về client</li>
+<li><strong>Event Emitters:</strong> Xử lý các sự kiện HTTP như &lsquo;request&rsquo;, &lsquo;connection&rsquo;, &lsquo;close&rsquo;</li>
+</ul>
+<h3 id="22-lý-do-nên-học-cách-xây-dựng-http-server-không-dùng-framework">2.2. Lý do nên học cách xây dựng HTTP server không dùng framework<a hidden class="anchor" aria-hidden="true" href="#22-lý-do-nên-học-cách-xây-dựng-http-server-không-dùng-framework">#</a></h3>
+<ul>
+<li><strong>Hiểu sâu về cơ chế hoạt động:</strong> Giúp bạn nắm vững cách thức HTTP hoạt động</li>
+<li><strong>Kiểm soát hoàn toàn:</strong> Bạn có toàn quyền kiểm soát từng chi tiết</li>
+<li><strong>Hiệu suất tối ưu:</strong> Không có overhead từ các framework nặng</li>
+<li><strong>Kỹ năng debugging tốt hơn:</strong> Khi hiểu cơ chế bên dưới, việc debug sẽ dễ dàng hơn</li>
+<li><strong>Flexibility cao:</strong> Tự do tùy chỉnh theo nhu cầu cụ thể</li>
+</ul>
+<h2 id="3-chu-trình-request-response-trong-http">3. Chu trình Request-Response trong HTTP<a hidden class="anchor" aria-hidden="true" href="#3-chu-trình-request-response-trong-http">#</a></h2>
+<p>Chu trình Request-Response trong Node.js HTTP server hoạt động theo các bước sau:</p>
+<ol>
+<li><strong>Client gửi HTTP Request:</strong> Browser hoặc application gửi request</li>
+<li><strong>Node.js nhận request:</strong> HTTP module parse request thành IncomingMessage object</li>
+<li><strong>Event &lsquo;request&rsquo; được emit:</strong> Server emit event và gọi callback function</li>
+<li><strong>Xử lý logic:</strong> Developer code xử lý request và chuẩn bị response</li>
+<li><strong>Gửi HTTP Response:</strong> Server gửi response về client thông qua ServerResponse object</li>
+<li><strong>Connection được quản lý:</strong> Keep-alive hoặc đóng connection</li>
+</ol>
+<h2 id="4-xây-dựng-http-server-cơ-bản-từng-bước">4. Xây dựng HTTP Server cơ bản từng bước<a hidden class="anchor" aria-hidden="true" href="#4-xây-dựng-http-server-cơ-bản-từng-bước">#</a></h2>
+<h3 id="41-bước-1-tạo-server-đơn-giản-nhất">4.1. Bước 1: Tạo server đơn giản nhất<a hidden class="anchor" aria-hidden="true" href="#41-bước-1-tạo-server-đơn-giản-nhất">#</a></h3>
+<p>Hãy bắt đầu với đoạn code đơn giản nhất. Tạo file <code>server.js</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Khởi tạo server
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// req: IncomingMessage (Đại diện cho yêu cầu từ Client gửi lên)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// res: ServerResponse (Đại diện cho câu trả lời Server gửi về)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>((<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 1. Ghi log để biết có request đến
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Request received from: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 2. Thiết lập Header trả về
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/plain&#34;</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 3. Gửi nội dung và kết thúc kết nối
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;Hello! Đây là server Node.js nguyên bản.&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PORT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">PORT</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Server đang chạy tại &#39;http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">PORT</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;`</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Chạy thử bằng <code>node server.js</code> và truy cập trình duyệt. Bạn thấy đấy, không cần một thư viện ngoài nào cả!</p>
+<h3 id="42-bước-2-thêm-xử-lý-lỗi-và-logging">4.2. Bước 2: Thêm xử lý lỗi và logging<a hidden class="anchor" aria-hidden="true" href="#42-bước-2-thêm-xử-lý-lỗi-và-logging">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;url&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>((<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Log mọi request
+</span></span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74"> - </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Parse URL
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">parsedUrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json; charset=utf-8&#34;</span>,
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Server hoạt động tốt&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsedUrl</span>.<span style="color:#a6e22e">pathname</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">query</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsedUrl</span>.<span style="color:#a6e22e">query</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">timestamp</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toISOString</span>(),
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      )
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Lỗi xử lý request:&#34;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/plain&#34;</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;Internal Server Error&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Xử lý lỗi server
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;error&#34;</span>, (<span style="color:#a6e22e">err</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Server error:&#34;</span>, <span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Xử lý khi server đóng
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;close&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Server đã đóng&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Server đang chạy trên port 3000&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="43-xử-lý-các-http-methods-khác-nhau">4.3. Xử lý các HTTP Methods khác nhau<a hidden class="anchor" aria-hidden="true" href="#43-xử-lý-các-http-methods-khác-nhau">#</a></h3>
+<p>(Xem file gốc)</p>
+<h2 id="5-xử-lý-routing-thủ-công">5. Xử lý Routing thủ công<a hidden class="anchor" aria-hidden="true" href="#5-xử-lý-routing-thủ-công">#</a></h2>
+<p>Trong Express, bạn viết <code>app.get('/about', ...)</code> rất nhàn. Nhưng với native http, bạn phải tự phân tích URL. Đây là lúc bạn sẽ thấm thía giá trị của framework. Nhưng hãy xem cách làm thủ công để hiểu logic:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>((<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Lấy đường dẫn và method
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">method</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Routing thủ công bằng If-Else hoặc Switch
+</span></span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">url</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;GET&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Trang chủ&#34;</span> }));
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">url</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;/about&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;GET&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">200</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Về chúng tôi&#34;</span> }));
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xử lý 404 Not Found
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">404</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Không tìm thấy trang&#34;</span> }));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>);
+</span></span></code></pre></div><blockquote>
+<p><strong>Nhận xét:</strong> Bạn thấy đấy, nếu ứng dụng có 100 API, khối if-else này sẽ trở thành cơn ác mộng. Đó là lý do Express sinh ra khái niệm Router.</p>
+</blockquote>
+<h2 id="6-xử-lý-dữ-liệu-body-stream-và-buffer">6. Xử lý dữ liệu Body: Stream và Buffer<a hidden class="anchor" aria-hidden="true" href="#6-xử-lý-dữ-liệu-body-stream-và-buffer">#</a></h2>
+<p>Đây là phần quan trọng nhất của bài viết này. Khi client gửi một cục dữ liệu lớn (ví dụ: upload file, hoặc một JSON body dài) qua phương thức POST, Node.js <strong>KHÔNG</strong> nhận toàn bộ dữ liệu ngay lập tức.</p>
+<p>Nó nhận dữ liệu dưới dạng <strong>Stream</strong> (Dòng chảy) chia nhỏ thành các <strong>Chunk</strong> (Mẩu tin). Nếu bạn dùng Express, body-parser đã làm thay bạn việc này. Nhưng làm thủ công thì phải thế này:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>((<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">url</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;/upload&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;POST&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bodyChunks</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Lắng nghe sự kiện &#39;data&#39;: Mỗi khi có một mẩu tin đến
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;data&#34;</span>, (<span style="color:#a6e22e">chunk</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Đã nhận một chunk...&#34;</span>, <span style="color:#a6e22e">chunk</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">bodyChunks</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">chunk</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Lắng nghe sự kiện &#39;end&#39;: Khi dữ liệu đã truyền xong
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;end&#34;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Ghép các mảnh lại thành Buffer rồi chuyển sang String
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bodyText</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>(<span style="color:#a6e22e">bodyChunks</span>).<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Parse JSON (nếu gửi JSON)
+</span></span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">bodyText</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Dữ liệu hoàn chỉnh:&#34;</span>, <span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">201</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span> });
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Success&#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">received</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span>,
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>      );
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Xử lý lỗi khi stream bị lỗi
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;error&#34;</span>, (<span style="color:#a6e22e">err</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;Stream error:&#34;</span>, <span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>, { <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;application/json&#34;</span> });
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Internal Server Error&#34;</span> }));
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>);
+</span></span></code></pre></div><blockquote>
+<p><strong>Bài học rút ra:</strong> Node.js xử lý I/O rất hiệu quả nhờ cơ chế Stream này. Nó không đợi tải hết file 1GB vào RAM rồi mới xử lý, mà có thể xử lý từng phần.</p>
+</blockquote>
+<h2 id="7-so-sánh-native-module-vs-framework">7. So sánh: Native Module vs Framework<a hidden class="anchor" aria-hidden="true" href="#7-so-sánh-native-module-vs-framework">#</a></h2>
+<p>Để chốt lại vấn đề, hãy nhìn vào bảng so sánh dưới đây để thấy Framework đã &ldquo;gánh&rdquo; giúp ta những gì.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Đặc điểm</th>
+          <th>Native Node.js HTTP</th>
+          <th>Express/NestJS Framework</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Độ phức tạp code</strong></td>
+          <td>Cao (Phải tự viết nhiều)</td>
+          <td>Thấp (Cú pháp gọn gàng)</td>
+      </tr>
+      <tr>
+          <td><strong>Routing</strong></td>
+          <td>Thủ công (Switch/Case, Regex)</td>
+          <td>Mạnh mẽ, hỗ trợ params</td>
+      </tr>
+      <tr>
+          <td><strong>Xử lý Body</strong></td>
+          <td>Thủ công (Stream &amp; Buffer)</td>
+          <td>Tự động (qua Middleware)</td>
+      </tr>
+      <tr>
+          <td><strong>Hiệu suất</strong></td>
+          <td>Cao nhất (Không có overhead)</td>
+          <td>Thấp hơn xíu (Do lớp trừu tượng)</td>
+      </tr>
+      <tr>
+          <td><strong>Mục đích sử dụng</strong></td>
+          <td>Học tập, Microservice cực nhỏ</td>
+          <td>Ứng dụng thực tế, API lớn</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="8-lời-kết">8. Lời kết<a hidden class="anchor" aria-hidden="true" href="#8-lời-kết">#</a></h2>
+<p>Việc biết cách viết một HTTP Server từ con số 0 giúp bạn:</p>
+<ol>
+<li>Hiểu rõ <strong>Request/Response Lifecycle</strong></li>
+<li>Hiểu <strong>Stream</strong> và <strong>Buffer</strong> - trái tim của Node.js I/O</li>
+<li>Trân trọng những gì Frameworks đã làm giúp mình</li>
+<li>Có nền tảng vững chắc để debug các vấn đề phức tạp</li>
+<li>Biết khi nào nên dùng framework và khi nào nên tự build</li>
+</ol>
+<p>Lần tới khi gặp lỗi <code>Can't read property of undefined</code> liên quan đến <code>req.body</code> trong Express, bạn sẽ nhớ ngay: <em>&ldquo;À, chắc là chưa cấu hình middleware để gom Stream thành Buffer đây mà!&rdquo;</em>. Đó chính là giá trị của việc hiểu bản chất.</p>
+<p>Node.js HTTP module là nền tảng vững chắc mà mọi framework đều được xây dựng trên đó. Khi bạn hiểu rõ cách nó hoạt động, bạn không chỉ trở thành một developer tốt hơn, mà còn có khả năng tối ưu hóa và debug các vấn đề một cách chuyên sâu. Framework là công cụ tuyệt vời, nhưng hiểu biết về core modules mới là sức mạnh thực sự.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/node.js/">Node.js</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/backend/">Backend</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/http/">HTTP</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/core-concepts/">Core Concepts</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/no-framework/">No Framework</a></li>
+      <li><a href="http://localhost:1313/Blog-s_VuManhCuong/tags/streams/">Streams</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/Blog-s_VuManhCuong/posts/websocket-client-javascript-chat/">
+    <span class="title">« Trang trước</span>
+    <br>
+    <span>WebSocket Client với JavaScript - Xây dựng Chat App không cần thư viện</span>
+  </a>
+  <a class="next" href="http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/">
+    <span class="title">Trang tiếp theo »</span>
+    <br>
+    <span>Fetch API trong JavaScript - Gọi REST API hiện đại</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on x"
+            href="https://x.com/intent/tweet/?text=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f&amp;hashtags=Node.js%2cBackend%2cHTTP%2cCoreConcepts%2cNoFramework%2cStreams">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f&amp;title=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework&amp;summary=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework&amp;source=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f&title=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on whatsapp"
+            href="https://api.whatsapp.com/send?text=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework%20-%20http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on telegram"
+            href="https://telegram.me/share/url?text=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework&amp;url=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Node.js HTTP Server từ đầu - Không dùng Framework on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Node.js%20HTTP%20Server%20t%e1%bb%ab%20%c4%91%e1%ba%a7u%20-%20Kh%c3%b4ng%20d%c3%b9ng%20Framework&u=http%3a%2f%2flocalhost%3a1313%2fBlog-s_VuManhCuong%2fposts%2fnodejs-http-server-from-scratch%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer><div
+  style="
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  "
+>
+  <h3
+    style="
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--content);
+    "
+  >
+    💬 Bình luận & Thảo luận
+  </h3>
+
+  <div id="giscus-container"></div>
+</div>
+
+<script>
+  function getCurrentTheme() {
+    const bodyTheme = document.body.getAttribute("data-theme");
+    const htmlTheme = document.documentElement.getAttribute("data-theme");
+    const savedTheme = localStorage.getItem("pref-theme");
+
+    const theme = bodyTheme || htmlTheme || savedTheme || "light";
+    return theme === "dark" ? "dark" : "light";
+  }
+
+  function loadGiscus() {
+    const theme = getCurrentTheme();
+    const container = document.getElementById("giscus-container");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "nssaker1208/Blog-s_VuManhCuong");
+    script.setAttribute("data-repo-id", "R_kgDOQsFoig");
+    script.setAttribute("data-category", "Announcements");
+    script.setAttribute("data-category-id", "DIC_kwDOQsFois4C0Czk");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-theme", theme);
+    script.setAttribute("data-lang", "vi");
+    script.setAttribute("crossorigin", "anonymous");
+    script.async = true;
+
+    container.appendChild(script);
+  }
+
+  function updateGiscusTheme() {
+    const theme = getCurrentTheme();
+    const iframe = document.querySelector("iframe.giscus-frame");
+
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        "https://giscus.app"
+      );
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadGiscus);
+  } else {
+    loadGiscus();
+  }
+
+  const bodyObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "data-theme") {
+        setTimeout(updateGiscusTheme, 100);
+      }
+    });
+  });
+
+  bodyObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  const htmlObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "data-theme") {
+        setTimeout(updateGiscusTheme, 100);
+      }
+    });
+  });
+
+  htmlObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener("click", function () {
+      setTimeout(updateGiscusTheme, 200);
+    });
+
+  document.getElementById("moon")?.addEventListener("click", function () {
+    setTimeout(updateGiscusTheme, 200);
+  });
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/Blog-s_VuManhCuong/">Blog Lập Trình Mạng</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+
+</html>

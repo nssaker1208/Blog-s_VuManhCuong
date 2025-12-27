@@ -1,0 +1,192 @@
+/* ===================================
+   CHỈ XÓA LOGO VÀ CĂN GIỮA MENU
+   =================================== */
+
+/* Ẩn hoàn toàn logo/title ở header */
+header .logo,
+header .logo a {
+  display: none !important;
+}
+
+/* ===================================
+   AVATAR TRONG TRANG ABOUT
+   =================================== */
+
+/* Căn giữa đoạn văn đầu tiên (chứa avatar) */
+.post-single .post-content > p:first-of-type {
+  text-align: center !important;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style cho ảnh avatar - HÌNH CHỮ NHẬT */
+.post-single .post-content > p:first-of-type img {
+  display: inline-block;
+  width: 300px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  margin: 0 auto; /* Thêm dòng này */
+}
+
+.post-single .post-content > p:first-of-type img:hover {
+  transform: scale(1.02);
+}
+
+/* ===================================
+   CĂN ĐỀU NỘI DUNG VĂN BẢN
+   =================================== */
+
+/* Căn đều tất cả đoạn văn trong post content */
+.post-single .post-content p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Trừ đoạn đầu tiên (chứa avatar) */
+.post-single .post-content > p:first-of-type {
+  text-align: center !important;
+}
+
+/* Căn giữa CHỈ phần header navigation */
+header nav,
+header nav#menu {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Căn giữa list menu items */
+header #menu {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+header #menu li {
+  list-style: none !important;
+}
+
+/* Style cho menu links */
+header #menu a {
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+header #menu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight trang hiện tại */
+header #menu li a[aria-current="page"] {
+  font-weight: bold;
+  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* ===================================
+   ẨN BREADCRUMBS VÀ PAGE TITLE (LIST PAGES)
+   =================================== */
+
+/* Ẩn breadcrumbs ở trang list */
+.page-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn page header title */
+.page-header h1 {
+  display: none !important;
+}
+
+/* Hoặc ẩn toàn bộ page header */
+.page-header {
+  display: none !important;
+}
+
+/* ===================================
+   ẨN POST HEADER Ở TRANG ABOUT/SINGLE
+   =================================== */
+
+/* Ẩn breadcrumbs ở trang single post/page */
+.post-single .post-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn meta mặc định ở mọi nơi */
+.post-single .post-header .post-meta {
+  display: none !important;
+}
+
+/* CHỈ HIỆN meta cho bài post có tags (bài viết thực sự) */
+.post-single:has(.post-tags) .post-header .post-meta {
+  display: block !important;
+}
+/* ===================================
+   RESPONSIVE - MOBILE (TỐI ƯU)
+   =================================== */
+
+@media (max-width: 768px) {
+  /* Giảm padding header để tiết kiệm không gian */
+  header {
+    padding: 0.5rem 1rem !important;
+    min-height: auto !important;
+  }
+
+  /* Menu NGANG thay vì DỌC - tiết kiệm diện tích */
+  header #menu {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    justify-content: center !important;
+    padding: 0.5rem 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Menu items nhỏ gọn hơn */
+  header #menu li {
+    margin: 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    width: auto !important;
+    white-space: nowrap;
+  }
+}
+
+/* Màn hình cực nhỏ (< 480px) */
+@media (max-width: 480px) {
+  header {
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  header #menu {
+    gap: 0.3rem !important;
+    padding: 0.4rem 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* ===================================
+   DARK MODE
+   =================================== */
+
+.dark header #menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark header #menu li a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.05);
+}

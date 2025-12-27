@@ -1,0 +1,78 @@
+/* ===================================
+   CHỈ XÓA LOGO VÀ CĂN GIỮA MENU
+   =================================== */
+
+/* Ẩn hoàn toàn logo/title ở header */
+header .logo,
+header .logo a {
+  display: none !important;
+}
+
+/* Căn giữa CHỈ phần header navigation */
+header nav,
+header nav#menu {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Căn giữa list menu items */
+header #menu {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+header #menu li {
+  list-style: none !important;
+}
+
+/* Style cho menu links */
+header #menu a {
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+header #menu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight trang hiện tại */
+header #menu li a[aria-current="page"] {
+  font-weight: bold;
+  color: var(--primary);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 768px) {
+  header #menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  header #menu a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================================
+   DARK MODE
+   =================================== */
+
+.dark header #menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark header #menu li a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.05);
+}

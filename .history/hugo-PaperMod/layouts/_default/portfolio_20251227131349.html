@@ -1,0 +1,169 @@
+{{- define "main" }}
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+  </header>
+
+  {{- if .Content }}
+  <div class="post-content">
+    {{- if not (.Param "disableAnchoredHeadings") }} {{- partial
+    "anchored_headings.html" .Content -}} {{- else }}{{ .Content }}{{ end }}
+  </div>
+  {{- end }}
+
+  <!-- Add portfolio cards grid section for interactive showcase -->
+  <section class="portfolio-section">
+    <div class="portfolio-grid">
+      <!-- Passion Card -->
+      <figure class="portfolio-card">
+        <div class="card-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="48"
+            height="48"
+          >
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            />
+          </svg>
+        </div>
+        <figcaption class="card-caption">
+          <h3 class="card-title">Đam mê</h3>
+          <div class="card-content">
+            <p>Network Programming, Web Development, Software Architecture</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Goal Card -->
+      <figure class="portfolio-card">
+        <div class="card-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="48"
+            height="48"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
+            />
+          </svg>
+        </div>
+        <figcaption class="card-caption">
+          <h3 class="card-title">Mục tiêu</h3>
+          <div class="card-content">
+            <p>
+              Trở thành Full-Stack Developer, phát triển các ứng dụng web hiệu
+              suất cao, đóng góp vào các dự án mã nguồn mở
+            </p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Skills Card -->
+      <figure class="portfolio-card">
+        <div class="card-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="48"
+            height="48"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </div>
+        <figcaption class="card-caption">
+          <h3 class="card-title">Kỹ năng</h3>
+          <div class="card-content">
+            <ul class="skills-list">
+              <li>Java, JavaScript, C#</li>
+              <li>Socket, HTTP, WebSocket</li>
+              <li>Git, Maven, Node.js</li>
+            </ul>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Education Card -->
+      <figure class="portfolio-card">
+        <div class="card-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="48"
+            height="48"
+          >
+            <path
+              d="M5 13.18v4C5 17.6 9.39 19 12 19c.77 0 1.53-.09 2.25-.22v-4.43c-.59.35-1.27.61-2.25.61-2.3 0-4-1.08-4-2.5m7.84-2c.74.02 1.44.45 1.84 1.02.4-.57 1.1-1 1.84-1.02.75 0 1.41.38 1.81.95.65-.55 1.5-.87 2.35-.87C21.3 10 23 11.7 23 13.5V19c0 1.1-.9 2-2 2h-1v-5.5c0-.83-.67-1.5-1.5-1.5S17 12.67 17 13.5V21h-1v-7c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v7h-1v-7c0-.83-.67-1.5-1.5-1.5S9 12.67 9 13.5V21H8v-5.5C8 14.12 8.88 13.37 10 13.18m5.84-7.15c.39.39.39 1.02 0 1.41L12.41 12 3.29 2.89c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L13 10.59l8.29-8.29c.39-.39 1.02-.39 1.41 0z"
+            />
+          </svg>
+        </div>
+        <figcaption class="card-caption">
+          <h3 class="card-title">Học vấn</h3>
+          <div class="card-content">
+            <p><strong>HUTECH</strong></p>
+            <p>Công nghệ phần mềm</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Experience Card -->
+      <figure class="portfolio-card">
+        <div class="card-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="48"
+            height="48"
+          >
+            <path
+              d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1h-5c-1.37 0-2.74.5-3.5 1.97V6H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm5 16H4V8h5.54v2H9c0 1.66 1.34 3 3 3s3-1.34 3-3h-.54V8H19v12z"
+            />
+          </svg>
+        </div>
+        <figcaption class="card-caption">
+          <h3 class="card-title">Kinh nghiệm</h3>
+          <div class="card-content">
+            <p><strong>Java:</strong> OOP, Design Patterns, Multithreading</p>
+            <p><strong>JavaScript:</strong> ES6+, Node.js, WebSocket</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <!-- Courses Card -->
+      <figure class="portfolio-card">
+        <div class="card-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="48"
+            height="48"
+          >
+            <path
+              d="M11.99 5V1h-1v4H8.01V1H7v4H3.99V1h-1v4c-1.11 0-1.99.9-1.99 2v4h20V7c0-1.1-.89-2-2-2h-4V1h-1v4zm8.23 12H4v-5h16.03v5z"
+            />
+          </svg>
+        </div>
+        <figcaption class="card-caption">
+          <h3 class="card-title">Khóa học</h3>
+          <div class="card-content">
+            <p><strong>Java Network Programming</strong></p>
+            <p><strong>JavaScript Web Development</strong></p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+</article>
+
+{{- end }}{{/* end main */}}

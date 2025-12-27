@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Promise on Blog Lập Trình Mạng</title>
+    <link>http://localhost:1313/Blog-s_VuManhCuong/tags/promise/</link>
+    <description>Recent content in Promise on Blog Lập Trình Mạng</description>
+    <generator>Hugo -- 0.153.0</generator>
+    <language>vi</language>
+    <lastBuildDate>Wed, 24 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/Blog-s_VuManhCuong/tags/promise/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fetch API trong JavaScript - Gọi REST API hiện đại</title>
+      <link>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Blog-s_VuManhCuong/posts/festapi_js/</guid>
+      <description>Hướng dẫn chi tiết sử dụng Fetch API với async/await, xử lý lỗi và Promise trong JavaScript hiện đại</description>
+    </item>
+  </channel>
+</rss>
