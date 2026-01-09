@@ -1,0 +1,114 @@
+baseURL = 'https://nssaker1208.github.io/Blog-s_VuManhCuong/'
+languageCode = 'vi'
+title = 'Blog Lập Trình Mạng'
+theme = 'PaperMod'
+
+[params]
+  description = "Chia sẻ kiến thức về Java & JavaScript Network Programming"
+  author = "Vũ Mạnh Cường"
+
+  # Theme Toggle Settings
+  defaultTheme = "auto"  # auto, light, dark
+  disableThemeToggle = false  # false = hiện nút toggle
+
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  comments = true
+  hideSiteTitleInHeader = true
+
+  # Profile Mode Configuration
+  [params.profileMode]
+    enabled = true
+    title = "Vũ Mạnh Cường"
+    subtitle = "Sinh viên / Network Developer chia sẻ kiến thức về Java, JavaScript và lập trình mạng."
+    
+    # Slogan Configuration
+    slogan = "Code • Connect • Create"
+    sloganSubtitle = "Kết nối mọi thứ qua mã nguồn"
+    
+    # CV Download URL
+    cvUrl = "/Blog-s_VuManhCuong/files/CV_VuManhCuong.pdf"
+    
+    # Profile Image
+    imageUrl = "/Blog-s_VuManhCuong/images/avatar.jpg"
+    imageWidth = 300
+    imageHeight = 300
+    imageTitle = "Vũ Mạnh Cường"
+    
+    # Action Buttons
+    [[params.profileMode.buttons]]
+      name = "GitHub Profile"
+      url = "https://github.com/nssaker1208"
+    
+    [[params.profileMode.buttons]]
+      name = "Portfolio"
+      url = "/Blog-s_VuManhCuong/portfolio/"
+    
+    [[params.profileMode.buttons]]
+      name = "About Me"
+      url = "/Blog-s_VuManhCuong/about/"
+
+  # Main Description (Backup nếu không dùng Profile Mode)
+  [params.homeInfoParams]
+    Title = "Hi, tôi là Cường 👋"
+    Content = "Sinh viên / Network Developer. Chia sẻ kiến thức về Java, JavaScript và lập trình mạng."
+
+  # Cover Image Settings
+  [params.cover]
+    linkFullImages = true
+    responsiveImages = true
+
+  # SEO & Social
+  [params.socialIcons]
+    [[params.socialIcons]]
+      name = "github"
+      url = "https://github.com/nssaker1208"
+    
+    [[params.socialIcons]]
+      name = "email"
+      url = "mailto:vumc.contact@gmail.com"
+
+# Menu Configuration
+[[menu.main]]
+  identifier = 'home'
+  name = 'Home'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  identifier = 'blog'
+  name = 'Blog'
+  url = '/posts/'
+  weight = 2
+
+[[menu.main]]
+  identifier = 'about'
+  name = 'About'
+  url = '/about/'
+  weight = 3
+
+[[menu.main]]
+  identifier = 'portfolio'
+  name = 'Portfolio'
+  url = '/portfolio/'
+  weight = 4
+
+# Markup Configuration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Pagination
+[pagination]
+  pagerSize = 10
+
+# Build Configuration
+[build]
+  writeStats = true
+
+# Output Configuration
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

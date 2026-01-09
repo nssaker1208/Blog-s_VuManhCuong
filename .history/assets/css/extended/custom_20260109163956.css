@@ -1,0 +1,1375 @@
+/* ===================================
+   HEADER IMPROVEMENTS - STICKY + THEME TOGGLE
+   =================================== */
+
+/* Header cố định (sticky) khi scroll */
+header.header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999 !important;
+  background: var(--entry) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  padding: 0.8rem 1.5rem !important;
+}
+
+/* Header khi scroll - shadow đậm hơn */
+header.header.scrolled {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  background: var(--entry) !important;
+}
+
+/* Dark mode - Header */
+.dark header.header {
+  background: var(--entry) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark header.header.scrolled {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+     CHỈ XÓA LOGO VÀ CĂN GIỮA MENU
+     =================================== */
+
+/* Ẩn CHỈ logo text/title, GIỮ LẠI logo-switches (theme toggle) */
+header .logo a,
+header .logo .logo-title {
+  display: none !important;
+}
+
+/* GIỮ LẠI logo-switches (container của theme toggle) */
+header .logo {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Menu ở giữa (grid column 2) */
+header nav,
+header nav#menu {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  background: transparent !important;
+}
+
+/* Căn giữa list menu items */
+header #menu {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+header #menu li {
+  list-style: none !important;
+}
+
+/* Style cho menu links - CẢI THIỆN */
+header #menu a {
+  color: var(--content) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+header #menu a:hover {
+  background-color: var(--tertiary) !important;
+  color: var(--primary) !important;
+  transform: translateY(-1px);
+}
+
+/* Highlight trang hiện tại */
+header #menu li a[aria-current="page"] {
+  font-weight: 700;
+  color: var(--primary) !important;
+  background-color: var(--tertiary) !important;
+}
+
+/* Dark mode - Menu */
+.dark header #menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark header #menu li a[aria-current="page"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ===================================
+     THEME TOGGLE BUTTON - GÓC PHẢI
+     =================================== */
+
+/* Container cho theme toggle ở góc phải */
+header .logo-switches {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+/* Theme toggle button styling */
+#theme-toggle {
+  background: linear-gradient(135deg, var(--tertiary), var(--entry)) !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Hover effect */
+#theme-toggle:hover {
+  background: linear-gradient(135deg, var(--primary), #667eea) !important;
+  transform: scale(1.1) rotate(20deg) !important;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Icon styling */
+#theme-toggle svg {
+  width: 22px !important;
+  height: 22px !important;
+  fill: var(--content) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#theme-toggle:hover svg {
+  fill: #fff !important;
+  transform: scale(1.1) !important;
+}
+
+/* Active/Click animation */
+#theme-toggle:active {
+  transform: scale(0.95) rotate(0deg) !important;
+}
+
+/* Ripple effect on click */
+#theme-toggle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+#theme-toggle:active::before {
+  width: 60px;
+  height: 60px;
+}
+
+/* Dark mode - theme toggle */
+.dark #theme-toggle {
+  background: linear-gradient(135deg, var(--tertiary), var(--entry)) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark #theme-toggle:hover {
+  background: linear-gradient(135deg, var(--primary), #667eea) !important;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.6) !important;
+}
+
+/* ===================================
+     ẨN BREADCRUMBS VÀ PAGE TITLE (LIST PAGES)
+     =================================== */
+
+/* Ẩn breadcrumbs ở trang list */
+.page-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn page header title */
+.page-header h1 {
+  display: none !important;
+}
+
+/* Hoặc ẩn toàn bộ page header */
+.page-header {
+  display: none !important;
+}
+
+/* ===================================
+     ẨN POST HEADER Ở TRANG ABOUT/SINGLE
+     =================================== */
+
+/* Ẩn breadcrumbs ở trang single post/page */
+.post-single .post-header .breadcrumbs {
+  display: none !important;
+}
+
+/* Ẩn meta mặc định ở mọi nơi */
+.post-single .post-header .post-meta {
+  display: none !important;
+}
+
+/* CHỈ HIỆN meta khi breadcrumbs chứa "posts" */
+.post-header:has(.breadcrumbs a[href*="posts"]) .post-meta {
+  display: block !important;
+}
+
+/* LOẠI BỎ KHOẢNG TRẮNG khi meta bị ẩn */
+.post-single .post-header:not(:has(.breadcrumbs a[href*="posts"])) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Giảm khoảng cách giữa header và content khi không có meta */
+.post-single:not(:has(.breadcrumbs a[href*="posts"])) .post-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Giảm padding của post-header khi meta bị ẩn */
+.post-single .post-header:not(:has(.post-meta[style*="display: block"])) {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* ===================================
+     AVATAR TRONG TRANG ABOUT - CHỈ CĂN GIỮA ẢNH
+     =================================== */
+
+/* CHỈ căn giữa đoạn văn đầu tiên NÀO CÓ ẢNH */
+.post-single .post-content > p:first-of-type:has(img) {
+  text-align: center !important;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style cho ảnh avatar - HÌNH CHỮ NHẬT */
+.post-single .post-content > p:first-of-type img {
+  display: inline-block;
+  width: 300px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  margin: 0 auto;
+}
+
+.post-single .post-content > p:first-of-type img:hover {
+  transform: scale(1.02);
+}
+
+/* ===================================
+     CĂN ĐỀU NỘI DUNG VĂN BẢN
+     =================================== */
+
+/* Căn đều tất cả đoạn văn trong post content */
+.post-single .post-content p {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+}
+
+/* NGOẠI LỆ: CHỈ căn giữa paragraph đầu tiên CÓ ẢNH */
+.post-single .post-content > p:first-of-type:has(img) {
+  text-align: center !important;
+}
+
+/* Paragraph đầu tiên KHÔNG CÓ ẢNH vẫn căn đều (justify) */
+.post-single .post-content > p:first-of-type:not(:has(img)) {
+  text-align: justify !important;
+  display: block !important;
+}
+
+/* Đảm bảo heading, list, strong luôn căn trái */
+.post-single .post-content h1,
+.post-single .post-content h2,
+.post-single .post-content h3,
+.post-single .post-content h4,
+.post-single .post-content h5,
+.post-single .post-content h6,
+.post-single .post-content ul,
+.post-single .post-content ol,
+.post-single .post-content blockquote {
+  text-align: left !important;
+}
+
+/* Đảm bảo các paragraph có strong (Chủ đề:) căn trái */
+.post-single .post-content p:has(strong) {
+  text-align: left !important;
+}
+
+/* ===================================
+     ẨN TIÊU ĐỀ CHỈ Ở TRANG PORTFOLIO
+     =================================== */
+
+/* Ẩn tiêu đề "Portfolio" ở post-header */
+body:has(.portfolio-filter) .post-single .post-title,
+body:has(.portfolio-filter) .post-single .post-header h1 {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ẩn tiêu đề trong content */
+body:has(.portfolio-filter) .post-single .post-content > h1:first-child,
+body:has(.portfolio-filter) .post-single .post-content > h2:first-child {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Loại bỏ khoảng trắng */
+body:has(.portfolio-filter) .post-single .post-content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+body:has(.portfolio-filter) .post-single .post-header {
+  padding-bottom: 0 !important;
+  margin-bottom: 1rem !important;
+  min-height: 0 !important;
+}
+
+body:has(.portfolio-filter) .post-single {
+  padding-top: 0.5rem !important;
+}
+
+/* ===================================
+     PORTFOLIO FILTER BUTTONS
+     =================================== */
+
+.portfolio-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 3rem 0;
+  padding: 1.5rem 1rem;
+  flex-wrap: wrap;
+  background: var(--entry);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn {
+  padding: 0.6rem 1.5rem;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--content);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================================
+     PORTFOLIO GRID - 3 COLUMNS
+     =================================== */
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin: 0 0 3rem 0;
+}
+
+/* Card styling */
+.portfolio-card {
+  position: relative;
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: var(--entry);
+  cursor: pointer;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Hidden state for filtering */
+.portfolio-card.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+/* Image container */
+.card-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Overlay - mặc định ẩn */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-overlay h3 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+/* Hiện overlay khi hover */
+.portfolio-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.portfolio-card:hover .card-overlay h3 {
+  transform: translateY(0);
+}
+
+/* Content area */
+.card-content {
+  padding: 1.5rem;
+  background: var(--entry);
+}
+
+.card-content h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: var(--content);
+  text-align: left !important;
+  font-size: 0.95rem;
+}
+
+.card-content strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ===================================
+     CERTIFICATE EXPANDABLE CARDS
+     =================================== */
+
+/* Expandable parent card indicator */
+.expandable-card {
+  cursor: pointer !important;
+  position: relative;
+}
+
+.expandable-card .expand-icon {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  transition: transform 0.3s ease;
+  color: var(--primary);
+}
+
+.expandable-card.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+/* Certificate subcards container */
+.certificate-subcards {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--entry);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Individual certificate card */
+.certificate-card {
+  background: var(--code-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Certificate thumbnail */
+.cert-thumb {
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.cert-thumb::after {
+  content: "🔍 Click để xem";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: #fff;
+  padding: 1rem 0.5rem 0.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificate-card:hover .cert-thumb::after {
+  opacity: 1;
+}
+
+/* Certificate info */
+.cert-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.cert-info h5 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.cert-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--content);
+  line-height: 1.4;
+}
+
+/* ===================================
+     MODAL LIGHTBOX FOR CERTIFICATES - CĂN GIỮA + ZOOM
+     =================================== */
+
+.cert-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.95);
+  animation: fadeIn 0.3s ease;
+  /* Flexbox để căn giữa */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cert-modal[style*="display: block"] {
+  display: flex !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container cho ảnh */
+.cert-modal-image-container {
+  position: relative;
+  max-width: 90%;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cert-modal-content {
+  display: block;
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Zoom state */
+.cert-modal-content.zoomed {
+  cursor: zoom-out;
+  max-width: none;
+  max-height: none;
+}
+
+#cert-modal-caption {
+  margin: 1rem auto 0;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+/* Close button */
+.cert-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 10000;
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.cert-modal-close:hover,
+.cert-modal-close:focus {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
+
+/* Zoom indicator */
+.zoom-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10001;
+}
+
+.zoom-indicator.show {
+  opacity: 1;
+}
+
+/* ===================================
+     PROFILE MODE HOMEPAGE
+     =================================== */
+
+.profile-home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Profile Hero Section */
+.profile-hero {
+  margin-bottom: 5rem;
+  padding: 3rem 0;
+}
+
+.profile-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Left Side: Text Content */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile-greeting {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--content);
+}
+
+.highlight {
+  color: var(--primary);
+  position: relative;
+}
+
+.profile-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--secondary);
+  margin: 0;
+}
+
+/* Profile Buttons */
+.profile-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.profile-btn {
+  padding: 0.8rem 2rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile-btn:hover {
+  background: var(--primary);
+  opacity: 0.9;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Side: Profile Image */
+.profile-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border: 5px solid var(--entry);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05) rotate(3deg);
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Recent Posts Section */
+.recent-posts-section {
+  margin-top: 4rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--content);
+  text-align: center;
+}
+
+/* Posts Grid */
+.posts-grid-home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Home Post Card */
+.home-post-card {
+  background: var(--entry);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.home-post-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: var(--tertiary);
+}
+
+.home-post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.home-post-card:hover .home-post-image img {
+  transform: scale(1.1);
+}
+
+.home-post-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-post-title {
+  margin: 0 0 0.8rem 0;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.home-post-title a {
+  color: var(--content);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.home-post-title a:hover {
+  color: var(--primary);
+}
+
+.home-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: var(--secondary);
+}
+
+.home-post-summary {
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* View All Button */
+.view-all-posts {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.view-all-btn {
+  display: inline-block;
+  padding: 1rem 3rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.view-all-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================================
+     RESPONSIVE - MOBILE (TỐI ƯU)
+     =================================== */
+
+/* Màn hình lớn (>1400px) */
+@media (min-width: 1400px) {
+  .portfolio-grid {
+    gap: 3rem;
+  }
+
+  .card-image {
+    height: 280px;
+  }
+}
+
+/* Tablet lớn (900-1200px) */
+@media (max-width: 1200px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .card-image {
+    height: 220px;
+  }
+
+  .card-overlay h3 {
+    font-size: 1.7rem;
+  }
+}
+
+/* Tablet (640-900px) */
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card-image {
+    height: 200px;
+  }
+
+  .card-overlay h3 {
+    font-size: 1.5rem;
+  }
+
+  .portfolio-filter {
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .certificate-subcards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .cert-thumb {
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Header layout mobile - flex instead of grid */
+  header.header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.5rem 1rem !important;
+    grid-template-columns: none !important;
+  }
+
+  /* Menu center */
+  header nav {
+    flex: 1 !important;
+    grid-column: auto !important;
+  }
+
+  /* Theme toggle right */
+  header .logo-switches {
+    grid-column: auto !important;
+    margin-left: 0.5rem !important;
+  }
+
+  /* Smaller toggle button on mobile */
+  #theme-toggle {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  #theme-toggle svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Menu NGANG thay vì DỌC - tiết kiệm diện tích */
+  header #menu {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    justify-content: center !important;
+    padding: 0.5rem 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Menu items nhỏ gọn hơn */
+  header #menu li {
+    margin: 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    width: auto !important;
+    white-space: nowrap;
+  }
+
+  /* Avatar nhỏ hơn trên mobile */
+  .post-single .post-content > p:first-of-type img {
+    width: 250px;
+    max-width: 90%;
+  }
+}
+
+/* Mobile (480-640px) */
+@media (max-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .card-image {
+    height: 150px;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-content h4 {
+    font-size: 1rem;
+  }
+
+  .card-content p {
+    font-size: 0.85rem;
+  }
+
+  .card-overlay h3 {
+    font-size: 1.2rem;
+  }
+
+  .portfolio-filter {
+    gap: 0.4rem;
+    padding: 0.8rem 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .certificate-subcards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .cert-thumb {
+    height: 180px;
+  }
+
+  .cert-modal-content {
+    max-width: 95%;
+    max-height: 80vh;
+  }
+
+  .cert-modal-close {
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  #cert-modal-caption {
+    font-size: 1rem;
+    padding: 0.8rem;
+    width: 90%;
+  }
+
+  .zoom-indicator {
+    bottom: 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Màn hình cực nhỏ (< 480px) */
+@media (max-width: 480px) {
+  header.header {
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  #theme-toggle {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #theme-toggle svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  header #menu {
+    gap: 0.3rem !important;
+    padding: 0.4rem 0 !important;
+  }
+
+  header #menu a {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Avatar còn nhỏ hơn trên điện thoại nhỏ */
+  .post-single .post-content > p:first-of-type img {
+    width: 200px;
+    max-width: 95%;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card-image {
+    height: 180px;
+  }
+
+  .portfolio-filter {
+    gap: 0.3rem;
+    padding: 0.6rem 0.3rem;
+  }
+
+  .filter-btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.65rem;
+  }
+
+  .profile-home {
+    padding: 1rem 0.5rem;
+  }
+
+  .profile-greeting {
+    font-size: 1.8rem;
+  }
+
+  .profile-description {
+    font-size: 1rem;
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .home-post-image {
+    height: 150px;
+  }
+
+  .home-post-content {
+    padding: 1rem;
+  }
+
+  .home-post-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Profile Mode Responsive */
+@media (max-width: 1024px) {
+  .profile-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .profile-content {
+    align-items: center;
+  }
+
+  .profile-buttons {
+    justify-content: center;
+  }
+
+  .posts-grid-home {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-greeting {
+    font-size: 2.2rem;
+  }
+
+  .profile-description {
+    font-size: 1.1rem;
+  }
+
+  .profile-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .posts-grid-home {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+}
+
+/* ===================================
+     DARK MODE
+     =================================== */
+
+.dark .portfolio-card {
+  background: var(--entry);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .portfolio-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.dark .card-content {
+  background: var(--entry);
+}
+
+.dark .portfolio-filter {
+  background: var(--entry);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark .filter-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .filter-btn:hover,
+.dark .filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.dark .certificate-subcards {
+  background: var(--entry);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .certificate-card {
+  background: var(--code-bg);
+}
+
+.dark .profile-image {
+  border-color: var(--entry);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dark .home-post-card {
+  background: var(--entry);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .home-post-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}

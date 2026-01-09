@@ -1,0 +1,87 @@
+{{ define "main" }}
+<main class="main profile-home">
+
+  <!-- Profile Hero Section -->
+  <section class="profile-hero">
+    <div class="profile-container">
+      
+      <!-- Left Side: Text Content -->
+      <div class="profile-content">
+        <h1 class="profile-greeting">
+          Hi, tôi là <span class="highlight">{{ .Site.Params.profileMode.title | default "Vũ Mạnh Cường" }}</span>
+        </h1>
+        
+        <p class="profile-description">
+          {{ .Site.Params.profileMode.subtitle | default "Sinh viên / Network Developer" }}
+          Chia sẻ kiến thức về Java, JavaScript và lập trình mạng.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="profile-buttons">
+          {{ range .Site.Params.profileMode.buttons }}
+            <a href="{{ .url }}" class="profile-btn" target="_blank" rel="noopener noreferrer">
+              {{ .name }}
+            </a>
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- Right Side: Profile Image -->
+      <div class="profile-image-wrapper">
+        <div class="profile-image">
+          <img src="{{ .Site.Params.profileMode.imageUrl | default "/Blog-s_VuManhCuong/images/avatar.jpg" }}" 
+               alt="{{ .Site.Params.profileMode.imageTitle | default "Profile Picture" }}"
+               loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <section class="recent-posts-section">
+    <h2 class="section-title">📝 Bài viết gần đây</h2>
+    
+    <div class="posts-grid-home">
+      {{ $pages := where .Site.RegularPages "Type" "posts" }}
+      {{ range first 6 $pages }}
+        <article class="home-post-card">
+          
+          <!-- Featured Image -->
+          {{ if .Params.cover.image }}
+          <div class="home-post-image">
+            <a href="{{ .Permalink }}">
+              <img src="{{ .Params.cover.image }}" alt="{{ .Title }}" loading="lazy">
+            </a>
+          </div>
+          {{ end }}
+
+          <div class="home-post-content">
+            <h3 class="home-post-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h3>
+
+            <div class="home-post-meta">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "02/01/2006" }}
+              </time>
+              <span class="separator">·</span>
+              <span>{{ .ReadingTime }} phút</span>
+            </div>
+          </div>
+
+        </article>
+      {{ end }}
+    </div>
+
+    <!-- View All Link -->
+    <div class="view-all-posts">
+      <a href="/Blog-s_VuManhCuong/posts/" class="view-all-btn">
+        Xem tất cả bài viết →
+      </a>
+    </div>
+
+  </section>
+
+</main>
+{{ end }}
